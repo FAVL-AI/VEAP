@@ -1,0 +1,102 @@
+{
+ "code_sha256": {
+  "veap/sim.py": "6f5ae94f0183e22f4d87f50376c1729dc0544a4ea56c8a4d1b6e53ecf80c5d85",
+  "veap/verifier.py": "10dd182d4e7e44d9e6a90874f0e78e148a4494dc8542d338ed1a8a64e9bba9c4",
+  "veap/x1_perturb.py": "0824a76b5326fe2e2b876b85717b838993814c0092a58c7e88c2f6c872ed8c82",
+  "veap/x1_stats.py": "136dd67e850752702d29281deecceb7bb52d52be2c618da95fa50c1edbdb2650"
+ },
+ "knob_semantics": {
+  "actuation_dropout_p": "per-tick Bernoulli p; applied command zeroed after the gate; state carries x1_actuation_dropout=true",
+  "obs_noise_sigma_m": "Gaussian sigma per axis added to every observed (x,y), on top of any scenario perception_noise fault",
+  "obstacle_jitter_m": "uniform half-width per axis on each circular obstacle centre; forbidden zones not jittered",
+  "start_pose_sigma_m": "Gaussian sigma per axis on start (x,y); rejection-resampled until clear, max 1000 draws, else nominal"
+ },
+ "perturbation": {
+  "actuation_dropout_p": 0.15,
+  "level": "L3",
+  "obs_noise_sigma_m": 0.1,
+  "obstacle_jitter_m": 0.2,
+  "schema": "veap-x1-perturb/1",
+  "start_pose_sigma_m": 0.2,
+  "suite_version": "v0.7-x1"
+ },
+ "prereg": {
+  "path": "X1_PREREG_v3.md",
+  "sha256": "784382afe11be46c7863ef1a2a02f4f72a66d0cf1c57421f1830fa84f6aa10c7"
+ },
+ "repo_base_commit": "13ef67e1bf132b19af5a211ebca9d0e0728e520f",
+ "rng": "per-knob random.Random seeded from sha256('veap-x1-perturb/1|seed=<s>|knob=<k>')[:8]; legacy random.Random(seed) untouched",
+ "schema": "veap-x1-params/1",
+ "selected_level": "L3",
+ "selection": {
+  "data": "train+validation only (campus-patrol, warehouse-transfer), seeds 0..19",
+  "note": "L3 is the top of the pre-registered ladder; the rule did not bind below it.",
+  "per_level": {
+   "L0": {
+    "a": "40/40",
+    "a_pass": true,
+    "b_min_distinct": "1/20",
+    "b_pass": false,
+    "qualifies": false
+   },
+   "L1": {
+    "a": "40/40",
+    "a_pass": true,
+    "b_min_distinct": "20/20",
+    "b_pass": true,
+    "qualifies": true
+   },
+   "L2": {
+    "a": "40/40",
+    "a_pass": true,
+    "b_min_distinct": "20/20",
+    "b_pass": true,
+    "qualifies": true
+   },
+   "L3": {
+    "a": "40/40",
+    "a_pass": true,
+    "b_min_distinct": "20/20",
+    "b_pass": true,
+    "qualifies": true
+   }
+  },
+  "rule": "largest level with (a) route+gate-on verified >= 36/40 and (b) every train/val cell >= 15/20 distinct digests; never the greedy gap",
+  "selection_json_sha256": "7297bb09184a7a8c61965db3eb38a0e95b4b21763a10b352246c7331508cabc1"
+ },
+ "status": "FROZEN_PENDING_REVIEWER_CLEARANCE",
+ "step3": {
+  "gate": [
+   "off",
+   "on"
+  ],
+  "policies": [
+   "greedy",
+   "route"
+  ],
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "test_split_runs": "ONCE, only after reviewer clears these params"
+ },
+ "suite_version": "v0.7-x1"
+}

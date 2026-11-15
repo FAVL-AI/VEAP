@@ -84,3 +84,40 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - Measured: `grep -cE '^def test_'` = 38 test functions; `grep -oE '^def test_fixture_[0-9]+'` = 37 functions, numbers 01..37 with no duplicates and no gaps; the 38th is test_gate1_adversarial_fixture_count_and_recall (aggregate, not a fixture); `pytest --collect-only` = 38 tests collected (no parametrisation).
 - Result: MATCH. Cite only as "fixtures numbered 1..37 and 38 test functions".
 - deviation: none (manual entry; commands run interactively, outputs captured in this note).
+
+### deviation.steplog_edit
+- While writing note.adversarial_fixture_count I appended a malformed placeholder line ('- utc: $(date) placeholder replaced below') and removed it with `sed -i '$d'` seconds later, before any other entry. This is the only non-append edit to this file; no prior content was changed.
+
+### step2.selection
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python x1/step2_select.py`
+- utc: 2026-11-15T21:46:52Z | london: 2026-11-15T21:46:52+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 2.928169306
+- head: 112a4af98312c37ad2644dd3a6ffeb4bfbf67e81
+- df -B1 avail before: 50628763648 | after: 50628288512
+- output: /home/favl/veap_x1/logs/out/20261115T214652Z_step2_selection_.txt (sha256 569f5d263daf3697ad38e2b520e62a832612c3999537674df633b2ac0c458b50)
+- deviation: -
+
+### step2.check_claims
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T21:47:23Z | london: 2026-11-15T21:47:23+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .025702833
+- head: 112a4af98312c37ad2644dd3a6ffeb4bfbf67e81
+- df -B1 avail before: 50628259840 | after: 50628255744
+- output: /home/favl/veap_x1/logs/out/20261115T214723Z_step2_check_claims_.txt (sha256 a4c1a8debddecbb4f245c942214dffcc89cc76dafde65aaa3618bf68c8d75af1)
+- deviation: -
+
+### step2.freeze X1_PARAMS.json
+- utc: 2026-11-15T21:47:23Z | london: 2026-11-15T21:47:23+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50628255744
+- X1_PARAMS.json sha256 7924e78ec25fd5b52b27d49e229d310533c3e3fe6ea6efdd79b5141df0c3cd94; selection.json sha256 7297bb09184a7a8c61965db3eb38a0e95b4b21763a10b352246c7331508cabc1
+- Seed entry point found: veap/sim.py run_episode, `rng = random.Random(seed)`, consumed ONLY by scenario perception_noise faults (uniform ±0.24 m) -> explains 4/20 seed-varying cells (distribution-shift only; hospital-inspection's noise fault did not change its digest).
+- Condition table (train+val, seeds 0..19; (a) route+gate-on verified >=36/40; (b) min distinct digests over 8 train/val cells >=15/20):
+  - L0: a 40/40 PASS | b 1/20 FAIL | qualifies NO
+  - L1: a 40/40 PASS | b 20/20 PASS | qualifies YES
+  - L2: a 40/40 PASS | b 20/20 PASS | qualifies YES
+  - L3: a 40/40 PASS | b 20/20 PASS | qualifies YES
+- Selected: L3 (largest qualifying). Qualification monotone/contiguous (L1–L3). L3 is the ladder ceiling, so the rule did not bind.
+- Non-monotone pattern found (secondary, not used in selection): warehouse-transfer route gate-OFF verified 20/20 (L0), 16/20 (L1), 19/20 (L2), 18/20 (L3); violations 0, 30, 3, 15.
+- Test split NOT run. Awaiting reviewer clearance of params.
+- deviation: manual entry; selection itself logged by slog as step2.selection.

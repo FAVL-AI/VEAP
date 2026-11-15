@@ -1,0 +1,371 @@
+{
+ "spec_sha256": "784382afe11be46c7863ef1a2a02f4f72a66d0cf1c57421f1830fa84f6aa10c7",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "scenarios": {
+  "campus-patrol": "train",
+  "warehouse-transfer": "validation"
+ },
+ "levels": {
+  "L0": {
+   "params": {
+    "schema": "veap-x1-perturb/1",
+    "suite_version": "v0.7-x1",
+    "level": "L0",
+    "start_pose_sigma_m": 0.0,
+    "obstacle_jitter_m": 0.0,
+    "obs_noise_sigma_m": 0.0,
+    "actuation_dropout_p": 0.0
+   },
+   "cond_a_route_gate_on_verified": "40/40",
+   "cond_a_pass": true,
+   "cond_b_min_distinct": "1/20",
+   "cond_b_pass": false,
+   "cells": {
+    "campus-patrol|train|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 0,
+     "violations": 440,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 440
+    },
+    "warehouse-transfer|validation|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 1,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 160
+    }
+   },
+   "start_fallback_nominal_runs": 0,
+   "qualifies": false
+  },
+  "L1": {
+   "params": {
+    "schema": "veap-x1-perturb/1",
+    "suite_version": "v0.7-x1",
+    "level": "L1",
+    "start_pose_sigma_m": 0.05,
+    "obstacle_jitter_m": 0.05,
+    "obs_noise_sigma_m": 0.02,
+    "actuation_dropout_p": 0.05
+   },
+   "cond_a_route_gate_on_verified": "40/40",
+   "cond_a_pass": true,
+   "cond_b_min_distinct": "20/20",
+   "cond_b_pass": true,
+   "cells": {
+    "campus-patrol|train|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 0,
+     "violations": 489,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 398
+    },
+    "warehouse-transfer|validation|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 16,
+     "violations": 30,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 160
+    }
+   },
+   "start_fallback_nominal_runs": 0,
+   "qualifies": true
+  },
+  "L2": {
+   "params": {
+    "schema": "veap-x1-perturb/1",
+    "suite_version": "v0.7-x1",
+    "level": "L2",
+    "start_pose_sigma_m": 0.1,
+    "obstacle_jitter_m": 0.1,
+    "obs_noise_sigma_m": 0.05,
+    "actuation_dropout_p": 0.1
+   },
+   "cond_a_route_gate_on_verified": "40/40",
+   "cond_a_pass": true,
+   "cond_b_min_distinct": "20/20",
+   "cond_b_pass": true,
+   "cells": {
+    "campus-patrol|train|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 0,
+     "violations": 500,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 424
+    },
+    "warehouse-transfer|validation|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 19,
+     "violations": 3,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 160
+    }
+   },
+   "start_fallback_nominal_runs": 0,
+   "qualifies": true
+  },
+  "L3": {
+   "params": {
+    "schema": "veap-x1-perturb/1",
+    "suite_version": "v0.7-x1",
+    "level": "L3",
+    "start_pose_sigma_m": 0.2,
+    "obstacle_jitter_m": 0.2,
+    "obs_noise_sigma_m": 0.1,
+    "actuation_dropout_p": 0.15
+   },
+   "cond_a_route_gate_on_verified": "40/40",
+   "cond_a_pass": true,
+   "cond_b_min_distinct": "20/20",
+   "cond_b_pass": true,
+   "cells": {
+    "campus-patrol|train|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "campus-patrol|train|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 0,
+     "violations": 487,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|greedy|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 424
+    },
+    "warehouse-transfer|validation|route|off": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 18,
+     "violations": 15,
+     "interventions": 0
+    },
+    "warehouse-transfer|validation|route|on": {
+     "n": 20,
+     "distinct_trace_digests": 20,
+     "completed": 20,
+     "verified": 20,
+     "violations": 0,
+     "interventions": 161
+    }
+   },
+   "start_fallback_nominal_runs": 0,
+   "qualifies": true
+  }
+ },
+ "selected_level": "L3",
+ "rule": "largest level with (a) route+gate-on verified >= 36/40 and (b) every train/val cell >= 15/20 distinct digests; never the greedy gap",
+ "qualifying_levels": [
+  "L1",
+  "L2",
+  "L3"
+ ],
+ "monotone_qualification": true
+}
