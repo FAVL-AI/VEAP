@@ -77,7 +77,7 @@
     {
       "id": "E106",
       "status": "DEMONSTRATED",
-      "statement": "v0.6 kinematic planar cross-engine replay agreement (MuJoCo x Isaac Lab): release gate FAILED 18/20 (gate_passed = false; insp-07, insp-08 failed on contact-state disagreement).",
+      "statement": "v0.6 kinematic planar cross-engine replay agreement (MuJoCo x Isaac Lab): release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08) on contact-state disagreement.",
       "scope": "40 kinematic traces (372 samples), gravity disabled planar surrogate at z = 0.16 m, tapes from the same generator as the manifest",
       "limitations": "Not native-physics equivalence; gravity disabled; about 9 samples per trace; audit was internal (labelled 'Independent Audit Subagent' in the artifact, which is an internal agent)",
       "artifact": "artifacts/research/v06-release-gate-report.json",

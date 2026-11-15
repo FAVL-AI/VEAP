@@ -360,3 +360,15 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - veap/governance/claims.py: check_public_copy scan list += web/app.js (8 files). tests/test_readme_public_copy.py: FILES += web/app.js (old-phrase and on-scan-list checks) plus test_app_js_old_trial_phrase_absent.
 - index.html remaining uses (design quote, roadmap item) left unchanged per ruling (3).
 - pytest 230 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 8, valid).
+
+### erratum.v06-count: 'gate FAILED 18/20' -> 18 of 20 pairs passed, 2 failed
+- prev_entry_sha256: 0450097831db178eb9fb15080373e990e8c8a20b5f4a245b86e9d9ce57beb101
+- utc: 2026-11-15T23:35:10Z | london: 2026-11-15T23:35:10+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50623655936
+- branch: x1-erratum-v06-count at bf9df39129c525f9168f085f0ebe648979f46062 (merged main), local only, not pushed
+- old phrase (README.md, README_V06.md, docs/CLAIMS_REGISTER.json E106; also quoted in this steplog line 246 and x1/step5/forbidden_grep.txt:148): "gate FAILED 18/20"
+- problem: reads as 18 failures. Source artifacts/research/v06-release-gate-report.json: summary.passed_runs 18, failed_run_count 2, total_paired_runs 20, gate_passed false; failed_runs insp-07, insp-08 (hospital-inspection, contact_state_disagreement_rate=0.0769)
+- corrected wording: "release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08)"; headings/listings: "gate FAILED; 18 of 20 pairs passed, 2 failed"
+- fixed: README.md:15,24,81(h),83,90,127(h),151(listing); README_V06.md:1(h),4,16; docs/CLAIMS_REGISTER.json:80 (E106 statement)
+- left unchanged (historical, append-only): logs/STEPLOG.md:246, x1/step5/forbidden_grep.txt:148; logs/STEPLOG.md:121 '18/20 (L3)' is an X1 selection count, unrelated
+- guard: veap/governance/claims.py STALE_V06_COUNT (?i)\bfailed\s+18\s*/\s*20\b in check_public_copy; tests/test_readme_public_copy.py +3 tests (positive, negative, historical records ignored)
+- pytest: 239 passed, 3 skipped, 0 failed (logs/out/20261115T233445Z_erratum_pytest_.txt sha256 a33af38a81e55cd5c5a732f4406c044ed29984e966545a5375cfabdd5103a98d); check_claims exit 0 (9 claims; copy files_checked 8); check_public_copy {'valid': True, 'files_checked': 8}
