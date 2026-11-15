@@ -1,9 +1,10 @@
-# step5 forbidden-word grep (git grep -I over tracked text files, excl. logs/out), 2026-11-15T21:57:48Z
+# step5 forbidden-word grep (git grep -I over tracked + new text files, excl. logs/out and this file), 2026-11-15T22:02:03Z
 ## finding
 artifacts/research/v06-release-gate-report.json:50:    "discrepancy_findings": [
 docs/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample size, all at
 docs/research/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample siz
 logs/STEPLOG.md:143:### gate.a_b findings
+logs/STEPLOG.md:254:- Step 5 committed locally as c5577ae71f3d4751e13d2db800a49469549f71f8 (Frank sole author/committer, not pushed). veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md heading edit ('findings' -> 'results') was missed by that commit's pathspec an
 scripts/check_v07_security.py:58:    findings: list[dict[str, Any]] = []
 scripts/check_v07_security.py:74:                    findings.append({"file": rel, "line": lineno, "rule": rule})
 scripts/check_v07_security.py:75:    return {"scanned_files": scanned, "finding_count": len(findings), "findings": findings}
@@ -19,8 +20,8 @@ veap/simulation/asset_audit.py:72:    return {'schema_version':'veab-static-asse
 veap/simulation/asset_audit.py:73:            'scene_sha256':scene.get('content_sha256'),'checks':findings,
 ## shows agents
 ## (^|[^0-9.])0\.57([^0-9]|$)|57 ?%
-README.md:50:In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed independent verification in 34 of 60 runs (0.57; sc
-docs/CLAIMS_REGISTER.json:44:      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification in
+README.md:50:In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by a verifier separate from the agent 
+docs/CLAIMS_REGISTER.json:44:      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by
 veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/compliant.reference.json:291:      "t_s": 0.57,
 veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/compliant.reference.json:292:      "x": 0.57,
 veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_critical_interval.reference.json:291:      "t_s": 0.57,
@@ -75,6 +76,7 @@ docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:16:9. First-party Studio includ
 docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:46:**Permitted public claim:** VEAP provides software-tested research components for evidence-sufficient robot-execution evaluation, an M3 recording-contract prototype, and an early first-party Studio. **Not cla
 docs/research/PREREG_VEAP_NAV_PROTOCOL.md:7:**Who:** robotics research teams and independent safety engineers. **What:** compare final task-success scoring with actor-independent process grading. **Why:** terminal success can hide unsafe intermediate execution
 logs/STEPLOG.md:229:- deviation: rerun after reverting edits to the two checksum-pinned / pre-registration PREREG_VEAP_NAV_PROTOCOL.md files (first run: 1 failed test_research_v030_exact_checksums)
+logs/STEPLOG.md:247:- CLAIMS_REGISTER: E103-E108 added (9 claims total). check_claims exit 0. pytest 226 passed, 2 skipped, 0 failed (first run 1 failed: test_research_v030_exact_checksums, caused by my edit to checksum-pinned docs/research/PREREG_VEAP_NAV_PRO
 scripts/browser_smoke.py:12:    page.locator("#scenario-select option").first.wait_for()
 scripts/check_v06_base.py:6:its prerequisites first.
 veap/adapters/isaac_lab.py:138:    first = telemetry_records[0] if telemetry_records else {}
@@ -145,7 +147,6 @@ web/style.css:2:*{box-sizing:border-box}body{margin:0;background:var(--bg);color
 README.md:11:> **Core Definition:** VEAP is a **model- and harness-agnostic evaluation protocol** that jointly measures **task success**, **constraint violations**, **recovery**, **resource cost**, and **independently checkable evidence** under **controlled fa
 README.md:13:> **Evidence & Claim Boundaries:** Components carry explicit maturity labels (`Core v0.1.0`, `Evidence R1.1–R1.3`, `Studio R0.3 / VEAP Foundry`, `M3 Replay R0.1`, and `v0.6 kinematic planar cross-engine replay agreement — gate FAILED 18/20`). 
 README.md:24:| **Cryptographic Custody & Verification** | `Ed25519` (`R1.3`), `HMAC-SHA256`, `Rust` (`backend/rust_verifier`), `Go` (`veap-go-orchestrator`) | Independent trace verification, three-valued evidence certificates, public-key reference custody | `v
-README.md:50:In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed independent verification in 34 of 60 runs (0.57; sc
 README.md:106:Open **http://127.0.0.1:8000** to launch the **VEAP Agent Observatory**. Select a scenario contract, choose a baseline (`route` or `greedy`), toggle the geometric safety gate, and run the benchmark. Exported evidence JSON bundles are independentl
 README.md:119:# Independently verify a standalone evidence bundle
 README_M3_REPLAY.md:60:| WP2 independent-implementation monitor | Implemented, reads only JSONL and contract | Independent ground truth and third-party assessment |
@@ -185,6 +186,7 @@ artifacts/research/process-analysis.json:148:      "inference_status": "explorat
 artifacts/research/process-analysis.json:152:        "Verifier reads simulator-generated state, not independent physical ground truth",
 artifacts/research/process-analysis.json:217:      "inference_status": "exploratory, NOT preregistered or independent",
 artifacts/research/process-analysis.json:221:        "Verifier reads simulator-generated state, not independent physical ground truth",
+artifacts/research/reexecuted-factorial.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
 artifacts/research/reexecuted-factorial.v0x-seed-invariant.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
 artifacts/research/v06-heldout-traces/isaaclab/abs-01.json:84:      "note": "Not independently attested ground truth",
 artifacts/research/v06-heldout-traces/isaaclab/abs-02.json:84:      "note": "Not independently attested ground truth",
@@ -488,6 +490,7 @@ external_monitor/monitor.py:5:Consumes exported pose/event records, not model se
 external_monitor/monitor.py:6:implemented software, NOT independent sensor ground truth or safety certification.
 external_monitor/monitor.py:188:      'source_trust':'unattested exported simulator or synthetic evidence; not independent real-world ground truth',
 external_monitor/monitor.py:202:    parser=argparse.ArgumentParser(description='Independent-implementation read-only exported-pose monitor')
+logs/STEPLOG.md:248:- Forbidden-word grep saved to x1/step5/forbidden_grep.txt. Verbatim headline contains 'independent verification' (flag to PHD: conflicts with the 'independent' ban and with veap/governance/claims.py HIGH_RISK regex; README is not in check_
 scripts/generate_m3_fixture_set.py:48:    patch('truncated_one_sample',lambda v:v.__setitem__(slice(None),[r for r in v if r['log_time_ns'] <1_200_000_000]),True,'Bounded window is inferred from recorded data; truncation is not independently observable without
 scripts/run_m3_controls.py:29:        b=monitor.independently_check(ROOT/'contracts/m3_nav_v1.template.json',raw)
 scripts/run_m3_controls.py:31:        independently_rejected=b['verdict']!='OBSERVED'
@@ -512,6 +515,9 @@ tests/test_m3_contract.py:156:def test_independent_monitor_import_isolation():
 tests/test_m3_contract.py:170:def test_independent_monitor_agrees_on_constructed_cases(case,pass_expected):
 tests/test_m3_contract.py:175:    verdict=mod.independently_check(CONTRACT,FIX/(case+'.jsonl'))
 tests/test_m3_contract.py:188:        b=mod.independently_check(CONTRACT,FIX/(case+'.jsonl'))['verdict']=='OBSERVED'
+tests/test_readme_public_copy.py:10:def test_old_independent_verification_phrase_absent():
+tests/test_readme_public_copy.py:13:        assert not re.search(r"(?i)independent verification", body), f"{name} reintroduces 'independent verification'"
+tests/test_readme_public_copy.py:20:    assert "agent-independent" not in headline
 tests/test_veap_integrated_gate.py:23:        "no_independent_scenes": True,
 tests/test_veap_integrated_gate.py:32:        "independent_heldout_environments": False,
 tests/test_veap_integrated_gate.py:35:                    "independent_monitor_disagreements": 0,

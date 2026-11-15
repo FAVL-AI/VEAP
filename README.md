@@ -47,7 +47,7 @@ Enterprise & research assurance workbench featuring the **Evidence Claim Ladder 
 
 ### X1 re-baseline (v0.7-x1, branch `x1-rebaseline`, prereg `X1_PREREG_v3` sha `784382af…10c7`, params `X1_PARAMS.json` sha `7924e78e…cd94`)
 
-In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed independent verification in 34 of 60 runs (0.57; scenario-clustered 95% CI 0–1, n = 3 scenarios). With the gate on, violations were 0 in all 60 runs. This demonstrates the metric; it is not an estimate of real-agent behaviour.
+In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by a verifier separate from the agent in 34 of 60 runs (0.57; scenario-clustered 95% CI 0–1, n = 3 scenarios). With the gate on, violations were 0 in all 60 runs. This demonstrates the metric; it is not an estimate of real-agent behaviour.
 
 - **Conditional on completion:** 34 of 40 completed greedy gate-off runs failed verification (34/40, next to 34/60 of all runs; scenario-clustered 95% CI for 34/60 is 0–1, n = 3 scenarios).
 - **Absence scenario:** greedy never completes `absence-rejection` (0/20); completion there means correctly declaring the target absent within budget, which the greedy baseline never does.

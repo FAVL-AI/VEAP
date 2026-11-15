@@ -41,7 +41,7 @@
     {
       "id": "E103",
       "status": "DEMONSTRATED",
-      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification in 34 of 60 runs (0.57; scenario-clustered 95% CI 0-1, n = 3 scenarios); 34 of 40 conditional on completion; greedy never completes absence-rejection (0/20).",
+      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by a verifier separate from the agent in 34 of 60 runs (0.57; scenario-clustered 95% CI 0-1, n = 3 scenarios); 34 of 40 conditional on completion; greedy never completes absence-rejection (0/20).",
       "scope": "Toy 2-D kinematic simulator, test split run once at frozen perturbation level L3; metric demonstration only",
       "limitations": "Not an estimate of real-agent behaviour; greedy ignores obstacles by construction; n = 3 scenarios gives an uninformative clustered CI; injected-dropout faults not measured (ledger has no fault event for dropout)",
       "artifact": "x1/step3/X1_TEST_ANALYSIS.json",

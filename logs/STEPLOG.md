@@ -252,3 +252,33 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - prev_entry_sha256: d691a9eb44a09b22dc19a8ae0b8c7aedb93f7dd7123c6a4cfcabb996059d9ef9
 - utc: 2026-11-15T21:58:24Z | london: 2026-11-15T21:58:24+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50620657664
 - Step 5 committed locally as c5577ae71f3d4751e13d2db800a49469549f71f8 (Frank sole author/committer, not pushed). veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md heading edit ('findings' -> 'results') was missed by that commit's pathspec and is committed in the follow-up commit together with this entry.
+
+### ruling.check_claims
+- prev_entry_sha256: b1b90e64e766da1975985958b0a1c26c6406bd3139293a09c12b3579726131ab
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T22:01:25Z | london: 2026-11-15T22:01:25+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .028234125
+- head: eda9877f70da283af63073b62984bf764f6389b3
+- df -B1 avail before: 50622685184 | after: 50622676992
+- output: /home/favl/veap_x1/logs/out/20261115T220125Z_ruling_check_claims_.txt (sha256 ccf72bbaf0521332e461da260793e3c8f578bc52f87b498ccfa2803b7425f8ab)
+- deviation: README.md, README_V06.md added to check_public_copy scan list
+
+### ruling.pytest
+- prev_entry_sha256: 87b1eb8b757d19efcc0386ef8efd6a22c2c65fce99d014dfd7b104a7c04fc2e5
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider`
+- utc: 2026-11-15T22:01:36Z | london: 2026-11-15T22:01:36+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 8.586744874
+- head: eda9877f70da283af63073b62984bf764f6389b3
+- df -B1 avail before: 50622648320 | after: 50622623744
+- output: /home/favl/veap_x1/logs/out/20261115T220136Z_ruling_pytest_.txt (sha256 6e25f8ca97ab92418a0d933fbab119e6ffc4e391f332fd4f8a5f37185f7b5017)
+- deviation: -
+
+### ruling.summary (reviewer rulings 1-2, relayed 22:00 London)
+- prev_entry_sha256: 4b6f5c6c5798e61948596bfd9be897addd8bf0a068a85ee6a812bb8761266d3e
+- utc: 2026-11-15T22:02:31Z | london: 2026-11-15T22:02:31+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50622562304
+- (1) Headline: 'failed independent verification' -> 'failed verification by a verifier separate from the agent' in README.md (only occurrence; README_V06.md has no headline) and E103 statement. No 'agent-independent' in the sentence. veap/governance/claims.py check_public_copy scan list += README.md, README_V06.md (files_checked 4 -> 6, valid). New tests/test_readme_public_copy.py (3 tests); negative control: restoring the old phrase makes the regex match. README lines 11 ('independently checkable evidence') and 106 ('independently verifiable via python -m veap verify') unchanged and do not trip the scan or the test.
+- (2) docs/ASSURANCE_v0.4_SHA256_MANIFEST.json untouched; sidecar docs/ASSURANCE_v0.4_SHA256_MANIFEST.ERRATUM.md records stale f45c908680766229be98876d608ed593793c523f0b75c0b4291cb8539839c15c, current 682d53221a6c9d94f6d51269d88401c27f024c44353a5dc69abd6cc5039215e1, date 2026-11-15. grep: README.md, README_V06.md, CLAIMS_REGISTER.json do not cite the v0.4 manifest.
+- SHA256SUMS: root SHA256SUMS.txt covers none of the changed files (33/33 OK, unchanged). veap_studio_r03/SHA256SUMS.txt has 11 pre-existing FAILED lines at base 13ef67e1 (files untouched by X1), left unchanged.
+- check_claims exit 0 (9 claims; copy 6 files). pytest 229 passed, 2 skipped, 0 failed.
