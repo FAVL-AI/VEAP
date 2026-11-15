@@ -1,0 +1,14 @@
+{
+  "evidence": {
+    "valid": true,
+    "claim_count": 3,
+    "statuses": [
+      "DEMONSTRATED",
+      "IMPLEMENTED"
+    ]
+  },
+  "copy": {
+    "valid": true,
+    "files_checked": 4
+  }
+}

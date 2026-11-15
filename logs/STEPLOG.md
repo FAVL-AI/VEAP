@@ -121,3 +121,60 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - Non-monotone pattern found (secondary, not used in selection): warehouse-transfer route gate-OFF verified 20/20 (L0), 16/20 (L1), 19/20 (L2), 18/20 (L3); violations 0, 30, 3, 15.
 - Test split NOT run. Awaiting reviewer clearance of params.
 - deviation: manual entry; selection itself logged by slog as step2.selection.
+
+### gate.c hash-chained steplog (chain start)
+- prev_entry_sha256: fb276510805d89d312e08ae718422052364e39eae548ec3ff596b81031abd860
+- utc: 2026-11-15T21:49:54Z | london: 2026-11-15T21:49:54+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50631196672
+- From this entry on, every entry carries prev_entry_sha256 = sha256 of the previous entry's bytes (from the start of its '### ' line to EOF, as computed by logs/prev_entry_sha.py). Implemented in logging tools only (logs/slog.sh, logs/note.sh, logs/prev_entry_sha.py); harness code untouched.
+- Chain start = sha256 of last pre-existing entry ('### step2.freeze X1_PARAMS.json'): fb276510805d89d312e08ae718422052364e39eae548ec3ff596b81031abd860
+- Freeze integrity re-checked before test: X1_PARAMS.json sha256 7924e78ec25fd5b52b27d49e229d310533c3e3fe6ea6efdd79b5141df0c3cd94; code_sha256 for veap/sim.py, verifier.py, x1_perturb.py, x1_stats.py all match; HEAD 864e660e48f1ea310c83ecbdc7a9d8978feb624e; tracked tree clean.
+
+### gate.a_b trace inspection (validation scenario, L3, seed 0, greedy gate off)
+- prev_entry_sha256: 455a37fe1bbe372065df84d476f20ebd6785319d69e734025fa546d2ac421e47
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python /tmp/x1_gates_ab.py`
+- utc: 2026-11-15T21:50:09Z | london: 2026-11-15T21:50:09+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .084305661
+- head: 864e660e48f1ea310c83ecbdc7a9d8978feb624e
+- df -B1 avail before: 50630160384 | after: 50630156288
+- output: /home/favl/veap_x1/logs/out/20261115T215009Z_gate_a_b_trace_inspection__validation_scenario__L3__seed_0__greedy_gate_off__.txt (sha256 5c05bc39a1b93551fd605ef0013621774493a1939df9c80c9b1bdf1f05f7217c)
+- deviation: script /tmp/x1_gates_ab.py, output in logs/out; no test-split data touched
+
+### gate.a_b findings
+- prev_entry_sha256: 3457c27d00ed9fc3bb25034fcbd988d58132c3dab30d2eeb767c302483ea1bd4
+- utc: 2026-11-15T21:50:30Z | london: 2026-11-15T21:50:30+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50631151616
+- Gate (a) PASS: x1_actuation_dropout is inside the hashed trace. Code: veap/sim.py puts it in the "state" event payload; veap/ledger.py Ledger.emit hashes {seq,tick,kind,payload,prev_hash} via canonical JSON, so the flag feeds each event hash and the chained ledger_root_sha256 (= trace_sha256). Actual trace (warehouse-transfer [validation], greedy, gate off, L3, seed 0): 8 flagged state events = manifest actuation_dropout_ticks 8; event 3 hash f8c9f900…164a recomputes equal WITH the flag, NOT equal without it; check_chain(original)=valid, check_chain(flag stripped)=event digest mismatch at 3; root f5ed5cea…bfee = last event hash.
+- Gate (b) PASS: violations are scored on the TRUE pose. Code: sim emits "state" x,y from the true integrated pos; noisy coordinates go only into "observation" events. verifier.py computes speed/segment/clearance violations exclusively from "state" events (lines 105-131); for "observation" it reads only target_present/sensor_ok (lines 144-146), never x/y. Same trace: verifier violations 29; observed x/y differ from prior-tick true pose by up to 1.9789 m (sensor_dropout fault stale pose + noise), and that does not enter scoring.
+- Limitation recorded: the injected dropout is NOT a ledger "fault" event; verifier faults/recovered_faults cannot see it -> report as "not measured", never 0.
+- Script: x1/gates_ab_check.py. Both gates pass; proceeding to the one-shot test split.
+
+### step3.TEST_SPLIT_ONE_SHOT
+- prev_entry_sha256: 52d1e20477f017df40f5da0452ef976a960ad8eee416bf223ad5d67ac2c34e6b
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python x1/step3_test_once.py`
+- utc: 2026-11-15T21:50:30Z | london: 2026-11-15T21:50:30+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 1.113110707
+- head: 864e660e48f1ea310c83ecbdc7a9d8978feb624e
+- df -B1 avail before: 50631143424 | after: 50630930432
+- output: /home/favl/veap_x1/logs/out/20261115T215030Z_step3_TEST_SPLIT_ONE_SHOT_.txt (sha256 5d329371d8de665daee7a44d93dc4d886d18e857637222d699800e05d4305ae9)
+- deviation: runner x1/step3_test_once.py written after freeze (new file; no change to frozen harness code, shas asserted)
+
+### step4.analyze test records
+- prev_entry_sha256: 664ff3ae494d5ca0687cdaada18563b8085e2b4908d07efed4904d31c59febdb
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python x1/step3_analyze.py`
+- utc: 2026-11-15T21:50:58Z | london: 2026-11-15T21:50:58+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 2.041228400
+- head: 864e660e48f1ea310c83ecbdc7a9d8978feb624e
+- df -B1 avail before: 50630901760 | after: 50630881280
+- output: /home/favl/veap_x1/logs/out/20261115T215058Z_step4_analyze_test_records_.txt (sha256 36ff5ccd1c47860a1bf1b582924e5b0cd8748985e13876fb12044f9a4894ba2c)
+- deviation: analysis script x1/step3_analyze.py written after freeze (new file)
+
+### step4.results (test split, one shot, L3, seeds 0..19)
+- prev_entry_sha256: 4faec673e4717a45ea47051f4340604597a6807f991e63bc135f8917e94cfa97
+- utc: 2026-11-15T21:51:18Z | london: 2026-11-15T21:51:18+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50630864896
+- Test split ran exactly once (step3.TEST_SPLIT_ONE_SHOT, exit 0, 240 records; 3 scenarios absence-rejection, distribution-shift, hospital-inspection). No rerun.
+- PRIMARY greedy gate-off (completed - verified)/n = 34/60 = 0.5667 (completed 40, verified 6); scenario-clustered bootstrap 95% CI [0.0, 1.0], 10,000 resamples, seed 0, n = 3 scenarios; effective n = 60 distinct digests of 60. Per scenario: absence-rejection 0/20, distribution-shift 14/20, hospital-inspection 20/20.
+- SECONDARY route gate-off mean violations 0.05 per run (3 total, all distribution-shift), clustered 95% CI [0.0, 0.2].
+- Injected-dropout faults/recovered_faults: not measured (ledger has no fault event for it).
+- Outputs + sha256: see x1/step3/SHA256SUMS.

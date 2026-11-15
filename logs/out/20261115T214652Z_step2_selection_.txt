@@ -1,0 +1,37 @@
+L0 a: 40/40 True | b min distinct: 1/20 False | qualifies: False | start_fallback: 0
+    campus-patrol|train|greedy|off {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|greedy|on {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|off {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|on {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    warehouse-transfer|validation|greedy|off {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 0, 'violations': 440, 'interventions': 0}
+    warehouse-transfer|validation|greedy|on {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 440}
+    warehouse-transfer|validation|route|off {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    warehouse-transfer|validation|route|on {'n': 20, 'distinct_trace_digests': 1, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 160}
+L1 a: 40/40 True | b min distinct: 20/20 True | qualifies: True | start_fallback: 0
+    campus-patrol|train|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    warehouse-transfer|validation|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 0, 'violations': 489, 'interventions': 0}
+    warehouse-transfer|validation|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 398}
+    warehouse-transfer|validation|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 16, 'violations': 30, 'interventions': 0}
+    warehouse-transfer|validation|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 160}
+L2 a: 40/40 True | b min distinct: 20/20 True | qualifies: True | start_fallback: 0
+    campus-patrol|train|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    warehouse-transfer|validation|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 0, 'violations': 500, 'interventions': 0}
+    warehouse-transfer|validation|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 424}
+    warehouse-transfer|validation|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 19, 'violations': 3, 'interventions': 0}
+    warehouse-transfer|validation|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 160}
+L3 a: 40/40 True | b min distinct: 20/20 True | qualifies: True | start_fallback: 0
+    campus-patrol|train|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    campus-patrol|train|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 0}
+    warehouse-transfer|validation|greedy|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 0, 'violations': 487, 'interventions': 0}
+    warehouse-transfer|validation|greedy|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 424}
+    warehouse-transfer|validation|route|off {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 18, 'violations': 15, 'interventions': 0}
+    warehouse-transfer|validation|route|on {'n': 20, 'distinct_trace_digests': 20, 'completed': 20, 'verified': 20, 'violations': 0, 'interventions': 161}
+selected: L3 qualifying: ['L1', 'L2', 'L3'] contiguous: True
