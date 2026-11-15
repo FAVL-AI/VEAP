@@ -1,3 +1,5 @@
+Historical (2026-11-15): superseded by README v0.7-x1; internal checks are not independent.
+
 # VEAP — Research, Experiment, and Verification Protocol
 
 **Status: Laboratory research prototype.**

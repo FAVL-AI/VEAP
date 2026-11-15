@@ -1,3 +1,5 @@
+Historical (2026-11-15): superseded by README v0.7-x1; internal checks are not independent.
+
 # VEAP — From Apparent Success to Verifiable Autonomy
 ## Consolidated Review and Canonical Platform Narrative
 

@@ -4,7 +4,7 @@ from pathlib import Path
 from veap.governance.claims import check_public_copy
 
 BASE = Path(__file__).resolve().parents[1]
-FILES = ("README.md", "README_V06.md")
+FILES = ("README.md", "README_V06.md", "web/index.html")
 
 
 def test_old_independent_verification_phrase_absent():
@@ -23,5 +23,6 @@ def test_readme_headline_uses_separate_verifier_wording():
 def test_public_copy_scan_covers_readmes_and_passes():
     import inspect
     src = inspect.getsource(check_public_copy)
-    assert "'README.md'" in src and "'README_V06.md'" in src
+    for name in FILES:
+        assert f"'{name}'" in src, f"{name} missing from check_public_copy scan list"
     assert check_public_copy(BASE)["valid"]

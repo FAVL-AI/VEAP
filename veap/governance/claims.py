@@ -70,7 +70,7 @@ def check_public_copy(root: str|Path, files=None) -> dict:
     discussion would incorrectly flag legitimate negative statements.
     """
     base=Path(root).resolve()
-    files=files or ['docs/PUBLIC_PRODUCT_CLAIMS.md', 'docs/release/V06_FUNDING_POSITION.md', 'web/v06_product_positioning.md', '.github/pull_request_template.md', 'README.md', 'README_V06.md']
+    files=files or ['docs/PUBLIC_PRODUCT_CLAIMS.md', 'docs/release/V06_FUNDING_POSITION.md', 'web/v06_product_positioning.md', '.github/pull_request_template.md', 'README.md', 'README_V06.md', 'web/index.html']
     failures=[]
     for filename in files:
         path=(base/filename).resolve()

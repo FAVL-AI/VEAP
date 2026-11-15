@@ -287,3 +287,36 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - prev_entry_sha256: 92a07605fc12e7f6dbd4de0cb3884ac6e6506a1b061ca0f69806774878874216
 - utc: 2026-11-15T22:02:31Z | london: 2026-11-15T22:02:31+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50622410752
 - Rulings committed locally as 41a49901229776a0a03579f7f44601f4cd6212d1 (Frank sole author/committer, not pushed). This entry is committed in a follow-up steplog-only commit.
+
+### x1a.pytest
+- prev_entry_sha256: ac548a9d8590d76a8f19f9244efc3503144094116fb6e55edb8da9056b643082
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider`
+- utc: 2026-11-15T22:05:28Z | london: 2026-11-15T22:05:28+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 8.668548084
+- head: 6bbe92c0c45ce38d5c6ace6df8d9a8b3cc4c17b5
+- df -B1 avail before: 50621059072 | after: 50621050880
+- output: /home/favl/veap_x1/logs/out/20261115T220528Z_x1a_pytest_.txt (sha256 34ef39cd925bbb0d32902b75ae85886567a1dabcf5707c12dc4711a22918ac55)
+- deviation: web/index.html:78 'Do not interpret toy-world scores as SOTA.' reworded to 'Toy-world scores are not SOTA evidence.' (same denial) so the scoped-denial qualifier in check_public_copy accepts it; regex unchanged. Pre-run without this fix: 2 failed (test_current_registry_passes, test_public_copy_scan_covers_readmes_and_passes)
+
+### x1a.check_claims
+- prev_entry_sha256: e1d9f3ef1ad24c079f2ff9fca48d040edef9b978b6735445b92aaa77e69884e8
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T22:05:37Z | london: 2026-11-15T22:05:37+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .042537860
+- head: 6bbe92c0c45ce38d5c6ace6df8d9a8b3cc4c17b5
+- df -B1 avail before: 50621046784 | after: 50621042688
+- output: /home/favl/veap_x1/logs/out/20261115T220536Z_x1a_check_claims_.txt (sha256 c19ac085f235f97e44e989f34bd633d39605d4a4b4099c90b8f6031f92a458a8)
+- deviation: -
+
+### commit.x1a public copy (pre-push item a)
+- prev_entry_sha256: 4166cd0061a489b4486cb68a789f841f8ef7938c9d2b578dd7a0bfe14330b2dc
+- utc: 2026-11-15T22:06:02Z | london: 2026-11-15T22:06:02+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50621001728
+- web/index.html: 'INDEPENDENT VERIFICATION' heading -> 'VERIFIER SEPARATE FROM THE AGENT'; 'Computed by independent verifier' -> 'Computed by a verifier separate from the agent'; 'Evaluation uses independently checked postconditions.' -> 'Evaluation checks postconditions with a verifier separate from the agent.'; 'Independent geometric gate' -> 'Separate geometric gate'. Kept: line 28 design quote 'can be independently checked' (capability statement) and roadmap item '05. Independent safety assurance' (future external work). Element ids unchanged. Also 'Do not interpret toy-world scores as SOTA.' -> 'Toy-world scores are not SOTA evidence.' (same denial; needed so the existing scoped-denial qualifier accepts it once the file is scanned; regex unchanged).
+- veap/governance/claims.py: check_public_copy scan list += web/index.html (7 files). tests/test_readme_public_copy.py FILES += web/index.html (phrase-absent and on-scan-list checks loop over all three files).
+- docs/CANONICAL_NARRATIVE.md: option = exact dated banner at top. Why: VEAP's own checks are called independent in 4 places across sections (lines 63, 70, 168, 204 pre-banner) plus many neighbouring 'independent(ly)' uses that are legitimate; a one-line banner is the smaller change and does not rewrite historical narrative text.
+- docs/RESEARCH_PROTOCOL.md: option = exact dated banner at top. Why: self-references at lines 72 (RQ1 wording), 92 and 133 pre-banner; rewording RQ1 would alter a protocol research question, so the banner is the smaller, safer change.
+- Left as instructed: NASA IV&V citation, claims.py HIGH_RISK regex, guard-test phrase literals. Not in scope, flagged: web/app.js renders '<n> independently evaluated trial(s)' into the metric-rate note (unchanged).
+- SHA256SUMS: root SHA256SUMS.txt covers none of these files (all entries OK); veap_studio_r03 sums handled in the separate commit.
+- pytest 229 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 7). Sweep regenerated (x1/step5/forbidden_grep.txt): independent 768 -> 767 (web/index.html -4; banners +2; steplog +1; other changes are line-number shifts from the banners); finding 18 -> 18; first 87 -> 87; 0.57 33 -> 33; shows agents 0 -> 0.
