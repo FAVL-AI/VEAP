@@ -4,7 +4,7 @@ import { panels } from "./TracePanels";
 export default function ReplayWorkspace({ sources }) {
   const [source, setSource] = useState(Object.keys(sources)[0]);
   const [tick, setTick] = useState(0);
-  const [layout, setLayout] = useState(["Table"]);
+  const [layout, setLayout] = useState(["RL Metrics & Step Info", "Physics Verification", "Table"]);
   const [choice, setChoice] = useState("Raw Messages");
   const samples = sources[source];
   return (
