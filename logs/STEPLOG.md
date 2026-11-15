@@ -329,3 +329,34 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - Cause: unknown. Evidence: SUMS file and the 11 files were all added in commit 2d5d16c (2026-11-14) and never changed afterwards; no CR characters in any of the 11 files; reversing the VEAB->VEAP rename (several variants) reproduces none of the expected shas (store.py has no VEAP/veap string and still fails); none of 767 blobs in this clone's object store (42 commits) has any expected sha.
 - Checks after adding the note: pytest 229 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 7). The note itself has 0 forbidden-word hits (one ordinal 'first' reworded to 'were added').
 - Sweep: x1/step5/forbidden_grep.txt is kept as committed in 4ad2d9799942a6cb5644280a5d81c6f1a48e535c (sweep run before that commit's steplog entry). A sweep rerun now differs only by steplog lines that quote the words (finding 18->19, shows agents 0->1, 0.57 33->34, first 87->88, independent 767->771; all in logs/STEPLOG.md, append-only); the file is not re-committed here so this commit stays limited to veap_studio_r03 plus its steplog entry.
+
+### r4.pytest
+- prev_entry_sha256: e3d52924dde60f0946b7526719afdeb34d9339631379e94a2f4fc156e5c93021
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider`
+- utc: 2026-11-15T22:09:49Z | london: 2026-11-15T22:09:49+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 8.715915147
+- head: fe2af22cf45fdaad036b644a8c4f21fc1d28f9b7
+- df -B1 avail before: 50618867712 | after: 50618851328
+- output: /home/favl/veap_x1/logs/out/20261115T220949Z_r4_pytest_.txt (sha256 81ee63df01984c9a77cdd9e5de986118aa329047d53f56e703fb73ec87f75117)
+- deviation: -
+
+### r4.check_claims
+- prev_entry_sha256: 6f6b6d40076ebf05f9f22ace3188e51c64bad9463a4c3e977956ace0c3518933
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T22:09:58Z | london: 2026-11-15T22:09:58+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .038833754
+- head: fe2af22cf45fdaad036b644a8c4f21fc1d28f9b7
+- df -B1 avail before: 50618851328 | after: 50618847232
+- output: /home/favl/veap_x1/logs/out/20261115T220958Z_r4_check_claims_.txt (sha256 cac5e606fa407d445c670d69c90d8b0e3b6682a40795f4efbf35d69c35e685fd)
+- deviation: web/app.js added to check_public_copy scan list
+
+### commit.r4 web/app.js wording + note on 4ad2d979
+- prev_entry_sha256: 1d45d4e34d6ce9fa1e061774708a1e1afacd8aa736dbf5862446231ce7958992
+- utc: 2026-11-15T22:10:13Z | london: 2026-11-15T22:10:13+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50617786368
+- Note on 4ad2d9799942a6cb5644280a5d81c6f1a48e535c (not amended): that commit includes a scanner-driven edit to web/index.html, 'Do not interpret toy-world scores as SOTA.' -> 'Toy-world scores are not SOTA evidence.', made so check_public_copy's existing scoped-denial qualifier accepts the line; reviewer ACCEPTED it on r3.
+- web/app.js: '`${trials} independently evaluated trial${trials===1?'':'s'}`' -> '`${trials} trial${trials===1?'':'s'} evaluated by a verifier separate from the agent`' (singular/plural expression unchanged). No other app.js lines flagged by the scanner; no further rewordings.
+- veap/governance/claims.py: check_public_copy scan list += web/app.js (8 files). tests/test_readme_public_copy.py: FILES += web/app.js (old-phrase and on-scan-list checks) plus test_app_js_old_trial_phrase_absent.
+- index.html remaining uses (design quote, roadmap item) left unchanged per ruling (3).
+- pytest 230 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 8, valid).
