@@ -178,3 +178,8 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - SECONDARY route gate-off mean violations 0.05 per run (3 total, all distribution-shift), clustered 95% CI [0.0, 0.2].
 - Injected-dropout faults/recovered_faults: not measured (ledger has no fault event for it).
 - Outputs + sha256: see x1/step3/SHA256SUMS.
+
+### commit.step3
+- prev_entry_sha256: f637515655931c6717bfc5234feda0a552147422ad2149aa2f59be28dd6d84ae
+- utc: 2026-11-15T21:51:18Z | london: 2026-11-15T21:51:18+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50630672384
+- Outputs committed locally on x1-rebaseline as b1f8d230730ecb47b09375e2dc363ff3a3372802 (author/committer Frank Asante Van Laarhoven <frankleroyvan@gmail.com>). Not pushed. This entry is committed in a follow-up steplog-only commit.
