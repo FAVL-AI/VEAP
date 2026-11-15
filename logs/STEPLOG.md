@@ -372,3 +372,11 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - left unchanged (historical, append-only): logs/STEPLOG.md:246, x1/step5/forbidden_grep.txt:148; logs/STEPLOG.md:121 '18/20 (L3)' is an X1 selection count, unrelated
 - guard: veap/governance/claims.py STALE_V06_COUNT (?i)\bfailed\s+18\s*/\s*20\b in check_public_copy; tests/test_readme_public_copy.py +3 tests (positive, negative, historical records ignored)
 - pytest: 239 passed, 3 skipped, 0 failed (logs/out/20261115T233445Z_erratum_pytest_.txt sha256 a33af38a81e55cd5c5a732f4406c044ed29984e966545a5375cfabdd5103a98d); check_claims exit 0 (9 claims; copy files_checked 8); check_public_copy {'valid': True, 'files_checked': 8}
+
+### erratum.v06-count cross-reference: reviewer errata
+- prev_entry_sha256: f7d401f45f93ace7596a665e719acb111f4ec1ccf85fc8573f7ff3402b7b4c0a
+- utc: 2026-11-15T23:38:53Z | london: 2026-11-15T23:38:53+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50623246336
+- reviewer errata (box /workspace/veap_reviews/, both dated '## Erratum (2026-11-15 23:40 London)'; text: '"Gate FAILED (18/20)" in this review is ambiguous and reads as 18 failures. Correct reading per artifacts/research/v06-release-gate-report.json: gate_passed = false; 18 of 20 cross-engine pairs met the criteria; 2 failed ...'):
+  - 2026-11-15_veap_readme_claims_review.md (item 1 of 'Top 5 fixes', line 30; erratum at line 36) sha256 1ddcded90369e79a18d86025ca6df2a680a9db33b40f40d0de1c3a44df7a3015
+  - 2026-11-15_arcagi_methods_for_veap_review.md (section (1) item 2, line 10; erratum at line 49) sha256 e933ef2ae10a567a8a99149b8985e64497025cf9785d6032e88e49aa2ca23529
+- relation: the README wording 'gate FAILED 18/20' traces to review item 1's 'Gate FAILED (18/20)'; corrected in e7c30736 (reviewer ACCEPTED). This entry is a new commit on top of e7c30736 (no amend).
