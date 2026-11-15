@@ -1,0 +1,45 @@
+.replay {
+  background: #101a24;
+  color: #eef4f8;
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 4rem);
+  font: 1rem/1.5 system-ui;
+}
+.replay a {
+  color: #9bd9cd;
+}
+.replay label {
+  display: block;
+  margin: 1em 0;
+}
+.replay select,
+.replay button {
+  font: inherit;
+  padding: 0.3em 0.6em;
+  margin-right: 0.5em;
+}
+.replay .panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.replay section {
+  padding: 1rem;
+  background: #192a36;
+  overflow: auto;
+}
+.replay header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.replay table {
+  border-collapse: collapse;
+}
+.replay td,
+.replay th {
+  text-align: left;
+  padding: 0.25rem;
+  border-bottom: 1px solid #465864;
+}
