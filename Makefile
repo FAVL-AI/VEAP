@@ -9,3 +9,9 @@ serve:
 	python -m uvicorn veap.api:app --host 127.0.0.1 --port 8000
 suite:
 	python -m veap suite --seeds 0 1 2 --out artifacts/suite-summary.json
+
+.PHONY: native-rl-check frontend-build
+native-rl-check:
+	$(MAKE) -C backend/rl check
+frontend-build:
+	cd frontend && npm ci && npm run build

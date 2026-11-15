@@ -1,0 +1,17 @@
+name: VEAP Next.js and native RL
+on:
+  push:
+    paths: ['frontend/**', 'backend/rl/**', 'artifacts/research/v06-*.json', '.github/workflows/workbench-native.yml']
+  pull_request:
+    paths: ['frontend/**', 'backend/rl/**', 'artifacts/research/v06-*.json', '.github/workflows/workbench-native.yml']
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: make native-rl-check frontend-build

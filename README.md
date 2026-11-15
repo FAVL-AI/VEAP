@@ -1,5 +1,7 @@
 # VEAP — Verifiable Embodied Agent Platform
 
+[Next.js frontend and startup](frontend/README.md) · [Native C/C++ reinforcement learning](backend/rl/README.md) · [Workbench coverage and acceptance register](docs/release/FOXGLOVE_COVERAGE.md)
+
 [![CI — Integrated Scientific Gate](https://img.shields.io/badge/CI-Integrated_Scientific_Gate-2ea44f?style=flat-square)](#continuous-verification--governance)
 [![Physics — MuJoCo 4.0.1](https://img.shields.io/badge/Physics-MuJoCo_4.0.1-0f172a?style=flat-square)](#tools--framework-architecture)
 [![Physics — Isaac Lab 0.54.3](https://img.shields.io/badge/Physics-Isaac_Lab_0.54.3_%2F_Isaac_Sim_5.1-76b900?style=flat-square)](#tools--framework-architecture)

@@ -1,0 +1,4 @@
+# VEAP Next.js frontend
+From this directory run `npm ci && npm run build && npm start` (Node 22 or 24). Use / for the Observatory, /studio for Assurance Studio and /replay for the local trace workbench. Start the existing core and Studio APIs on ports 8000 and 8010 respectively. Set VEAP_CORE_ORIGIN and VEAP_STUDIO_ORIGIN before the build for other addresses. API authentication remains with those services.
+
+App Router pages compose panels from components/observatory, components/studio and components/replay. The first two dashboards retain their previous imperative controllers and styles to preserve existing calls, IDs and interactions. FastAPI static routes remain available for older deployments. Build new views as React components. The local replay route uses the two tracked native trace fixtures and requires no backend or credentials.
