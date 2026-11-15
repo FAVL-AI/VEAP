@@ -247,3 +247,8 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - CLAIMS_REGISTER: E103-E108 added (9 claims total). check_claims exit 0. pytest 226 passed, 2 skipped, 0 failed (first run 1 failed: test_research_v030_exact_checksums, caused by my edit to checksum-pinned docs/research/PREREG_VEAP_NAV_PROTOCOL.md; both PREREG copies reverted, rerun clean).
 - Forbidden-word grep saved to x1/step5/forbidden_grep.txt. Verbatim headline contains 'independent verification' (flag to PHD: conflicts with the 'independent' ban and with veap/governance/claims.py HIGH_RISK regex; README is not in check_public_copy scope so it does not fail).
 - Not fixed: docs/ASSURANCE_v0.4_SHA256_MANIFEST.json lists reexecuted-factorial.json with sha f45c9086… (already stale before X1; historical v0.4 manifest, left untouched).
+
+### commit.step5
+- prev_entry_sha256: d691a9eb44a09b22dc19a8ae0b8c7aedb93f7dd7123c6a4cfcabb996059d9ef9
+- utc: 2026-11-15T21:58:24Z | london: 2026-11-15T21:58:24+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50620657664
+- Step 5 committed locally as c5577ae71f3d4751e13d2db800a49469549f71f8 (Frank sole author/committer, not pushed). veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md heading edit ('findings' -> 'results') was missed by that commit's pathspec and is committed in the follow-up commit together with this entry.
