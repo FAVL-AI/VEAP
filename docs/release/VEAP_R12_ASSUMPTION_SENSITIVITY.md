@@ -33,4 +33,4 @@ Any mismatch must be investigated before accepting the release. Preserve the off
 3. Compare VEAP certificates with a strong runtime-verifier implementation, competent task-specific scripts and blinded human reviewers.
 4. Measure false-compliant, false-violating, unnecessary-inconclusive, correct-inconclusive and explanation-checking rates, plus human review time.
 5. Analyse by independently authored scene as the statistical unit, not translated seeds/trace variants.
-6. Publish negative, tied and adverse findings alongside positive results.
+6. Publish negative, tied and adverse results alongside positive results.

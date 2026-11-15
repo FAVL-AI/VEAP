@@ -183,3 +183,67 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - prev_entry_sha256: f637515655931c6717bfc5234feda0a552147422ad2149aa2f59be28dd6d84ae
 - utc: 2026-11-15T21:51:18Z | london: 2026-11-15T21:51:18+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50630672384
 - Outputs committed locally on x1-rebaseline as b1f8d230730ecb47b09375e2dc363ff3a3372802 (author/committer Frank Asante Van Laarhoven <frankleroyvan@gmail.com>). Not pushed. This entry is committed in a follow-up steplog-only commit.
+
+### step5.regenerate_factorial
+- prev_entry_sha256: 0d81876b267152714abe18314d15e6edb730fc608f2b710b812083ffe6f86c11
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m veap research-run --seeds 0 1 2 --split all --out artifacts/research/reexecuted-factorial.json`
+- utc: 2026-11-15T21:54:38Z | london: 2026-11-15T21:54:38+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .320558550
+- head: 0274dc13912b00ffeb0cf8978b3ab2feebefc3ca
+- df -B1 avail before: 50630422528 | after: 50630344704
+- output: /home/favl/veap_x1/logs/out/20261115T215438Z_step5_regenerate_factorial_.txt (sha256 d4322944514ba5ce6724993655d3653174ab15143800e8447802a455fd67dccf)
+- deviation: old artifact preserved via git mv as reexecuted-factorial.v0x-seed-invariant.json (sha 3f88031e…7f99, unchanged bytes)
+
+### step5.check_claims
+- prev_entry_sha256: 1a40a754a1771446f33c41116a842ea12f8b7a476ea0441116180747b018aa3f
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T21:57:05Z | london: 2026-11-15T21:57:05+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .024608031
+- head: 0274dc13912b00ffeb0cf8978b3ab2feebefc3ca
+- df -B1 avail before: 50628636672 | after: 50628628480
+- output: /home/favl/veap_x1/logs/out/20261115T215705Z_step5_check_claims_.txt (sha256 615c7ee2706949cafedc924d3b6b3a733a612ff03ef6b56c346babe4d20c28b3)
+- deviation: -
+
+### step5.pytest
+- prev_entry_sha256: 9ff4cf2f6fe771e7092f8cef10997243abc82628cc26962cabe53616ea9d80c8
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider`
+- utc: 2026-11-15T21:57:05Z | london: 2026-11-15T21:57:05+0000
+- cwd: /home/favl/veap_x1
+- exit: 1 | wall_s: 10.271951986
+- head: 0274dc13912b00ffeb0cf8978b3ab2feebefc3ca
+- df -B1 avail before: 50628624384 | after: 50619936768
+- output: /home/favl/veap_x1/logs/out/20261115T215705Z_step5_pytest_.txt (sha256 532565f72a733b51e854a1f1f54b07a2ddf9acf9cb046f739abaab22181c6543)
+- deviation: -
+
+### step5.pytest_rerun
+- prev_entry_sha256: 1a9e6c283363c2d417d702c27fa6786189b017e08052a9f6f4f4414b9ea77132
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider`
+- utc: 2026-11-15T21:57:28Z | london: 2026-11-15T21:57:28+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: 8.850587142
+- head: 0274dc13912b00ffeb0cf8978b3ab2feebefc3ca
+- df -B1 avail before: 50619916288 | after: 50619969536
+- output: /home/favl/veap_x1/logs/out/20261115T215728Z_step5_pytest_rerun_.txt (sha256 8b34643c4e3145bf9bda0777946748dcd640e97412d879aee07204fd1f2bc2d0)
+- deviation: rerun after reverting edits to the two checksum-pinned / pre-registration PREREG_VEAP_NAV_PROTOCOL.md files (first run: 1 failed test_research_v030_exact_checksums)
+
+### step5.check_claims_rerun
+- prev_entry_sha256: 917dda0fd2b5a2970c74ca93639c05b868d1c42e0bf7d7f79689e0a43220f567
+- cmd: `env -u PYTHONPATH -u AMENT_PREFIX_PATH .venv/bin/python scripts/check_claims.py`
+- utc: 2026-11-15T21:57:37Z | london: 2026-11-15T21:57:37+0000
+- cwd: /home/favl/veap_x1
+- exit: 0 | wall_s: .041831183
+- head: 0274dc13912b00ffeb0cf8978b3ab2feebefc3ca
+- df -B1 avail before: 50619969536 | after: 50619965440
+- output: /home/favl/veap_x1/logs/out/20261115T215737Z_step5_check_claims_rerun_.txt (sha256 615c7ee2706949cafedc924d3b6b3a733a612ff03ef6b56c346babe4d20c28b3)
+- deviation: -
+
+### step5.summary
+- prev_entry_sha256: 62ae11042b6d9604609e57a45ae53067c5dc4baf3e06c7414bd92064f50cbce0
+- utc: 2026-11-15T21:58:08Z | london: 2026-11-15T21:58:08+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50619785216
+- Factorial regenerated: artifacts/research/reexecuted-factorial.json new sha 682d53221a6c9d94f6d51269d88401c27f024c44353a5dc69abd6cc5039215e1 (scenario_sha256 = current contracts, 60/60; results and trace digests identical). Old artifact preserved byte-for-byte by git mv as reexecuted-factorial.v0x-seed-invariant.json sha 3f88031e7cc4397d13a27e926e919d025f4a49aa433b7dd3a3bb368d2c0e7f99.
+- README: verbatim headline, 34/40, absence 0/20, exploratory route line, faults not measured + dropout limitation, post-freeze script shas, legacy table labelled 'v0.x, seed-invariant (effective n = 5 scenarios)', v0.6 retitled kinematic planar replay agreement, gate FAILED 18/20, internal audit. README_V06, CANONICAL_NARRATIVE, RESEARCH_PROTOCOL and 6 other docs de-overclaimed.
+- CLAIMS_REGISTER: E103-E108 added (9 claims total). check_claims exit 0. pytest 226 passed, 2 skipped, 0 failed (first run 1 failed: test_research_v030_exact_checksums, caused by my edit to checksum-pinned docs/research/PREREG_VEAP_NAV_PROTOCOL.md; both PREREG copies reverted, rerun clean).
+- Forbidden-word grep saved to x1/step5/forbidden_grep.txt. Verbatim headline contains 'independent verification' (flag to PHD: conflicts with the 'independent' ban and with veap/governance/claims.py HIGH_RISK regex; README is not in check_public_copy scope so it does not fail).
+- Not fixed: docs/ASSURANCE_v0.4_SHA256_MANIFEST.json lists reexecuted-factorial.json with sha f45c9086… (already stale before X1; historical v0.4 manifest, left untouched).

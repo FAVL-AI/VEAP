@@ -11,7 +11,7 @@
 
 ### What the Actual Experiment Shows
 
-The recorded experiment contains five toy-world scenarios, three seeds per scenario, two planning policies, and two safety-gate conditions (60 total trials):
+Legacy table — v0.x, seed-invariant (effective n = 5 scenarios). Five toy-world scenarios, three seeds per scenario, two planning policies, and two safety-gate conditions (60 nominal trials; in 16 of 20 cells the 3 seeds give identical traces):
 
 | Configuration | Task completion | Verified completion | Safety violations |
 |---|---|---|---|
@@ -23,11 +23,11 @@ The recorded experiment contains five toy-world scenarios, three seeds per scena
 *Source: Bundled VEAP v0.1.0 60-trial summary; deterministic simplified 2D simulation. Descriptive development results, not independent external benchmark results.*
 
 #### The Core Narrative Anchor
-**Nine of fifteen ungated greedy trials reached their task objectives but were rejected by the independent verifier because they violated safety constraints.**
+**Legacy v0.x, seed-invariant (effective n = 5 scenarios): ungated greedy runs that reached the goal but were rejected by the verifier occur in 3 of 5 scenarios (9 of 15 nominal runs; 3 identical seeds each). This is a metric demonstration: greedy ignores obstacles by construction.** The v0.7-x1 re-baseline (3 held-out test scenarios × 20 seeded perturbations) replaces this table: 34 of 60 greedy gate-off runs reached the goal but failed verification (scenario-clustered 95% CI 0–1, n = 3 scenarios); see README and claims E103–E108.
 
 This demonstrates a concrete, reproducible disagreement between task completion and verified completion within the current simulator. It does not yet demonstrate superior real-world safety or generalisation. It is a measurable engineering failure that can be reproduced, inspected, and used to establish the next research hypothesis.
 
-Re-execution of the complete 60-trial suite confirms that all 60 trace digests and scenario digests match the bundled results, establishing reproducibility for this local software environment.
+Re-execution of the complete 60-trial suite reproduces all 60 trace digests and results. The previously bundled artifact's scenario digests did not match the current scenario contracts; the artifact was regenerated on `x1-rebaseline` (new sha `682d5322…15e1`; old file preserved as `reexecuted-factorial.v0x-seed-invariant.json`, sha `3f88031e…7f99`).
 
 #### The Canonical Benchmark Separation Example (Agent A vs. Agent B)
 Consider two candidate deployment policies evaluated across 100 trials:
@@ -96,11 +96,11 @@ The initial automated test suite contains 27 passing tests (extended to 65 with 
 The implementation establishes a working research foundation, but its physics and environmental assumptions remain deliberately simplified.
 
 ### 5. Midpoint — Task Success and Verified Success Diverge
-The platform's first important experimental finding arises from comparing the same planning policy with and without its safety gate.
+A metric demonstration arises from comparing the same planning policy with and without its safety gate (legacy v0.x table, seed-invariant; effective n = 5 scenarios).
 
 Across 15 ungated greedy trials, 12 reached their defined task objectives, but only three satisfied the verifier's full conditions.
 
-Nine task-complete trials were rejected because of recorded safety violations.
+Nine task-complete trials (3 of 5 scenarios × 3 identical seeds) were rejected because of recorded safety violations.
 
 With the geometric gate enabled, the greedy policy again completed 12 of 15 tasks, but all 12 completed tasks were verified without geometric safety violations.
 

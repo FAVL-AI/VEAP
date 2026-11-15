@@ -42,7 +42,7 @@ A release tag may be created at G0/G1 as an engineering candidate but must not i
 | Paired native coverage | Count of matched command-tape/scene pairs actually executed in **both** physics engines | >=20 pairs across >=2 independently authored task families before v0.6 exit |
 | Timebase consistency | 99th percentile absolute deviation from recorded frozen commands/grid | <2 ms at the sampling boundary, or report preregistered engine-specific exceptions |
 | Cross-simulator error | P90 position error, max position error, and contact mismatch on calibrated assets | Define thresholds from pilot calibration before held-out confirmatory runs; report every failure |
-| Incremental verifier value | Difference in independently labelled failure recall between VEAB and safety-aware comparator | Predeclare target >=10 pp for specified evidence/recovery errors while false rejection <=5% in powered study; not a current finding |
+| Incremental verifier value | Difference in independently labelled failure recall between VEAB and safety-aware comparator | Predeclare target >=10 pp for specified evidence/recovery errors while false rejection <=5% in powered study; not a current result |
 | Evidence completeness | Required data fields present/eligible fields expected per real evidence schema | >=99% for in-scope replay packets at v0.8 pilot exit |
 | Service recovery | Recovered state, accepted run count and audit continuity after documented fault injection | 100% completion of predeclared backup/restore test cases before v0.9 qualification; no availability SLA inferred |
 

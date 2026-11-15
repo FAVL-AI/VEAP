@@ -1,18 +1,19 @@
-# VEAP v0.6 — Locked Cross-Engine Replay & Native Physics Acceptance
+# VEAP v0.6 — Locked Kinematic Planar Cross-Engine Replay Agreement (gate FAILED 18/20)
 
 **Status:** Stages 1–4 executed locally on RTX 4080 SUPER (`MuJoCo 4.0.1` + `Isaac Lab 0.54.3 / Isaac Sim 5.1.0.0`); software and artifact verification passing in CI.  
+**Release gate result:** `gate_passed = false` — **gate FAILED 18/20** (`insp-07`, `insp-08`). Both engines run kinematic bodies with gravity disabled; this is a kinematic planar replay agreement, not native-physics equivalence. Claim E106.  
 **Claim boundary:** `eligible_for_physics_equivalence_claim = false`, `independently_attested_ground_truth = false`. All 40 held-out traces simulate an uncalibrated planar research surrogate (`z = 0.16 m`, `mass = 8.0 kg`, `simulator_reported_unattested` provenance).
 
 ---
 
-## Verified Capabilities & Evidence Artifacts
+## Recorded Capabilities & Evidence Artifacts
 
 | Stage | Deliverable | Artifact / Module | Key Result |
 |---|---|---|---|
 | **Stage 1 — Pilot Localization** | Per-tick divergence diagnostic & deterministic workstation repeatability | [`artifacts/research/v06-pilot-per-tick-diagnostic.json`](artifacts/research/v06-pilot-per-tick-diagnostic.json) | `0.20182817 m` pilot RMSE repeats with `0.0 m` drift; localized to tick-0 gravity drop + PhysX Coulomb static-friction stall (`ticks 2–18`) and `25/25` missing right contacts |
 | **Stage 2 — Model Alignment & Contacts** | Aligned Isaac Lab runner (`ENU_z_up_m`, `WXYZ → XYZW`, `s⁻¹` damping, `ContactSensor`) | [`veap/simulation/isaaclab_native_runner.py`](veap/simulation/isaaclab_native_runner.py), [`artifacts/research/v06-stage2-contact-verification.json`](artifacts/research/v06-stage2-contact-verification.json) | Distinguishes observed zero contact (`0`), observed contact (`> 0`), and missing observation (`null`, never coerced to `0`) |
 | **Stage 3 — Frozen Evaluation** | Versioned manifest preserving pilot baseline & freezing 20 `test`-split tapes | [`artifacts/research/v06-evaluation-manifest.json`](artifacts/research/v06-evaluation-manifest.json) | `manifest_sha256: 31bee016b771f47379fd3cb800251fddc737f4b58a652452bbbd1565528cc25d`; `max_position_rmse_m <= 0.100 m` retained |
-| **Stage 4 — 40-Trace Release Gate** | 20 held-out paired runs (40 native traces) across 3 `test`-split task families + independent audit | [`artifacts/research/v06-release-gate-report.json`](artifacts/research/v06-release-gate-report.json), [`artifacts/research/v06-heldout-traces/`](artifacts/research/v06-heldout-traces/) | `mean_rmse = 0.0135539 m`, `max_rmse = 0.06157238 m`, `timegrid_err = 0.0 s`, `missing_contacts = 0`; `18/20` passed (`insp-07`, `insp-08` failed at `0.0769` contact-state disagreement due to 1-tick PhysX contact-offset lead) |
+| **Stage 4 — 40-Trace Release Gate** | 20 held-out paired runs (40 native traces) across 3 `test`-split task families + internal audit (internal subagent; not external) | [`artifacts/research/v06-release-gate-report.json`](artifacts/research/v06-release-gate-report.json), [`artifacts/research/v06-heldout-traces/`](artifacts/research/v06-heldout-traces/) | `mean_rmse = 0.0135539 m`, `max_rmse = 0.06157238 m`, `timegrid_err = 0.0 s`, `missing_contacts = 0`; **gate FAILED 18/20** (`insp-07`, `insp-08` failed at `0.0769` contact-state disagreement due to 1-tick PhysX contact-offset lead) |
 
 ---
 

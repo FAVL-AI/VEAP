@@ -3,7 +3,7 @@
 **Snapshot inspected:** `FAVL-AI/VEAP` `main@2d5d16cff552722ee9679d77146443ee71c0c99a` (2026-11-14 UTC).
 **Audit type:** source/CI evidence review plus local unit tests of matching standalone research and Studio snapshots. **Not an independent safety or security assessment.**
 
-## Findings
+## Audit observations
 
 1. Repository rename from VEAB to VEAP is complete at the GitHub repository level. `FAVL-AI/VEAB` resolves to the same repository ID, `1454632734`.
 2. The monorepo contains: `veap/` (core prototype), `veap/m3_replay/` (synthetic ROS evidence contract), `veap_evidence_r1_1/` (three-valued evidence research), and `veap_studio_r03/` (first-party UI/replay pilot). These are **different component maturity levels**, not a unified production release.

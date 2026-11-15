@@ -15,8 +15,8 @@ The primary decision-maker is the **robotics validation or safety-assurance engi
 
 The central question: **Should completing the destination task count as success when the agent violates constraints along the way?**
 
-### What the 60-Trial Factorial Evaluation Shows
-Across five scenarios, three seeds, two policies, and two gate conditions:
+### Legacy 60-Trial Factorial — v0.x, seed-invariant (effective n = 5 scenarios)
+Across five scenarios, three seeds, two policies, and two gate conditions (in 16 of 20 cells the 3 seeds give identical traces):
 
 | Configuration | Task completion | Verified completion | Safety violations |
 |---|---|---|---|
@@ -26,7 +26,7 @@ Across five scenarios, three seeds, two policies, and two gate conditions:
 | **Route, gate on** | 15/15 | 15/15 | 0 |
 
 #### The Core Narrative Anchor
-**Nine of fifteen ungated greedy trials reached their task objectives but were rejected by the independent verifier because they violated safety constraints.**
+**Legacy v0.x, seed-invariant (effective n = 5 scenarios): ungated greedy runs that reached the goal but were rejected by the verifier occur in 3 of 5 scenarios (9 of 15 nominal runs; 3 identical seeds each). This is a metric demonstration: greedy ignores obstacles by construction.** The v0.7-x1 re-baseline (3 held-out test scenarios × 20 seeded perturbations) replaces this table: 34 of 60 greedy gate-off runs reached the goal but failed verification (scenario-clustered 95% CI 0–1, n = 3 scenarios); see README and claims E103–E108.
 
 For example, in `warehouse-transfer` (seed 0), the ungated greedy planner reached the goal with 22 geometric violations in 68 steps. With the geometric gate enabled, the planner completed with 22 safety interventions, 0 violations, and 83 steps. This exposes a measurable, reproducible trade-off between safety intervention and execution time.
 
