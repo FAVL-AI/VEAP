@@ -12,7 +12,7 @@
 
 > **Core Definition:** VEAP is a **model- and harness-agnostic evaluation protocol** that jointly measures **task success**, **constraint violations**, **recovery**, **resource cost**, and **independently checkable evidence** under **controlled faults**.
 
-> **Evidence & Claim Boundaries:** Components carry explicit maturity labels (`Core v0.1.0`, `Evidence R1.1–R1.3`, `Studio R0.3 / VEAP Foundry`, `M3 Replay R0.1`, and `v0.6 kinematic planar cross-engine replay agreement — gate FAILED 18/20`). **No production readiness, SOTA superiority, independently attested hardware ground truth, or physical safety certification is claimed.**
+> **Evidence & Claim Boundaries:** Components carry explicit maturity labels (`Core v0.1.0`, `Evidence R1.1–R1.3`, `Studio R0.3 / VEAP Foundry`, `M3 Replay R0.1`, and `v0.6 kinematic planar cross-engine replay agreement — release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08)`). **No production readiness, SOTA superiority, independently attested hardware ground truth, or physical safety certification is claimed.**
 
 ---
 
@@ -21,7 +21,7 @@
 | Layer | Technologies & Frameworks | Role in VEAP | Evidence Boundary |
 |---|---|---|---|
 | **Core Benchmark & Safety Gate** | `Python 3.10+`, `Pydantic v2`, `FastAPI`, `Uvicorn`, `SQLite` | Deterministic scenario contracts (`veap-scenario/1`), greedy & A\* route planners, geometric safety gate, SHA-256 hash-linked event ledger | `veap/` (`v0.1.0`, deterministic 2-D kinematic benchmark) |
-| **Native Physics & 3-D Scene Pipeline** | `MuJoCo 4.0.1`, `NVIDIA Isaac Lab 0.54.3` / `Isaac Sim 5.1.0.0` (`PhysX`, `CUDA`), `OpenUSD (.usda)`, `MJCF (.xml)`, `URDF`, `SDF 1.10`, `glTF 2.0 (.glb)` | Locked open-loop command-tape replay (`veab-control-tape/1`), `ENU_z_up_m` scene compilation, `ContactSensor` instrumentation, 40-trace held-out gate (FAILED 18/20) | `veap/simulation/` (`v0.6`, uncalibrated kinematic planar surrogate, gravity disabled; `eligible_for_physics_equivalence_claim = false`) |
+| **Native Physics & 3-D Scene Pipeline** | `MuJoCo 4.0.1`, `NVIDIA Isaac Lab 0.54.3` / `Isaac Sim 5.1.0.0` (`PhysX`, `CUDA`), `OpenUSD (.usda)`, `MJCF (.xml)`, `URDF`, `SDF 1.10`, `glTF 2.0 (.glb)` | Locked open-loop command-tape replay (`veab-control-tape/1`), `ENU_z_up_m` scene compilation, `ContactSensor` instrumentation, 40-trace held-out release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08) | `veap/simulation/` (`v0.6`, uncalibrated kinematic planar surrogate, gravity disabled; `eligible_for_physics_equivalence_claim = false`) |
 | **Assurance Studio / VEAP Foundry** | `VEAP Studio R0.3`, `FastAPI`, `Vanilla JS / Canvas`, `OIDC` (`VEAP_OIDC_*`) | Read-only multi-tenant replay, assurance & contract monitor, native runtime workbench, evidence claim ladder (`G0–G3`) | `veap_studio_r03/`, `veap/enterprise/` (local evaluation; live IdP auth unverified) |
 | **Cryptographic Custody & Verification** | `Ed25519` (`R1.3`), `HMAC-SHA256`, `Rust` (`backend/rust_verifier`), `Go` (`veap-go-orchestrator`) | Independent trace verification, three-valued evidence certificates, public-key reference custody | `veap_evidence_r1_1/`, `backend/` (software-tested custody; synthetic R1.1/R1.2 certificates) |
 | **Robotics & Telemetry Ingest** | `ROS 2 Humble` (`rosbag2`), `MCAP` (`mcap_decode.py`), `JSONL` | Read-only external trajectory and bag metadata ingest with explicit untrusted-provenance labelling | `veap/m3_replay/` (`R0.1`, synthetic metadata contract; physical sensor gates open) |
@@ -78,16 +78,16 @@ In this legacy table, ungated greedy runs that reached the goal but were rejecte
 
 ---
 
-## v0.6 Kinematic Planar Cross-Engine Replay Agreement (`MuJoCo` × `Isaac Lab`) — gate FAILED 18/20
+## v0.6 Kinematic Planar Cross-Engine Replay Agreement (`MuJoCo` × `Isaac Lab`) — gate FAILED; 18 of 20 pairs passed, 2 failed
 
-Executed on an **NVIDIA RTX 4080 SUPER** workstation (`MuJoCo 4.0.1` and `Isaac Lab 0.54.3 / Isaac Sim 5.1.0.0`) using frozen open-loop command tapes (`veab-control-tape/1`). Both engines run kinematic bodies with gravity disabled (`disabled_planar_surrogate_at_z_0.16m`), so this is a kinematic planar replay agreement, not native-physics equivalence. **Release gate result: `gate_passed = false` — gate FAILED 18/20.** Audit of the report was internal (an internal audit subagent), not external.
+Executed on an **NVIDIA RTX 4080 SUPER** workstation (`MuJoCo 4.0.1` and `Isaac Lab 0.54.3 / Isaac Sim 5.1.0.0`) using frozen open-loop command tapes (`veab-control-tape/1`). Both engines run kinematic bodies with gravity disabled (`disabled_planar_surrogate_at_z_0.16m`), so this is a kinematic planar replay agreement, not native-physics equivalence. **Release gate result:** release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08). Audit of the report was internal (an internal audit subagent), not external.
 
 | Stage | Scope & Artifact | Recorded Outcome |
 |---|---|---|
 | **1. Pilot Localization** | [`v06-pilot-per-tick-diagnostic.json`](artifacts/research/v06-pilot-per-tick-diagnostic.json) | `0.20182817 m` pilot RMSE repeats with `0.0 m` drift; localized to tick-0 gravity drop (`z = 0.16 → 0.135 m`) + PhysX Coulomb static-friction stall (`ticks 2–18`) and `25/25` missing right contacts. The pilot divergence was resolved by disabling gravity, i.e. by removing that physics. |
 | **2. Model Alignment & Contacts** | [`isaaclab_native_runner.py`](veap/simulation/isaaclab_native_runner.py), [`v06-stage2-contact-verification.json`](artifacts/research/v06-stage2-contact-verification.json) | Aligned `ENU_z_up_m` frames, explicit `WXYZ → XYZW` quaternions, `s⁻¹` damping, and `ContactSensor` instrumentation distinguishing `0`, `> 0`, and `null` (never coerced to `0`). |
 | **3. Frozen Manifest** | [`v06-evaluation-manifest.json`](artifacts/research/v06-evaluation-manifest.json) | Froze criteria (`max_position_rmse_m <= 0.100 m`, `P90 <= 0.150 m`, `max <= 0.200 m`, `timegrid <= 1e-6 s`, `0` missing contacts), scene/asset hashes, preserved `0.20182817 m` pilot, and `20` `test`-split tapes across `3` task families (tapes from the same generator as the manifest). |
-| **4. 40-Trace Release Gate** | [`v06-release-gate-report.json`](artifacts/research/v06-release-gate-report.json), [`v06-heldout-traces/`](artifacts/research/v06-heldout-traces/) | **gate FAILED 18/20** (`gate_passed = false`). 40 kinematic traces (`372` samples, about 9 per trace): `mean_rmse = 0.0135539 m`, `max_rmse = 0.06157238 m`, `max_error = 0.08551475 m`, `timegrid_err = 0.0 s`, `0` missing contacts. `insp-07` & `insp-08` failed (`0.0769` binary contact-state disagreement from a 1-tick PhysX contact-offset lead). Claim E106. |
+| **4. 40-Trace Release Gate** | [`v06-release-gate-report.json`](artifacts/research/v06-release-gate-report.json), [`v06-heldout-traces/`](artifacts/research/v06-heldout-traces/) | **release gate FAILED (gate_passed = false): 18 of 20 cross-engine pairs met the criteria; 2 failed (insp-07, insp-08)**. 40 kinematic traces (`372` samples, about 9 per trace): `mean_rmse = 0.0135539 m`, `max_rmse = 0.06157238 m`, `max_error = 0.08551475 m`, `timegrid_err = 0.0 s`, `0` missing contacts. `insp-07` & `insp-08` failed (`0.0769` binary contact-state disagreement from a 1-tick PhysX contact-offset lead). Claim E106. |
 
 See [README_V06.md](README_V06.md) and [docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md](docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md).
 
@@ -124,7 +124,7 @@ python -m veap verify artifacts/warehouse.json
 # Run the legacy v0.x factorial suite (seed-invariant; effective n = 5 scenarios)
 python -m veap suite --seeds 0 1 2 --split all --out artifacts/suite-summary.json
 
-# v0.6 MuJoCo replay & 40-trace gate evaluation (recorded result: gate FAILED 18/20)
+# v0.6 MuJoCo replay & 40-trace gate evaluation (recorded result: gate FAILED; 18 of 20 pairs passed, 2 failed)
 python scripts/veap_v06.py run-mujoco --tape artifacts/research/v06-control-tape.json --out artifacts/v06/mujoco
 python scripts/veap_v06.py evaluate-gate \
   --manifest artifacts/research/v06-evaluation-manifest.json \
@@ -148,7 +148,7 @@ veap_studio_r03/         VEAP Foundry / Studio R0.3 multi-tenant UI, monitors, a
 backend/                 Rust standalone verifier & Go orchestrator
 scenarios/               Versioned public train / validation / test task contracts
 web/                     VEAP Agent Observatory (vanilla JS + isometric 3-D projection)
-artifacts/research/      Frozen v0.6 pilot, diagnostic, manifest, 40 kinematic traces & gate report (FAILED 18/20)
+artifacts/research/      Frozen v0.6 pilot, diagnostic, manifest, 40 kinematic traces & gate report (gate FAILED; 18 of 20 pairs passed, 2 failed)
 tests/                   Pytest unit, API, claims, studio, and native MuJoCo integration suites
 docs/                    Protocols, threat model, claims policy, release train, and screenshots
 ```

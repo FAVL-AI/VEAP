@@ -11,6 +11,8 @@ import re
 from pathlib import Path
 
 STATUSES={"IMPLEMENTED","DEMONSTRATED","VALIDATED","CERTIFIED"}
+# Erratum 2026-11-15: "gate FAILED 18/20" read as 18 failures; 18 of 20 pairs passed, 2 failed.
+STALE_V06_COUNT=re.compile(r"(?i)\bfailed\s+18\s*/\s*20\b")
 HIGH_RISK=re.compile(r"(?i)\b(?:production[- ]ready|enterprise[- ]grade|certified safety|validated safety|"
                      r"(?<!agent-)independent verification|state[- ]of[- ]the[- ]art|SOTA|trusted provenance)\b")
 
@@ -79,6 +81,8 @@ def check_public_copy(root: str|Path, files=None) -> dict:
             continue
         body=path.read_text(encoding='utf8')
         for line_number,line in enumerate(body.splitlines(),1):
+            if STALE_V06_COUNT.search(line):
+                failures.append(f'{filename}:{line_number}: ambiguous v0.6 gate count "FAILED 18/20" (use: 18 of 20 cross-engine pairs met the criteria; 2 failed)')
             for match in HIGH_RISK.finditer(line):
                 preceding=line[max(0,match.start()-40):match.start()].lower()
                 following=line[match.end():min(len(line),match.end()+36)].lower()
