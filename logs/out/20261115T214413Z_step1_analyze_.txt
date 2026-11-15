@@ -1,0 +1,175 @@
+{
+ "current_table": {
+  "greedy__gate_off": {
+   "n": 15,
+   "completed": 12,
+   "verified": 3,
+   "violations": 147
+  },
+  "greedy__gate_on": {
+   "n": 15,
+   "completed": 12,
+   "verified": 12,
+   "violations": 0
+  },
+  "route__gate_off": {
+   "n": 15,
+   "completed": 15,
+   "verified": 15,
+   "violations": 0
+  },
+  "route__gate_on": {
+   "n": 15,
+   "completed": 15,
+   "verified": 15,
+   "violations": 0
+  }
+ },
+ "stored_table": {
+  "greedy__gate_off": {
+   "n": 15,
+   "completed": 12,
+   "verified": 3,
+   "violations": 147
+  },
+  "greedy__gate_on": {
+   "n": 15,
+   "completed": 12,
+   "verified": 12,
+   "violations": 0
+  },
+  "route__gate_off": {
+   "n": 15,
+   "completed": 15,
+   "verified": 15,
+   "violations": 0
+  },
+  "route__gate_on": {
+   "n": 15,
+   "completed": 15,
+   "verified": 15,
+   "violations": 0
+  }
+ },
+ "records_current": 60,
+ "records_stored": 60,
+ "fields_differing_vs_stored": {
+  "task_completed": 0,
+  "verified": 0,
+  "safety_violations": 0,
+  "interventions": 0,
+  "steps": 0,
+  "trace_sha256": 0,
+  "scenario_sha256": 60
+ },
+ "scenarios": {
+  "absence-rejection": {
+   "split": "test",
+   "current_scenario_sha256": "3b6d92680c8d6e2bf9e397536cc2d60fff978743e6a7365bdb8dc521471f051b",
+   "stored_scenario_sha256": "45501b835cddde9e7c77d1b1427a473c22aab793e67ff62112118bbe7046270e"
+  },
+  "campus-patrol": {
+   "split": "train",
+   "current_scenario_sha256": "7ea53dcf828cd42c99167f1a114826e939c4b2764c4d472c215258a60327daca",
+   "stored_scenario_sha256": "d1968d30e36a3e61fc912787c41c48d673254c9782549aa316ed33c7230d5de1"
+  },
+  "distribution-shift": {
+   "split": "test",
+   "current_scenario_sha256": "e662074cdebefbc4f7833447b5f7a43fc6c984fb0bf161e5a0cfb5a0ef15e7fb",
+   "stored_scenario_sha256": "8f5628e7be44c51bcf605f97a64a9732bf692e8f6e67c0ca83c91947aea06049"
+  },
+  "hospital-inspection": {
+   "split": "test",
+   "current_scenario_sha256": "17c181c60c8e141dfb07cc7e9eb48b4465b2ac2840db40adfb0a4079ecef2b73",
+   "stored_scenario_sha256": "38ab1b41f02b607160d9ebc0a2a0760ace6dfb2f098e60ab1c8021055df19eaf"
+  },
+  "warehouse-transfer": {
+   "split": "validation",
+   "current_scenario_sha256": "0bb7535885a4ca0b6eff45a1718c0c7364d336eb15e819e661b3708637451a09",
+   "stored_scenario_sha256": "7803186e84f8e73d5d44098dab67ad351b01e1349a894a4c9a5423c5d6903e23"
+  }
+ },
+ "cells": {
+  "absence-rejection|test|greedy|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "absence-rejection|test|greedy|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "absence-rejection|test|route|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "absence-rejection|test|route|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "campus-patrol|train|greedy|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "campus-patrol|train|greedy|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "campus-patrol|train|route|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "campus-patrol|train|route|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "distribution-shift|test|greedy|off": {
+   "distinct": 3,
+   "n": 3
+  },
+  "distribution-shift|test|greedy|on": {
+   "distinct": 3,
+   "n": 3
+  },
+  "distribution-shift|test|route|off": {
+   "distinct": 3,
+   "n": 3
+  },
+  "distribution-shift|test|route|on": {
+   "distinct": 3,
+   "n": 3
+  },
+  "hospital-inspection|test|greedy|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "hospital-inspection|test|greedy|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "hospital-inspection|test|route|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "hospital-inspection|test|route|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "warehouse-transfer|validation|greedy|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "warehouse-transfer|validation|greedy|on": {
+   "distinct": 1,
+   "n": 3
+  },
+  "warehouse-transfer|validation|route|off": {
+   "distinct": 1,
+   "n": 3
+  },
+  "warehouse-transfer|validation|route|on": {
+   "distinct": 1,
+   "n": 3
+  }
+ },
+ "seed_invariant_cells": "16/20"
+}

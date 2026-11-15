@@ -1,0 +1,911 @@
+# step5 forbidden-word grep (git grep -I over tracked + new text files, excl. logs/out and x1/step5), 2026-11-15T22:05:47Z
+## finding
+artifacts/research/v06-release-gate-report.json:50:    "discrepancy_findings": [
+docs/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample size, all at
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample siz
+logs/STEPLOG.md:143:### gate.a_b findings
+logs/STEPLOG.md:254:- Step 5 committed locally as c5577ae71f3d4751e13d2db800a49469549f71f8 (Frank sole author/committer, not pushed). veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md heading edit ('findings' -> 'results') was missed by that commit's pathspec an
+scripts/check_v07_security.py:58:    findings: list[dict[str, Any]] = []
+scripts/check_v07_security.py:74:                    findings.append({"file": rel, "line": lineno, "rule": rule})
+scripts/check_v07_security.py:75:    return {"scanned_files": scanned, "finding_count": len(findings), "findings": findings}
+scripts/check_v07_security.py:94:    return 0 if res["finding_count"] == 0 else 2
+tests/test_assurance_controls.py:74:    """Known negative finding: a coherent untrusted forged record passes geometry checks.
+tests/test_v07_security_foundation.py:199:    assert scan["finding_count"] == 0, f"Unexpected secret findings: {scan['findings']}"
+veap/evaluation_matrix.py:227:        "finding": "Adding the safety gate scaffold reduces unsafe action rate to 0.0 without modifying policy weights."
+veap/simulation/asset_audit.py:19:    findings=[]
+veap/simulation/asset_audit.py:21:        findings.append({'check':description,'passed':bool(condition)})
+veap/simulation/asset_audit.py:37:    if any(not f['passed'] for f in findings):
+veap/simulation/asset_audit.py:38:        return {'valid':False,'checks':findings,'scope':'static exports only, not native physics'}
+veap/simulation/asset_audit.py:72:    return {'schema_version':'veab-static-asset-audit/1','valid':all(f['passed'] for f in findings),
+veap/simulation/asset_audit.py:73:            'scene_sha256':scene.get('content_sha256'),'checks':findings,
+## shows agents
+## (^|[^0-9.])0\.57([^0-9]|$)|57 ?%
+README.md:50:In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios × 20 seeded perturbations), an obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by a verifier separate from the agent i
+docs/CLAIMS_REGISTER.json:44:      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/compliant.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/compliant.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_critical_interval.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_critical_interval.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_critical_interval.reference.json:413:      "y": 0.57
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_critical_interval.reference.json:603:      "y": 0.57
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_irrelevant_camera.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_irrelevant_camera.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_safe_interval.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/missing_safe_interval.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/observed_violation.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/observed_violation.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/observed_violation.reference.json:413:      "y": 0.57
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/observed_violation.reference.json:603:      "y": 0.57
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/violation_plus_missing.reference.json:291:      "t_s": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/violation_plus_missing.reference.json:292:      "x": 0.57,
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/violation_plus_missing.reference.json:413:      "y": 0.57
+veap_evidence_r1_1/artifacts/r1_blinded_synthetic/reference_only/violation_plus_missing.reference.json:603:      "y": 0.57
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:219:const demo={"assets":{"assets":[{"id":"ae05a8972bb846d88c2f08d350c8464d","name":"M3 \u00b7 Yard Inspection.jsonl","kind":"TRAJECTORY","sha256":"79cc8a25ea344e223ece3116249e7c9136852fd99dd1924fb7351e5415a79c
+veap_studio_r03/local_data/blobs/04dbf0261bb343e1a1d6f4748171426e.jsonl:31:{"t_ns": 3000000000, "x_m": 3.1119, "y_m": 2.4857, "yaw_rad": 0.559, "speed_m_s": 0.433, "clearance_m": 0.57, "latency_ms": 14.44, "sensor_ok": true, "cmd_vel": [0.551, 0.379, 0.0], "ev
+veap_studio_r03/local_data/blobs/04dbf0261bb343e1a1d6f4748171426e.jsonl:44:{"t_ns": 4300000000, "x_m": 3.7202, "y_m": 2.7631, "yaw_rad": 0.559, "speed_m_s": 0.57, "clearance_m": 0.488, "latency_ms": 18.14, "sensor_ok": true, "cmd_vel": [0.58, 0.348, 0.0], "eve
+veap_studio_r03/local_data/blobs/04dbf0261bb343e1a1d6f4748171426e.jsonl:86:{"t_ns": 8500000000, "x_m": 5.5981, "y_m": 3.9756, "yaw_rad": 0.559, "speed_m_s": 0.572, "clearance_m": 0.524, "latency_ms": 16.56, "sensor_ok": true, "cmd_vel": [0.57, 0.399, 0.0], "ev
+veap_studio_r03/local_data/blobs/248bc7d71ed349dab64895562ea2c8b2.jsonl:31:{"t_ns": 3000000000, "x_m": 2.7981, "y_m": 2.3633, "yaw_rad": 0.559, "speed_m_s": 0.433, "clearance_m": 0.57, "latency_ms": 14.44, "sensor_ok": true, "cmd_vel": [0.551, 0.379, 0.0], "ev
+veap_studio_r03/local_data/blobs/248bc7d71ed349dab64895562ea2c8b2.jsonl:44:{"t_ns": 4300000000, "x_m": 3.5372, "y_m": 2.8007, "yaw_rad": 0.559, "speed_m_s": 0.57, "clearance_m": 0.488, "latency_ms": 18.14, "sensor_ok": true, "cmd_vel": [0.58, 0.348, 0.0], "eve
+veap_studio_r03/local_data/blobs/248bc7d71ed349dab64895562ea2c8b2.jsonl:86:{"t_ns": 8500000000, "x_m": 5.9043, "y_m": 4.2894, "yaw_rad": 0.559, "speed_m_s": 0.572, "clearance_m": 0.524, "latency_ms": 16.56, "sensor_ok": true, "cmd_vel": [0.57, 0.399, 0.0], "ev
+veap_studio_r03/local_data/blobs/cd93d22cc48c414db8b8e86ba5cff30e.jsonl:31:{"t_ns": 3000000000, "x_m": 2.7, "y_m": 2.325, "yaw_rad": 0.559, "speed_m_s": 0.433, "clearance_m": 0.57, "latency_ms": 14.44, "sensor_ok": true, "cmd_vel": [0.551, 0.379, 0.0], "event"
+veap_studio_r03/local_data/blobs/cd93d22cc48c414db8b8e86ba5cff30e.jsonl:44:{"t_ns": 4300000000, "x_m": 3.48, "y_m": 2.8125, "yaw_rad": 0.559, "speed_m_s": 0.57, "clearance_m": 0.488, "latency_ms": 18.14, "sensor_ok": true, "cmd_vel": [0.58, 0.348, 0.0], "event
+veap_studio_r03/local_data/blobs/cd93d22cc48c414db8b8e86ba5cff30e.jsonl:86:{"t_ns": 8500000000, "x_m": 6.0, "y_m": 4.3875, "yaw_rad": 0.559, "speed_m_s": 0.572, "clearance_m": 0.524, "latency_ms": 16.56, "sensor_ok": true, "cmd_vel": [0.57, 0.399, 0.0], "event
+veap_studio_r03/local_data/blobs/d1045eeedbef4159be34830a86e22d2a.jsonl:31:{"t_ns": 3000000000, "x_m": 2.5725, "y_m": 2.2753, "yaw_rad": 0.559, "speed_m_s": 0.433, "clearance_m": 0.57, "latency_ms": 14.44, "sensor_ok": true, "cmd_vel": [0.551, 0.379, 0.0], "ev
+veap_studio_r03/local_data/blobs/d1045eeedbef4159be34830a86e22d2a.jsonl:44:{"t_ns": 4300000000, "x_m": 3.4057, "y_m": 2.8278, "yaw_rad": 0.559, "speed_m_s": 0.57, "clearance_m": 0.488, "latency_ms": 18.14, "sensor_ok": true, "cmd_vel": [0.58, 0.348, 0.0], "eve
+veap_studio_r03/local_data/blobs/d1045eeedbef4159be34830a86e22d2a.jsonl:86:{"t_ns": 8500000000, "x_m": 6.1244, "y_m": 4.515, "yaw_rad": 0.559, "speed_m_s": 0.572, "clearance_m": 0.524, "latency_ms": 16.56, "sensor_ok": true, "cmd_vel": [0.57, 0.399, 0.0], "eve
+## \bfirst\b
+README.md:9:**An evidence-first evaluation, cross-simulator replay, and runtime assurance platform for autonomous and embodied AI.**
+README_M3_REPLAY.md:24:## B. Discover the actual ROS 2 topics first (Ubuntu 22.04 / Humble)
+backend/go_orchestrator/fallback.cpp:129:        metrics[kv.first] = aggregateMetrics(kv.second);
+backend/go_orchestrator/fallback.cpp:170:        std::printf("    \"%s\": %d%s\n", kv.first.c_str(), kv.second, (++idx < fault_counts.size()) ? "," : "");
+docs/ADAPTER_CONTRACT.md:5:## Capture first, control later
+docs/CANONICAL_NARRATIVE.md:89:### 4. First Implementation — Building VEAP v0.1.0
+docs/CANONICAL_NARRATIVE.md:90:The first implementation provides an integrated, local evaluation environment.
+docs/CANONICAL_NARRATIVE.md:170:VEAP begins with a problem in autonomous AI evaluation: reaching a goal is not equivalent to completing a task safely and reliably. A robot or autonomous agent may achieve its final objective while violating operational constrai
+docs/CANONICAL_NARRATIVE.md:173:The platform develops an evidence-first evaluation architecture in which task execution, safety intervention and outcome verification are separate components. Researchers can compare planning policies, inject disturbances, inspe
+docs/PREREG_VEAP_NAV_PROTOCOL.md:7:**Who:** robotics research teams and independent safety engineers. **What:** compare final task-success scoring with actor-independent process grading. **Why:** terminal success can hide unsafe intermediate execution. **Where
+docs/enterprise/RELEASE_RUNBOOK.md:6:2. Use `python -m veap.enterprise.cli bootstrap ...` to create the first tenant and owner. Treat printed bearer token as secret.
+docs/enterprise/SCIENCE_PROTOCOL.md:13:**Where:** at least two calibrated simulators first (Isaac Lab, MuJoCo), then a supervised physical robot under an independently reviewed safety case. Gazebo/ROS 2 ingest is a separate middleware compliance study.
+docs/m3/YAHBOOM_M3_PRO_VALIDATION_REGISTER.md:61:| `VEAP-R01` | Capture first stationary real-robot ROS 2 MCAP evidence recording and audit with `veap.m3_replay.cli` | **ON HOLD** | Pending `STOR-04`–`STOR-06`, `M3-HW-01`, and `ros-humble-rosbag2-storage-mcap`
+docs/release/REPOSITORY_RECONCILIATION.md:13:# first: protect your existing local edits
+docs/release/REPOSITORY_RECONCILIATION.md:21:# STOP if nonzero: public main lacks prerequisites; merge v0.5 first.
+docs/release/REPOSITORY_RECONCILIATION.md:36:**Operational decision:** published main lacks prerequisite Studio and simulation source; do not apply v0.6 without first reconciling newer local worktree and confirming preflight.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:20:- `python scripts/veap_v06.py diagnose` produces a per-tick cross-engine comparison (`veap-paired-physics-diagnostic/1`) localizing initial pose/velocity offsets, first planar and 3D divergence ticks, target-ex
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:9:2. The monorepo contains: `veap/` (core prototype), `veap/m3_replay/` (synthetic ROS evidence contract), `veap_evidence_r1_1/` (three-valued evidence research), and `veap_studio_r03/` (first-party UI/replay pi
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:16:9. First-party Studio includes native worker entry points but has no demonstrated native Isaac Lab/MuJoCo/Gazebo acceptance from the audited repository. Software API coverage is not physics calibration.
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:46:**Permitted public claim:** VEAP provides software-tested research components for evidence-sufficient robot-execution evaluation, an M3 recording-contract prototype, and an early first-party Studio. **Not cla
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:7:**Who:** robotics research teams and independent safety engineers. **What:** compare final task-success scoring with actor-independent process grading. **Why:** terminal success can hide unsafe intermediate execution
+logs/STEPLOG.md:229:- deviation: rerun after reverting edits to the two checksum-pinned / pre-registration PREREG_VEAP_NAV_PROTOCOL.md files (first run: 1 failed test_research_v030_exact_checksums)
+logs/STEPLOG.md:247:- CLAIMS_REGISTER: E103-E108 added (9 claims total). check_claims exit 0. pytest 226 passed, 2 skipped, 0 failed (first run 1 failed: test_research_v030_exact_checksums, caused by my edit to checksum-pinned docs/research/PREREG_VEAP_NAV_PRO
+scripts/browser_smoke.py:12:    page.locator("#scenario-select option").first.wait_for()
+scripts/check_v06_base.py:6:its prerequisites first.
+veap/adapters/isaac_lab.py:138:    first = telemetry_records[0] if telemetry_records else {}
+veap/adapters/isaac_lab.py:139:    x0 = float(first.get("pos_x", scenario.start.x))
+veap/adapters/isaac_lab.py:140:    y0 = float(first.get("pos_y", scenario.start.y))
+veap/adapters/isaac_lab.py:141:    vx0 = float(first.get("linear_velocity", [0.0, 0.0])[0])
+veap/adapters/isaac_lab.py:142:    vy0 = float(first.get("linear_velocity", [0.0, 0.0])[1])
+veap/adapters/mujoco.py:120:    first = records[0] if records else {}
+veap/adapters/mujoco.py:121:    x0 = float(first.get("pos_x", scenario.start.x))
+veap/adapters/mujoco.py:122:    y0 = float(first.get("pos_y", scenario.start.y))
+veap/adapters/mujoco.py:123:    vx0 = float(first.get("vx", 0.0))
+veap/adapters/mujoco.py:124:    vy0 = float(first.get("vy", 0.0))
+veap/cli.py:75:    bench.add_argument("--bundle-a",required=True,help="First evidence bundle (e.g. kinematic or sim)")
+veap/enterprise/api.py:398:        # truncate assurance totals after their first 100 rows.
+veap/protocol.py:70:    # The 5 First-Class Evaluation Dimensions
+veap/protocol.py:81:    """Evaluate an evidence bundle across all five first-class dimensions."""
+veap/x1_perturb.py:46:    """Return (perturbed scenario, info). Obstacles jittered first, then a clear start is sampled."""
+veap_evidence_r1_1/README.md:49:No SOTA, novel-first, true sensor provenance, general safety or production qualification is claimed.
+veap_evidence_r1_1/README.md:63:Open `VEAP_R1_1_Offline_Identifiability_Lab.html` for an original first-party visual explanation. It is a self-contained synthetic research explorer, **not** an enterprise telemetry dashboard or a live physical robot view.
+veap_evidence_r1_1/VEAP_R1_1_Offline_Identifiability_Lab.html:33:<section class="top"><div><span class="sub">EVIDENCE-SUFFICIENT EMBODIED EVALUATION</span><h1>One observation record. Two possible worlds.</h1><p>Contract-conditioned evaluation of a recorded rob
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:44:First, use synthetic controlled partial traces with external checkers. Second, ingest real MCAP/ROS 2 recordings **from a qualified evidence collector**. Third, calibrated Isaac Lab ↔ MuJoCo cross-engine 
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:13:Prior runtime verification literature—specifically Bauer et al. (2011) on three-valued semantics (`10.1145/2000799.2000800`), Taleb, Hallé, and Khoury (2023) on uncertainty and incomplete traces in runtime
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:62:Submit a confirmatory paper only after a preregistered held-out experiment with separately authored scenes, external reference measurements, matched baselines, reviewer blinding, reproducibility controls, 
+veap_evidence_r1_1/r13/custody.py:55:    first = inventories[0]
+veap_evidence_r1_1/r13/custody.py:56:    if any(inv != first for inv in inventories[1:]):
+veap_evidence_r1_1/r13/custody.py:59:    if cert_ids != first:
+veap_evidence_r1_1/r13/custody.py:61:    return first
+veap_evidence_r1_1/r13/split_integrity.py:41:    """Return translation-invariant (dt, dx, dy) displacement sequence from first sample."""
+veap_evidence_r1_1/scripts/build_r11_viewer.py:45:<section class="top"><div><span class="sub">EVIDENCE-SUFFICIENT EMBODIED EVALUATION</span><h1>One observation record. Two possible worlds.</h1><p>Contract-conditioned evaluation of a recorded robot task. Identi
+veap_evidence_r1_1/tests/test_r13_certificate_audit.py:41:        # Keep only the first observation ref, which cannot cover the full mission window
+veap_evidence_r1_1/tests/test_r13_split_integrity.py:36:        # Replace scene-002's first case with a rigid (+10m, +5m) translation of scene-001's first case
+veap_studio_r03/README.md:1:# VEAP Studio R0.3 — First-Party Physical AI Engineering Workbench
+veap_studio_r03/README.md:5:VEAP is a **Verifiable Embodied Agent Platform**. This Studio integrates a first-party robotics workspace for artifact ingest, model/scene inspection, synthetic and recorded replay, contract checks, counterfactual perturbations, pro
+veap_studio_r03/README.md:39:- **ROS 2 recording:** `scripts/veap_record_ros2.sh --check` and `--record` are bounded first-party read-only capture commands, requiring active sensor topics and MCAP plugin. Not run by browser or on the unqualified Yahboom.
+veap_studio_r03/README.md:55:| Photorealistic RTX/Unreal-quality engine | First-party projected viewport | Hardware-accelerated renderer not built |
+veap_studio_r03/README.md:78:## First-party contract authoring and agent-independent monitoring
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:219:const demo={"assets":{"assets":[{"id":"ae05a8972bb846d88c2f08d350c8464d","name":"M3 \u00b7 Yard Inspection.jsonl","kind":"TRAJECTORY","sha256":"79cc8a25ea344e223ece3116249e7c9136852fd99dd1924fb7351e5415a79c
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:323:function renderWorld(){let models=st.assets.filter(a=>['MODEL_3D','CAD','ROBOT_DESCRIPTION','POINT_CLOUD'].includes(a.kind));$('#geometrySelect').innerHTML=models.map(a=>`<option value="${a.id}">${esc(a.nam
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:373:  if(['mcap_decode','lerobot_dataset'].includes(kind)&&!source_id)return toast('Select a source asset first',true);
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:380:async function createFault(){if(!$('#faultSource').value)return toast('Import a trajectory first.',true);let request={asset_id:$('#faultSource').value,fault:$('#faultType').value,severity:Number($('#faultSe
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:394: if(!c||!a)return toast('Select registered contract and source trace first.',true);
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:471:$('#comparePhysics').onclick=async()=>{try{let j=await api('/api/jobs');let m=j.jobs.find(x=>x.kind==='mujoco_fall'&&x.status==='COMPLETED');let i=j.jobs.find(x=>x.kind==='isaac_fall'&&x.status==='COMPLETED
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:473:$('#shortcuts').onclick=()=>toast('Shortcuts: Space = play/pause · [ or Ctrl+B = toggle sidebar · / = source search · 1–6 = workspace tabs · Arrow keys = seek');$('#about').onclick=()=>toast('VEAP R0.3: fir
+veap_studio_r03/docs/ARCHITECTURE.md:4:                     FIRST-PARTY VEAP STUDIO (browser)
+veap_studio_r03/docs/ENGINE_ACCEPTANCE.md:5:| G0 First-party UI | Self-contained browser preview, tests, API | Software test coverage provided |
+veap_studio_r03/docs/INTEGRATION_DECISIONS.md:1:# First-party Integration Decisions
+veap_studio_r03/docs/INTEGRATION_DECISIONS.md:5:We retain format compatibility with the open MCAP ecosystem and LeRobotDataset for data science only. The UI, evidence registry, state model, API, experiment workbench and provenance reporting are first-party imp
+veap_studio_r03/docs/ROADMAP.md:3:**R0.3 — First-party native workbench (implemented software)**
+veap_studio_r03/docs/RUNTIME_CONFIG.md:25:MuJoCo and Isaac should first be assessed using the exact same `dt=0.005`, `steps=400` and sphere/ground geometry. Solver contact parameters, material coefficients, mass and physical invariants still require further ca
+veap_studio_r03/scripts/build_offline_demo.py:25:   ('renderer','VEAP 3D Engine','First-party synthetic scene viewport'),
+veap_studio_r03/scripts/ubuntu_quickstart.sh:2:# First-party VEAP Studio local Ubuntu service; never touches robot controls.
+veap_studio_r03/veap_studio/integrations.py:102:                 'claim':'First-party 3D viewport + OpenUSD/glTF 2.0 interchange ready; no external Unreal Engine runtime claimed'})
+veap_studio_r03/web/app.js:78:function renderWorld(){let models=st.assets.filter(a=>['MODEL_3D','CAD','ROBOT_DESCRIPTION','POINT_CLOUD'].includes(a.kind));$('#geometrySelect').innerHTML=models.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('')|
+veap_studio_r03/web/app.js:128:  if(['mcap_decode','lerobot_dataset'].includes(kind)&&!source_id)return toast('Select a source asset first',true);
+veap_studio_r03/web/app.js:135:async function createFault(){if(!$('#faultSource').value)return toast('Import a trajectory first.',true);let request={asset_id:$('#faultSource').value,fault:$('#faultType').value,severity:Number($('#faultSeverity').value),seed:Nu
+veap_studio_r03/web/app.js:149: if(!c||!a)return toast('Select registered contract and source trace first.',true);
+veap_studio_r03/web/app.js:226:$('#comparePhysics').onclick=async()=>{try{let j=await api('/api/jobs');let m=j.jobs.find(x=>x.kind==='mujoco_fall'&&x.status==='COMPLETED');let i=j.jobs.find(x=>x.kind==='isaac_fall'&&x.status==='COMPLETED');if(!m||!i)return toa
+veap_studio_r03/web/app.js:228:$('#shortcuts').onclick=()=>toast('Shortcuts: Space = play/pause · [ or Ctrl+B = toggle sidebar · / = source search · 1–6 = workspace tabs · Arrow keys = seek');$('#about').onclick=()=>toast('VEAP R0.3: first-party engineering st
+web/app.js:2:/* VEAP offline-first dashboard. All rendered source data is escaped or assigned as textContent. */
+web/app.js:31:async function refresh(){if(state.polling)return;state.polling=true;try{state.runs=await api('/api/runs');renderRuns();const selectedId=state.selectedRun?.id;if(selectedId){const r=await api('/api/runs/'+selectedId);const wasComplete=state.select
+web/assurance_studio/app.js:150:  if(!state.project){msg('Select a project first.');return;}
+web/assurance_studio/index.html:32:<div class="overlay" id="connect-overlay"><div class="connect-card"><div class="brand-mark large">V<span>∕</span></div><div class="eyebrow">ENTERPRISE ACCESS / DEVELOPMENT PREVIEW</div><h2>Connect to Assurance Studio</h2><p>E
+web/index.html:7:  <meta name="description" content="VEAP: evidence-first agent benchmark and simulation operations console" />
+web/style.css:2:*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.44}a{color:var(--mint)}.shell{display:flex;min-height:
+## independent
+.github/pull_request_template.md:19:- [ ] Statistical unit is the independently authored scene, not duplicated seeds
+.github/pull_request_template.md:20:- [ ] Release/milestone acceptance gates are evaluated independently of unit-test pass count
+README.md:11:> **Core Definition:** VEAP is a **model- and harness-agnostic evaluation protocol** that jointly measures **task success**, **constraint violations**, **recovery**, **resource cost**, and **independently checkable evidence** under **controlled fa
+README.md:13:> **Evidence & Claim Boundaries:** Components carry explicit maturity labels (`Core v0.1.0`, `Evidence R1.1–R1.3`, `Studio R0.3 / VEAP Foundry`, `M3 Replay R0.1`, and `v0.6 kinematic planar cross-engine replay agreement — gate FAILED 18/20`). **No
+README.md:24:| **Cryptographic Custody & Verification** | `Ed25519` (`R1.3`), `HMAC-SHA256`, `Rust` (`backend/rust_verifier`), `Go` (`veap-go-orchestrator`) | Independent trace verification, three-valued evidence certificates, public-key reference custody | `v
+README.md:106:Open **http://127.0.0.1:8000** to launch the **VEAP Agent Observatory**. Select a scenario contract, choose a baseline (`route` or `greedy`), toggle the geometric safety gate, and run the benchmark. Exported evidence JSON bundles are independentl
+README.md:119:# Independently verify a standalone evidence bundle
+README_M3_REPLAY.md:60:| WP2 independent-implementation monitor | Implemented, reads only JSONL and contract | Independent ground truth and third-party assessment |
+README_M3_REPLAY.md:67:| WP9 hardware pilot | Not started | Supervised rig, independent E-stop, approved safety case |
+README_M3_REPLAY.md:71:The synthetic control generator creates 11 **constructed** examples: seven invalid and four valid under the sample metadata contract. A record truncated at an unknown time may appear complete when the window is inferred from the recordin
+README_M3_REPLAY.md:73:Never use these results as estimates of unsafe-action detection, a robot safety claim, a production SLA or state-of-the-art performance. Human adjudication, independently authored scenes and physically grounded reference observations are
+README_STUDIO.md:27:4. Inspect independently evaluated postconditions, trajectory, constraint violations and digest-linked bundle.
+README_STUDIO.md:44:`studio-data/` contains project records, identity mappings, hashed tokens, trajectories and uploaded evidence. The single-process SQLite WAL registry plus bounded in-process worker are suitable for **development and small pilot experiments 
+README_V06.md:5:**Claim boundary:** `eligible_for_physics_equivalence_claim = false`, `independently_attested_ground_truth = false`. All 40 held-out traces simulate an uncalibrated planar research surrogate (`z = 0.16 m`, `mass = 8.0 kg`, `simulator_reported_u
+artifacts/assurance/negative-control-report.json:17:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:48:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:73:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:96:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:119:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:142:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:165:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:188:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:211:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:234:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:270:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:306:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:337:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:360:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:396:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:425:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:457:        "source_trust": "unattested exported simulator or synthetic evidence; not independent real-world ground truth",
+artifacts/assurance/negative-control-report.json:554:    "No physical robot, Isaac Lab, MuJoCo or independent hardware measurements executed",
+artifacts/assurance/negative-control-report.json:555:    "Evidence is derived from synthetic state series; independent sensor provenance is not demonstrated",
+artifacts/assurance/negative-control-report.json:556:    "Reconstructed safety comparator shares this monitor geometry code with the process grader and is NOT an external independently reproduced baseline",
+artifacts/assurance/negative-control-report.json:557:    "No blinded independent human adjudication and no published external benchmark comparison",
+artifacts/assurance/negative-control-report.json:562:  "status": "SYNTHETIC SOFTWARE REGRESSION ONLY; not blinded, independently adjudicated science"
+artifacts/research/process-analysis.json:17:    "trial_rows_are_not_independent_hardware_replications": true,
+artifacts/research/process-analysis.json:18:    "caveat": "All scenarios are public fixed toy-world demonstrations. Seeds may have identical paths: treating n trial rows as independent environmental replications is invalid."
+artifacts/research/process-analysis.json:79:      "inference_status": "exploratory, NOT preregistered or independent",
+artifacts/research/process-analysis.json:83:        "Verifier reads simulator-generated state, not independent physical ground truth",
+artifacts/research/process-analysis.json:148:      "inference_status": "exploratory, NOT preregistered or independent",
+artifacts/research/process-analysis.json:152:        "Verifier reads simulator-generated state, not independent physical ground truth",
+artifacts/research/process-analysis.json:217:      "inference_status": "exploratory, NOT preregistered or independent",
+artifacts/research/process-analysis.json:221:        "Verifier reads simulator-generated state, not independent physical ground truth",
+artifacts/research/reexecuted-factorial.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
+artifacts/research/reexecuted-factorial.v0x-seed-invariant.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
+artifacts/research/v06-heldout-traces/isaaclab/abs-01.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/abs-02.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/abs-03.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/abs-04.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-01.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-02.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-03.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-04.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-05.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-06.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-07.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/insp-08.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-01.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-02.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-03.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-04.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-05.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-06.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-07.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/isaaclab/nav-08.json:84:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-01.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-01.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-02.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-02.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-03.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-03.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-04.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/abs-04.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-01.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-01.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-02.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-02.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-03.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-03.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-04.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-04.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-05.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-05.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-06.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-06.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-07.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-07.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-08.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/insp-08.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-01.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-01.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-02.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-02.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-03.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-03.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-04.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-04.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-05.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-05.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-06.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-06.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-07.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-07.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-08.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-heldout-traces/mujoco/nav-08.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-isaaclab-locked-replay.json:22:      "note": "Not independently attested ground truth",
+artifacts/research/v06-mujoco-locked-replay.json:15:  "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+artifacts/research/v06-mujoco-locked-replay.json:25:      "note": "Not independently attested ground truth",
+artifacts/research/v06-paired-physics-report.json:14:  "independently_attested_ground_truth": false,
+artifacts/research/v06-pilot-per-tick-diagnostic.json:92:    "independently_attested_ground_truth": false,
+artifacts/research/v06-release-gate-report.json:49:  "independent_reviewer_assessment": {
+artifacts/research/v06-release-gate-report.json:58:    "reviewer": "VEAP Independent Audit Subagent",
+artifacts/research/v06-release-gate-report.json:59:    "scope_and_claim_boundaries": "Confirmed eligible_for_physics_equivalence_claim=false and independently_attested_ground_truth=false; all 40 native traces are uncalibrated planar surrogates (z=0.16 m, gravi
+artifacts/research/v06-release-gate-report.json:62:  "independently_attested_ground_truth": false,
+assurance_controls/adjudication.py:1:"""Blind review templates and Cohen's kappa on independently supplied labels.
+assurance_controls/run_controls.py:63:      'status':'SYNTHETIC SOFTWARE REGRESSION ONLY; not blinded, independently adjudicated science',
+assurance_controls/run_controls.py:72:           'No physical robot, Isaac Lab, MuJoCo or independent hardware measurements executed',
+assurance_controls/run_controls.py:73:           'Evidence is derived from synthetic state series; independent sensor provenance is not demonstrated',
+assurance_controls/run_controls.py:74:           'Reconstructed safety comparator shares this monitor geometry code with the process grader and is NOT an external independently reproduced baseline',
+assurance_controls/run_controls.py:75:           'No blinded independent human adjudication and no published external benchmark comparison',
+assurance_controls/scene_power.py:1:"""Illustrative design planning using independent SCENES as sample units.
+assurance_controls/scene_power.py:4:must be justified from pilot independent scenes before registration.
+assurance_controls/scene_power.py:20:    return {'unit':'independently authored scene (not seed/trial)',
+assurance_controls/scene_power.py:24:      'estimated_independent_scenes':required,
+assurance_controls/scene_power.py:25:      'caveat':'Illustrative normal approximation, NOT preregistered or powered without an independent pilot estimate of scene-level variance and test-statistic design.'}
+docs/ADAPTER_CONTRACT.md:26:The exact continuous tick count is required and each step uses the scenario's `dt`. It converts telemetry to `state` and geometric `milestone` events with the original input file hash. Such milestones are **geometric observations**,
+docs/ADAPTER_CONTRACT.md:31:- A trusted external tool/robot runtime that enforces endpoint-level read-only access and an independent emergency-stop chain.
+docs/ASSURANCE_REPORT_v0.4.html:3:<body><main><div class="eyebrow">VEAB / Research assurance / 12 November 2026</div><h1>v0.4: Verify the verifier</h1><p class="lead">A reproducible local test harness for task success, geometric safety, temporal recovery and e
+docs/ASSURANCE_REPORT_v0.4.html:4:<h2>Observed local fixture results</h2><div class="panel"><table><thead><tr><th>Comparator</th><th>Invalid rejected</th><th>Valid accepted</th><th>False acceptance</th><th>False rejection</th></tr></thead><tbody><tr><th>Termin
+docs/ASSURANCE_REPORT_v0.4.html:12:<h2>Scientific next gate</h2><p>Collect independent, held-out scenes; use separate native-engine and external witness data; obtain blinded human labels; compare against independently reproduced embodied benchmarks; analyse pa
+docs/BUILD_VALIDATION.json:23:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
+docs/CANONICAL_NARRATIVE.md:1:Historical (2026-11-15): superseded by README v0.7-x1; internal checks are not independent.
+docs/CANONICAL_NARRATIVE.md:10:> **Core Definition:** VEAP is a **model- and harness-agnostic evaluation protocol** that jointly measures **task success**, **constraint violations**, **recovery**, **resource cost**, and **independently checkable evidence** und
+docs/CANONICAL_NARRATIVE.md:25:*Source: Bundled VEAP v0.1.0 60-trial summary; deterministic simplified 2D simulation. Descriptive development results, not independent external benchmark results.*
+docs/CANONICAL_NARRATIVE.md:53:3. **Attestation status:** Optional HMAC signing is an existing implemented mechanism in v0.1.0. Enterprise identity, external key custody, and independently trusted attestation remain future work.
+docs/CANONICAL_NARRATIVE.md:65:The VEAP warehouse-transfer demonstration illustrates the problem. In a deterministic 2D simulation, the ungated greedy planner completes the required task, yet the recorded trajectory contains 22 geometric safety violations. A t
+docs/CANONICAL_NARRATIVE.md:72:The execution system generates actions and observations. The independent trace-checking component examines recorded states, trajectory consistency, geometric constraints, scenario requirements and terminal postconditions.
+docs/CANONICAL_NARRATIVE.md:78:The architectural principle is that claims must be supported by independently evaluated evidence, rather than accepted solely from an execution system's reported outcome.
+docs/CANONICAL_NARRATIVE.md:124:These limitations define the next research problems: independent ground truth, trustworthy capture, simulator fidelity, sensor provenance, calibrated uncertainty and operationally meaningful safety conditions.
+docs/CANONICAL_NARRATIVE.md:137:### 8. Decisive Scientific Test — Does Process Verification Add Independent Value?
+docs/CANONICAL_NARRATIVE.md:140:The study should use preregistered scenarios, controlled faults, independently labelled ground truth and strong reference baselines.
+docs/CANONICAL_NARRATIVE.md:148:Success would mean demonstrating a reproducible and independently substantiated evaluation advantage, not merely producing a larger collection of metrics.
+docs/CANONICAL_NARRATIVE.md:161:> **What can this autonomous agent demonstrably accomplish, under which conditions, with which safety and resource constraints, and with what independently checkable evidence?**
+docs/CANONICAL_NARRATIVE.md:170:VEAP begins with a problem in autonomous AI evaluation: reaching a goal is not equivalent to completing a task safely and reliably. A robot or autonomous agent may achieve its final objective while violating operational constrai
+docs/CANONICAL_NARRATIVE.md:176:VEAP aims to evolve into a reproducible evaluation and assurance infrastructure for autonomous agents operating across simulation and physical environments. Its future development will require independent scenario validation, re
+docs/CANONICAL_NARRATIVE.md:187:Secondary users include embodied-AI researchers, robotics manufacturers, benchmark developers, independent evaluators and enterprise autonomy teams.
+docs/CANONICAL_NARRATIVE.md:206:5. **Safety and verification:** Independent verification, runtime assurance, fault injection and reproducible evidence.
+docs/CANONICAL_NARRATIVE.md:223:| **Physical evidence** | At least 30 supervised trajectories with independently checked provenance, latency and safety observations | Open research gate |
+docs/CLAIMS_POLICY.md:11:| VALIDATED | Independently collected evidence of fitness for a named intended use | Validated for that named use only |
+docs/CLAIMS_POLICY.md:24:- **G2 — validated:** independently sourced truth, held-out scenes, appropriate blinded adjudication, confidence intervals, bounded false acceptance/rejection, and fit for named use.
+docs/CLAIMS_POLICY.md:25:- **G3 — operationally assured for a context:** relevant hazards, controls, monitored operation, incident response, customer acceptance and independent safety engineering. G3 is not certification.
+docs/CLAIMS_REGISTER.json:82:      "limitations": "Not native-physics equivalence; gravity disabled; about 9 samples per trace; audit was internal (labelled 'Independent Audit Subagent' in the artifact, which is an internal agent)",
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:24:- Make a second independently implemented trace checker run on exported records; compare exact accept/reject outputs and documented tolerances.
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:32:- Compare contact mechanics/constraint behavior to independently instrumented MuJoCo/Isaac runs; CAD mesh visual agreement does not prove mass/inertia/contact equivalence.
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:37:- Distinguish worker count from independent environmental sample size.
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:42:- Verify `/emergency_stop` wired to independent motor power cutoff; ROS message delivery alone does NOT prove a hard E-stop.
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:44:- Fault-recovery backoff motion must not occur in a blind or obstacle-uncertain state without an independent safety supervisor.
+docs/INTEGRATION_WITH_NATIVE_BACKENDS.md:48:The 17 constructed fixtures are public smoke tests. A confirmatory study requires independently authored hidden scenes, preregistration, external monitor/witness ground truth and blinded reviewers. Never combine 43 h
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:9:| Xie et al. (2024), **OSWorld** | NeurIPS 2024 D&B; DOI [10.52202/079017-1650](https://doi.org/10.52202/079017-1650); [proceedings](https://proceedings.neurips.cc/paper_files/paper/2024/hash/5d413e48f84dc61244b6be550
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:12:| Chen et al. (2025), **ScienceAgentBench** | ICLR 2025; [official](https://proceedings.iclr.cc/paper_files/paper/2025/hash/f12b4df26344f3be803c06b555252efe-Abstract-Conference.html) | Expert-validated tasks, executa
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:13:| Zhu et al. (2025), **Establishing Best Practices in Building Rigorous Agentic Benchmarks** | NeurIPS 2025 D&B; DOI [10.52202/085713-5547](https://doi.org/10.52202/085713-5547) | Agentic Benchmark Checklist; task / 
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:15:| Guo et al. (2026), **From Question Answering to Task Completion: A Survey on Agent System and Harness Design** | [arXiv:2606.20683](https://arxiv.org/abs/2606.20683); peer-reviewed venue **not established** | Obser
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:17:| Hong et al. (2026), **AgentActionBench** | [arXiv:2609.11117](https://arxiv.org/abs/2609.11117); NLPCC 2026 shared-task article; proceedings status **not independently confirmed** | Tool-level action recorder and p
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:26:| Mu et al. (2025), **RoboTwin: Dual-Arm Robot Benchmark with Generative Digital Twins** | CVPR 2025; [official](https://openaccess.thecvf.com/content/CVPR2025/html/Mu_RoboTwin_Dual-Arm_Robot_Benchmark_with_Generativ
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:32:1. **Executable benchmark validity (OSWorld/WebArena/ABC)** → `veap/spec.py`, `veap/verifier.py`, `veap/research/protocol.py`. Next evidence: independent scene-family holdouts and grading false-positive rates.
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:35:4. **Safety and formal contracts (Embodied Agent Interface/SENTINEL)** → current geometric constraints in `veap/verifier.py`; next: bounded-time fault-response and formal temporal monitors verified independently.
+docs/LITERATURE_TO_ENGINEERING_MATRIX.md:43:- "Independent" today means **agent-independent verification**; external custody, ground truth and independent implementation must be demonstrated separately.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:7:**Who:** robotics research teams and independent safety engineers. **What:** compare final task-success scoring with actor-independent process grading. **Why:** terminal success can hide unsafe intermediate execution. **Where
+docs/PREREG_VEAP_NAV_PROTOCOL.md:9:Primary hypothesis H1: Under matched scenario, seed, model, planner, harness, sensor, robot and fault conditions, the process-level evaluation identifies **additional independently confirmed unsafe task completions** beyond a
+docs/PREREG_VEAP_NAV_PROTOCOL.md:18:- **Unit of generalization:** independent environment/scene, not step, frame, repeated deterministic seed or resampled identical layout.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:20:- **Control:** task-success-only grader applied to identical raw trajectories; independent process verifier blinded to the executing policy.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:21:- **Reference truth:** third-party event monitor / independent calibrated simulator logger, with a blinded human engineering adjudication set. The executing policy and software verifier must not share an unexamined sole grou
+docs/PREREG_VEAP_NAV_PROTOCOL.md:22:- **Holdout:** new independently authored scenes, robot geometry and fault sequences not available during tuning. Hash preregistered task manifests before testing; do not disclose hidden assets to the policy.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:24:- **Safety boundary:** no commands issued from the web UI to physical actuators. In supervised trials use an external speed limiter, hardware E-stop, exclusion zone and independent operator.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:28:**Primary endpoint:** incremental sensitivity for detecting independently adjudicated unsafe *task-complete* episodes at a predeclared maximum false-positive rejection rate. Report absolute counts and scene-clustered confide
+docs/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample size, all at
+docs/PREREG_VEAP_NAV_PROTOCOL.md:36:- **Outcome grade beats or matches process grade on independent true-positive identification at equal false-rejection** → no claimed advantage; audit verifier complexity and false alerts.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:37:- **Verifier disagreement originates from common simulator bug or privileged ground truth** → halt, recalibrate and re-run under independent supervision.
+docs/PREREG_VEAP_NAV_PROTOCOL.md:49:| R4: Physical measurement | 30 or more witnessed supervised trajectories with an independent E-stop and calibrated onboard timing; no claims before safety review |
+docs/PREREG_VEAP_NAV_PROTOCOL.md:50:| R5: SOTA evaluation | Compare against the strongest relevant reproduced peer-reviewed embodied baselines with frozen budgets, independent evaluator and uncertainty; publish null or adverse outcomes |
+docs/PREREG_VEAP_NAV_PROTOCOL.md:52:No achieved threshold in this document implies independent safety certification.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:3:**Document status:** prospectively drafted 2026-11-12, **NOT preregistered**, NOT a validated benchmark or real-robot assurance case. The existing five toy-world scenarios and 17 synthetic controls are public development dat
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:7:**Who:** autonomous-robot development teams, external evaluators, research scientists. **What:** evaluate incremental validity of process-level verification. **Where:** independent scenes and eventually native Isaac Lab/MuJo
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:9:Primary H1: Given matched scenes, policies, observations, control budgets, harnesses and disturbances, VEAB process verification identifies independently adjudicated unsafe **task-complete** runs missed by the **strongest pr
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:11:Null: VEAB adds no independently corroborated unsafe-task-completion detection beyond the safety-aware terminal grader, or it adds false rejections beyond the prespecified bound.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:21:3. Reconstructed safety-aware terminal grader using an independently implemented geometry/temporal monitor (strong in-fixture comparator). Shared-monitor dependence must be disclosed.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:26:## Independent evidence model
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:30:- Separate monitor: independent code path (separate process, no simulator or policy imports), reconstructing collision, keep-out, deadline, state/command consistency and fault stop conditions.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:36:- Unit of generalization = **independently authored scene**. Repeated seeds and frames are nested within scenes, NOT independent replications.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:38:- An *illustrative-only* normal approximation, assumed scene SD 0.4 and target mean gain 0.2, suggests 32 independent scenes. This is NOT a study design commitment until variance is estimated in a separate pilot sample.
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:44:Independent human/monitor consensus unsafe-task-complete detection sensitivity; false-rejection rate for independently labelled good task-complete episodes. Compare process grading with reconstructed safety-aware grading on
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:64:**G0 — local contract controls:** >=15 constructed adversarial/positive fixtures and no failing automated tests; mark software regression only. Achieved for accessible base at 2026-11-12 with 17 controls and 55 tests, but n
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:66:**G1 — independent reference creation:** >=32 new independent scenes *only if justified by pre-study variance/power*, blinded reference decisions and adjudicator agreement. If the evidence set does not satisfy this, H1 is n
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:74:**G5 — supervised hardware:** pre-approved risk assessment, hardware independent E-stop, operator override, velocity/geofence limits and measured stop latency; signed witness records, not merely robot self logs. Not execute
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:76:**G6 — external reproduction/SOTA:** compare independently reproduced embodied baselines, report confidence intervals, costs, failures, source code, trajectories and adverse/null results. SOTA is conditional on this indepen
+docs/PROSPECTIVE_PROTOCOL_v0.4.md:80:These software tests do **not** establish physical fidelity, scientific hypothesis validation, model-generalization, regulatory compliance or certified safety. All physical actuation requires independent risk review and har
+docs/PUBLIC_PRODUCT_CLAIMS.md:7:Selected multi-user and audit interfaces were implemented in an internal research-pilot snapshot (`E102`), but production-ready and enterprise-grade status are **not claimed**. Independent organisational validation, physical-rob
+docs/RESEARCH_PROTOCOL.md:1:Historical (2026-11-15): superseded by README v0.7-x1; internal checks are not independent.
+docs/RESEARCH_PROTOCOL.md:7:> **Core Definition:** VEAP is a **model- and harness-agnostic evaluation protocol** that jointly measures **task success**, **constraint violations**, **recovery**, **resource cost**, and **independently checkable evidence** under 
+docs/RESEARCH_PROTOCOL.md:64:**Who:** Agent researchers and independent reviewers; a distinct verifier consumes immutable trace-format evidence without executing policy code. The present investigator is responsible for independently validating real robots and 
+docs/RESEARCH_PROTOCOL.md:70:**How:** Freeze scenario identities and task definitions; preregister comparisons and safety bounds; pair seed/scene conditions; run all baselines; collect unmodified traces; independently verify postconditions; report intervals, i
+docs/RESEARCH_PROTOCOL.md:74:**RQ1:** Can trace-level independent verification detect unsafe completions and false postconditions that a binary goal-reached metric would mark as successful?
+docs/RESEARCH_PROTOCOL.md:90:7. **Device migration:** Block external autonomy pending simulator fidelity review, authoritative state capture, latency/energy instrumentation, hardware emergency-stop testing and independent sign-off.
+docs/RESEARCH_PROTOCOL.md:94:The initial v0.1 local warehouse trial, `route`, seed 17, gate ON, completed 3/3 milestones in 81 steps (16.2 simulated seconds) with zero geometric violations and eight geometric safety interventions. This is a demonstration that 
+docs/RESEARCH_PROTOCOL.md:104:- Independent, unreleased held-out task families with integrity-preserving task creation and contamination audit.
+docs/RESEARCH_PROTOCOL.md:106:- 5+ independently randomized scene/task seeds per family (increase based on power analysis), confidence intervals across scenes and multiple independent research replications.
+docs/RESEARCH_PROTOCOL.md:122:| **Physical evidence** | At least 30 supervised trajectories with independently checked provenance, latency and safety observations | Hardware safety rate | Open research gate |
+docs/RESEARCH_PROTOCOL.md:135:**Strength:** deterministic traces, independent process verifier, separable policies/gate, clear source labels.
+docs/RESEARCH_PROTOCOL.md:142:Public reports should include the exact task manifest digest, dataset licence and provenance, code commit, model provider/weights, policy and harness versions, hardware, sensors, seeds, configuration, runtime settings, trial log h
+docs/RESEARCH_PROTOCOL.md:144:*References are listed and linked in README.md. The user-provided research prospectus informed the scientific objective; its newer bibliographic claims have not been treated as independently verified peer review.*
+docs/RESEARCH_RELEASE_NOTES_v0.3.0.md:11:7. **Prospective protocol:** a frozen-study template for blinded independent scene families, ground-truth adjudication and native simulator/robot acceptance gates.
+docs/RESEARCH_RELEASE_NOTES_v0.3.0.md:26:In the 60-row fixed demonstration dataset (five public scenes × three seeds × four arms), the gated and ungated greedy arms each report 12/15 task completions. The ungated arm has 3/15 verifier-accepted completions and 
+docs/RESEARCH_RELEASE_NOTES_v0.3.0.md:32:Native Isaac Lab, MuJoCo, Gazebo and Unreal execution have **not** been run or validated in this build environment. v0.2 interchange assets, CAD STEP/STL surrogate parts and simulator hooks remain included. No real robo
+docs/THREAT_MODEL.md:11:| Agent reports task success without reaching its goal | Independent waypoint checks and ordered markers | Same simulator labels may still be wrong |
+docs/THREAT_MODEL.md:28:4. Collect independent, signed or hardware-attested sensor provenance before using the word **verified** for real-robot outcomes.
+docs/THREAT_MODEL.md:29:5. Sign benchmark snapshots with independently custodied keys; publish immutable object hashes to an external log to mitigate coordinated evidence rewriting.
+docs/THREAT_MODEL.md:36:`HMAC-SHA256` = optional shared-secret integrity attestation only when independent key available.
+docs/enterprise/ACCEPTANCE_GATES.json:6:  "explanation":"Software integration coverage is distinct from independent safety assurance and enterprise operations.",
+docs/enterprise/ACCEPTANCE_GATES.json:9:    {"id":"R0-02","description":"Agent-independent verifier for deterministic toy-world evidence","status":"IMPLEMENTED_IN_LOCAL_PILOT","evidence":"veap/verifier.py"},
+docs/enterprise/ACCEPTANCE_GATES.json:10:    {"id":"R0-03","description":"Independent scene-level confirmatory benchmark with blinded labels","status":"NOT_PASSED","evidence":"Prospective protocol only"},
+docs/enterprise/ACCEPTANCE_GATES.json:19:    {"id":"R2-06","description":"Independent vulnerability assessment and remediations","status":"NOT_PASSED","evidence":"Pending"},
+docs/enterprise/ARCHITECTURE.md:5:Scientific programme: open benchmark contracts, repeatable simulations, external-reference experiments, matched comparisons, independent assurance research.
+docs/enterprise/ARCHITECTURE.md:9:These programmes share data contracts while maintaining independent scientific claims and customer security boundaries. No external data is used for benchmark training. The v0.5 service is a **single-node pilot**.
+docs/enterprise/ARCHITECTURE.md:18:  F --> G[Agent-independent trace verifier]
+docs/enterprise/ARCHITECTURE.md:31:- **Evidence:** uploaded ROS-related files are stored as untrusted source material. SHA-256 demonstrates stored-file consistency, not independent sensor authenticity.
+docs/enterprise/ARCHITECTURE.md:48:Assurance plane: independent monitor process and human adjudication; external time-stamped evidence anchors, per-artifact signatures, and calibrated real-world reference instrumentation.
+docs/enterprise/FUNDING_CASE.md:19:| Security and independent assurance | 35,000 |
+docs/enterprise/FUNDING_CASE.md:31:**WP1 (Months 1–3, scientific)** freeze protocols, independent validators, negative controls, sample-size analysis, publication-grade comparisons.
+docs/enterprise/FUNDING_CASE.md:41:Seek an eligible UK SME lead, an operational industrial deployer, and an independent academic/safety evaluation partner. Verify grant scope, readiness level, entity eligibility, co-funding, overheads, IP and state subsidy rul
+docs/enterprise/RELEASE_RUNBOOK.md:31:Independent penetration assessment and remediation; external infrastructure review; evidence custody and cryptographic key-rotation test; disaster-recovery exercise and RTO/RPO records; load tests; on-call and incident man
+docs/enterprise/SCIENCE_PROTOCOL.md:5:**H1:** Under matched scenes, tasks, policies, harnesses, sensors and injected disturbances, process-level verification identifies independently adjudicated execution/evidence failures missed by a credible safety-aware ter
+docs/enterprise/SCIENCE_PROTOCOL.md:9:**Who:** evaluation engineers and two independent human adjudicators who do not know model configuration labels.
+docs/enterprise/SCIENCE_PROTOCOL.md:13:**Where:** at least two calibrated simulators first (Isaac Lab, MuJoCo), then a supervised physical robot under an independently reviewed safety case. Gazebo/ROS 2 ingest is a separate middleware compliance study.
+docs/enterprise/SCIENCE_PROTOCOL.md:19:**How:** author genuinely unseen scenes, specify independent scene as the clustering unit, lock the inference plan, run matched conditions including sensor dropout, actuator stall, contact risk, keep-out zones, latency an
+docs/enterprise/SCIENCE_PROTOCOL.md:23:Scene holdout and independent authorship; leakage checks; intervention/shield ablation; model/harness factorial ablations; signed replay manifest; separate-policy and separate-monitor implementations; negative-control tra
+docs/enterprise/SCIENCE_PROTOCOL.md:25:Do not count three seeds of one scene as three independent environmental replications. Sample sizes must come from a prespecified effect size and scene-level power model, not p-value fishing. Publish negative/null outcome
+docs/enterprise/SCIENCE_PROTOCOL.md:32:| False rejection | <=5% independently adjudicated good episodes | Case-level FPR with CI |
+docs/enterprise/SECURITY_AND_THREAT_MODEL.md:12:| Evidence tampering | SHA-256 upload digest; explicit integrity endpoint; per-tenant chained audit records | Independent event anchoring, KMS signatures, append-only/WORM storage |
+docs/enterprise/SECURITY_AND_THREAT_MODEL.md:14:| Self-certification | Review author must differ from run author; reviewer role | Blind label allocation, inter-rater calibration, independent third-party auditors |
+docs/enterprise/SECURITY_AND_THREAT_MODEL.md:16:| SQL injection / path traversal | Parameterised queries; tenant-bound IDs; strict filename whitelist and safe object paths | Independent fuzzing and SAST/DAST validation |
+docs/enterprise/VALIDATION_SUMMARY.json:17:    "workflow":["personal token sign-in","project creation","queued local simulation","agent-independent verifier","isometric trajectory","engine status"],
+docs/enterprise/VALIDATION_SUMMARY.json:31:                "independent evidence custody","backup/restore drill","native robot/simulator trials","security audit","customer acceptance"],
+docs/m3/IMPLEMENTATION_EVIDENCE_REGISTER.md:6:| M3-E002 | DEMONSTRATED (synthetic) | `examples/m3/synthetic-control-results.json` | Constructed negative controls, not an independent benchmark |
+docs/m3/IMPLEMENTATION_EVIDENCE_REGISTER.md:13:**Interpretation:** PASS in source tests is evidence of implemented software conditions, not evidence that a physical robot would be safe or that the evaluation protocol is scientifically validated. The 11-recorde
+docs/m3/LOCAL_TEST_REPORT.txt:17:independently recorded expected start/end time to address this blind spot.
+docs/m3/LOCAL_TEST_REPORT.txt:20:user's machine, Yahboom M3 Pro device topic mapping, independent physical
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:4:**Claim status:** Implementation candidate. Confirmation and independent validation pending.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:9:- **What:** Does contract-conditioned replay reveal additional independently adjudicated safety- or evidence-relevant failures beyond terminal-only and safety-aware grading?
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:13:- **How:** Compare matched evaluations against a reference monitor with separate capture and blinded independent adjudication.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:17:**H1 (primary):** At matched false-positive rate, the process verifier identifies a higher proportion of independently labelled **evidence/recovery faults** than the strongest safety-aware terminal baseline under he
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:19:**H2 (secondary):** For independently labelled unsafe task-complete episodes, VEAP detects additional episodes not caught by a terminal-state-only grader. A strong safety-aware terminal grader is mandatory; the adde
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:27:- Use matched no-fault, sensor dropout and command delay conditions; add odometry drift only when a calibrated, independent position source exists.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:29:- Judge raw traces without revealing policy identity. Dual raters for a stratified sample; report Cohen's kappa or another predeclared inter-rater coefficient and resolve disagreements by an independent adjudicator.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:35:2. **False rejection** on independently accepted valid episodes: initial design ceiling 5%, with 95% confidence interval.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:43:- No agent-specific success claim can substitute for independent physical observation.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:47:- The independent implementation may share a faulty contract or compromised recording; independent implementation is not organisational independence.
+docs/m3/PROSPECTIVE_M3_REPLAY_PROTOCOL.md:52:If process verification provides no improvement over the strongest baseline at the chosen false-rejection threshold, report a null result with CIs and examine which checks add overhead or false alarms. Publish indep
+docs/m3/YAHBOOM_M3_PRO_VALIDATION_REGISTER.md:22:| `M3-ODOM-001` | 27 Oct 2026 | Raw wheel odometry publication rate (`/odom_raw`) | **Previously measured (Historical hardware observation)** | `/odom_raw` measured at ~**11.1 Hz** on the physical robot (fused b
+docs/m3/YAHBOOM_STATUS_ADDENDUM_2026-11-14.md:3:**Evidence date:** 14 November 2026 summary of local workstation and Jetson terminal outputs from 12–13 November. **Data classification:** operator-provided terminal results; no authenticated independent system a
+docs/release/RELEASE_BACKLOG_READY_FOR_GITHUB.md:7:Implement shared ENU frame, scene/scenario SHA, seed, command rate and actuator control assumptions. Negative tests for edited controls, missing observations and time drift. **Exit:** independent CI reproduces
+docs/release/RELEASE_BACKLOG_READY_FOR_GITHUB.md:19:Match inertial and contact parameters, declare tolerance before measuring held-out scenes, run >=20 paired tapes over two independently authored families. Report RMSE/p90/max, contact disagreement, timing dri
+docs/release/RELEASE_BACKLOG_READY_FOR_GITHUB.md:23:Pin provider and audience; verify JWT/JWKS rotation, roles at server side, deny-all defaults, audit and negative cross-tenant tests. **Exit:** tests plus independent security review; no production cutover fro
+docs/release/RELEASE_BACKLOG_READY_FOR_GITHUB.md:33:## v0.8-02 — Independent ground truth / robot pilot [P0]
+docs/release/RELEASE_BACKLOG_READY_FOR_GITHUB.md:39:External penetration test, remediation and retest, restore drill, documented SLO, scene-clustered confirmatory stats, reviewer reliability, null results. **Exit:** independent reports and customer security si
+docs/release/V06_FUNDING_POSITION.md:3:VEAB is an embodied-agent evaluation research project with a read-only assurance analytics product track. The working software includes local replay and agent-independent verification controls for bounded traces and synth
+docs/release/V06_FUNDING_POSITION.md:5:**Research question:** Do contract-conditioned process checks identify additional independently adjudicated failures beyond a reproduced, safety-aware terminal grader at an acceptable false rejection rate?
+docs/release/V06_FUNDING_POSITION.md:7:**Project-stage claim:** research prototype; no funder-defined TRL rating has been independently assessed. A TRL 5–6 deployment claim is pending operational evidence, an eligible deployment partner and the funding program
+docs/release/V06_FUNDING_POSITION.md:9:**Prospective work:** freeze scenarios and independent scene clusters, measure sensitivity/specificity and assessment overhead, run calibrated native cross-simulator experiments, and conduct a read-only shadow-mode custom
+docs/release/V06_FUNDING_POSITION.md:11:**Commercial product boundary:** VEAB Replay analyses recorded robotics evidence. It does not control robots, replace functional safety engineering, or confer external certification. Cost and schedule figures are estimat
+docs/release/V06_LOCAL_VALIDATION_REPORT.md:29:Native Isaac or MuJoCo physics results; robot inertia/contact equivalence; calibrated cross-engine accuracy; external provenance authenticity; hardware telemetry; independent external evaluation; production IAM/HA
+docs/release/V06_LOCAL_VALIDATION_REPORT.md:36:4. Calibrate equivalent robot/scene models and conduct preregistered matched tests with independently authored scenes.
+docs/release/V06_LOCAL_VALIDATION_REPORT.md:37:5. Independently audit provenance, grading accuracy and product threat model before customer or funding qualification claims.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:9:3. Both physics implementations consume the **same** open-loop control tape. Do not present independently generated closed-loop trajectories as a matched-physics experiment.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:11:5. The agent-independent monitor checks tape and geometry, and a separately implemented monitor must reconstruct reference outcomes before scientific validation.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:19:- `python scripts/veap_v06.py compare` requires matching tape, source scenario and timestamp grid. It reports discrepancies (`veab-locked-physics-comparison/1`) and always sets `eligible_for_physics_equivalence
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:69:- Freeze the evaluation manifest (position, timing, and contact thresholds, model/scene/tape hashes, and held-out split) before executing the >=20 held-out matched tapes (>=40 native traces across >=2 independe
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:74:- Robot inertial mass, CoM, joint damping, actuation limits and friction independently measured or documented.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:78:- Contact events independently derived from native physics, not fabricated from toy geometry.
+docs/release/V06_NATIVE_ACCEPTANCE_PROTOCOL.md:79:- Independent scene authoring; >=20 held-out matched runs over >=2 task families for release evidence.
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:3:**Hypothesis:** With identical available observations and a valid stated model, relaxing the assumed speed or position-error bound cannot generate new definitive compliance/violation knowledge from an inconclus
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:9:- Design: 15 × 4 × 3 = **180 correlated software-control cases**, no independent robot scenes.
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:10:- Comparator: existing separate standard-library reachability monitor, not organisationally independent.
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:11:- Reference check: independently recompute each certificate's obligations with a separate checker.
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:15:These results are exploratory *development controls*, not a confirmation of scientific novelty or accuracy on independent robot recordings. Relaxed assumptions should sometimes increase abstention; an increase
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:27:Any mismatch must be investigated before accepting the release. Preserve the offending fixture, versioned contract and resulting certificate; do not discard a failed case as an outlier. New purported scientifi
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:32:2. Calibrate and independently verify motion, frame, clock and observation uncertainty bounds.
+docs/release/VEAP_R12_ASSUMPTION_SENSITIVITY.md:35:5. Analyse by independently authored scene as the statistical unit, not translated seeds/trace variants.
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:13:**Hypothesis H1:** Compared with the strongest reproduced safety-aware outcome grader, process-level verification detects additional independently adjudicated evidence/recovery failures under paired held-out c
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:17:**Method:** freeze task contracts and controls; run native engines in pinned containers; independently record state and contacts; audit provenance; compare on predeclared metrics; blind human reviewers to poli
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:23:| **v0.6 — Native evidence** | True Isaac Lab and MuJoCo stepping plus cross-simulator comparisons | 2 independently executed native physics traces for each of at least 20 matched input tapes across two task f
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:25:| **v0.8 — ROS 2/MCAP & shadow pilot** | Read-only robot fleet evidence ingestion and an external monitor | ROS 2 time/TF/IMU/odom/control channel schema; authenticated recording manifest; independent ground-t
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:26:| **v0.9 — Operational qualification** | Security review, restore, load tests, independent scientific evaluation | Penetration-test report and re-test; SLO and observed service metrics; chaos and restore drill
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:27:| **v1.0 — Qualified assurance service** | Limited, named intended-use production deployment | Approved threat/risk assessment, customer acceptance, runbooks, incident ownership, documented service boundaries,
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:33:- **G2 validated:** independently obtained reference data and powered, held-out results establish a named intended use.
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:42:| Paired native coverage | Count of matched command-tape/scene pairs actually executed in **both** physics engines | >=20 pairs across >=2 independently authored task families before v0.6 exit |
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:45:| Incremental verifier value | Difference in independently labelled failure recall between VEAB and safety-aware comparator | Predeclare target >=10 pp for specified evidence/recovery errors while false reject
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:51:**Initial observation:** The toy-world mechanism demo contains task-complete traces that the verifier rejects, and synthetic controls distinguish evidence omissions from physical violations. These are not inde
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:55:**Refinement:** lock inputs and timebases, require two physics engines, add independently authored scenes, separate monitor custody, external reference measurements and blinding.
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:57:**Further experiments:** calibrated system identification, matched control tapes in Isaac and MuJoCo, independent collision/contact annotation, shift tests, fault sweeps, scene-clustered comparisons, cost/prov
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:59:**Final conclusion boundary:** v0.6 software contracts cannot prove SOTA, certified safety, fidelity, independently authenticated source data, or production readiness; such claims remain conditional on named g
+docs/release/VEAP_RELEASE_TRAIN_v0.6_to_v1.0.md:69:- NASA software independent verification and validation: https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695499/SWE-141+-+Software+Independent+Verification+and+Validation
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:4:**Audit type:** source/CI evidence review plus local unit tests of matching standalone research and Studio snapshots. **Not an independent safety or security assessment.**
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:29:| R1.2 assumptions | 180 synthetic variants, zero monitor/checker/monotonicity failures | Internal implementation control only, **not** 180 independent scenes |
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:40:| RG-3 | Independently authored and held-out robotic evidence with blinded adjudication | Not run |
+docs/release/VEAP_REPOSITORY_AUDIT_2026-11-14.md:46:**Permitted public claim:** VEAP provides software-tested research components for evidence-sufficient robot-execution evaluation, an M3 recording-contract prototype, and an early first-party Studio. **Not cla
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:9:| Xie et al. (2024), **OSWorld** | NeurIPS 2024 D&B; DOI [10.52202/079017-1650](https://doi.org/10.52202/079017-1650); [proceedings](https://proceedings.neurips.cc/paper_files/paper/2024/hash/5d413e48f84dc612
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:12:| Chen et al. (2025), **ScienceAgentBench** | ICLR 2025; [official](https://proceedings.iclr.cc/paper_files/paper/2025/hash/f12b4df26344f3be803c06b555252efe-Abstract-Conference.html) | Expert-validated tasks
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:13:| Zhu et al. (2025), **Establishing Best Practices in Building Rigorous Agentic Benchmarks** | NeurIPS 2025 D&B; DOI [10.52202/085713-5547](https://doi.org/10.52202/085713-5547) | Agentic Benchmark Checklist
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:15:| Guo et al. (2026), **From Question Answering to Task Completion: A Survey on Agent System and Harness Design** | [arXiv:2606.20683](https://arxiv.org/abs/2606.20683); peer-reviewed venue **not established*
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:17:| Hong et al. (2026), **AgentActionBench** | [arXiv:2609.11117](https://arxiv.org/abs/2609.11117); NLPCC 2026 shared-task article; proceedings status **not independently confirmed** | Tool-level action recor
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:26:| Mu et al. (2025), **RoboTwin: Dual-Arm Robot Benchmark with Generative Digital Twins** | CVPR 2025; [official](https://openaccess.thecvf.com/content/CVPR2025/html/Mu_RoboTwin_Dual-Arm_Robot_Benchmark_with_
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:32:1. **Executable benchmark validity (OSWorld/WebArena/ABC)** → `veap/spec.py`, `veap/verifier.py`, `veap/research/protocol.py`. Next evidence: independent scene-family holdouts and grading false-positive rate
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:35:4. **Safety and formal contracts (Embodied Agent Interface/SENTINEL)** → current geometric constraints in `veap/verifier.py`; next: bounded-time fault-response and formal temporal monitors verified independe
+docs/research/LITERATURE_TO_ENGINEERING_MATRIX.md:43:- "Independent" today means **agent-independent verification**; external custody, ground truth and independent implementation must be demonstrated separately.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:7:**Who:** robotics research teams and independent safety engineers. **What:** compare final task-success scoring with actor-independent process grading. **Why:** terminal success can hide unsafe intermediate execution
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:9:Primary hypothesis H1: Under matched scenario, seed, model, planner, harness, sensor, robot and fault conditions, the process-level evaluation identifies **additional independently confirmed unsafe task completions**
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:18:- **Unit of generalization:** independent environment/scene, not step, frame, repeated deterministic seed or resampled identical layout.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:20:- **Control:** task-success-only grader applied to identical raw trajectories; independent process verifier blinded to the executing policy.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:21:- **Reference truth:** third-party event monitor / independent calibrated simulator logger, with a blinded human engineering adjudication set. The executing policy and software verifier must not share an unexamined 
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:22:- **Holdout:** new independently authored scenes, robot geometry and fault sequences not available during tuning. Hash preregistered task manifests before testing; do not disclose hidden assets to the policy.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:24:- **Safety boundary:** no commands issued from the web UI to physical actuators. In supervised trials use an external speed limiter, hardware E-stop, exclusion zone and independent operator.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:28:**Primary endpoint:** incremental sensitivity for detecting independently adjudicated unsafe *task-complete* episodes at a predeclared maximum false-positive rejection rate. Report absolute counts and scene-clustere
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:32:**Statistical plan:** blinded scenario-clustered paired analysis; select number of scenes using pilot effect variance and a documented power/MDE calculation *before* running the confirmatory study. Report sample siz
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:36:- **Outcome grade beats or matches process grade on independent true-positive identification at equal false-rejection** → no claimed advantage; audit verifier complexity and false alerts.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:37:- **Verifier disagreement originates from common simulator bug or privileged ground truth** → halt, recalibrate and re-run under independent supervision.
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:49:| R4: Physical measurement | 30 or more witnessed supervised trajectories with an independent E-stop and calibrated onboard timing; no claims before safety review |
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:50:| R5: SOTA evaluation | Compare against the strongest relevant reproduced peer-reviewed embodied baselines with frozen budgets, independent evaluator and uncertainty; publish null or adverse outcomes |
+docs/research/PREREG_VEAP_NAV_PROTOCOL.md:52:No achieved threshold in this document implies independent safety certification.
+docs/research/RESEARCH_RELEASE_NOTES_v0.3.0.md:11:7. **Prospective protocol:** a frozen-study template for blinded independent scene families, ground-truth adjudication and native simulator/robot acceptance gates.
+docs/research/RESEARCH_RELEASE_NOTES_v0.3.0.md:26:In the 60-row fixed demonstration dataset (five public scenes × three seeds × four arms), the gated and ungated greedy arms each report 12/15 task completions. The ungated arm has 3/15 verifier-accepted complet
+docs/research/RESEARCH_RELEASE_NOTES_v0.3.0.md:32:Native Isaac Lab, MuJoCo, Gazebo and Unreal execution have **not** been run or validated in this build environment. v0.2 interchange assets, CAD STEP/STL surrogate parts and simulator hooks remain included. No 
+docs/research/process-analysis.json:17:    "trial_rows_are_not_independent_hardware_replications": true,
+docs/research/process-analysis.json:18:    "caveat": "All scenarios are public fixed toy-world demonstrations. Seeds may have identical paths: treating n trial rows as independent environmental replications is invalid."
+docs/research/process-analysis.json:79:      "inference_status": "exploratory, NOT preregistered or independent",
+docs/research/process-analysis.json:83:        "Verifier reads simulator-generated state, not independent physical ground truth",
+docs/research/process-analysis.json:148:      "inference_status": "exploratory, NOT preregistered or independent",
+docs/research/process-analysis.json:152:        "Verifier reads simulator-generated state, not independent physical ground truth",
+docs/research/process-analysis.json:217:      "inference_status": "exploratory, NOT preregistered or independent",
+docs/research/process-analysis.json:221:        "Verifier reads simulator-generated state, not independent physical ground truth",
+examples/60-trial-summary.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
+examples/m3/FIXTURE_LABELS.json:68:      "purpose": "Bounded window is inferred from recorded data; truncation is not independently observable without an expected window",
+external_monitor/m3_record_monitor.py:16:def independently_check(contract_path: str | Path, jsonl_path: str | Path) -> dict:
+external_monitor/m3_record_monitor.py:80:        'schema_version':'veap.m3.independent-monitor/1',
+external_monitor/m3_record_monitor.py:92:    parser=argparse.ArgumentParser(description='Independent implementation (not independent ground truth)')
+external_monitor/m3_record_monitor.py:98:        verdict=independently_check(args.contract,args.jsonl)
+external_monitor/monitor.py:5:Consumes exported pose/event records, not model self-reports. It is independently
+external_monitor/monitor.py:6:implemented software, NOT independent sensor ground truth or safety certification.
+external_monitor/monitor.py:188:      'source_trust':'unattested exported simulator or synthetic evidence; not independent real-world ground truth',
+external_monitor/monitor.py:202:    parser=argparse.ArgumentParser(description='Independent-implementation read-only exported-pose monitor')
+logs/STEPLOG.md:248:- Forbidden-word grep saved to x1/step5/forbidden_grep.txt. Verbatim headline contains 'independent verification' (flag to PHD: conflicts with the 'independent' ban and with veap/governance/claims.py HIGH_RISK regex; README is not in check_
+logs/STEPLOG.md:281:- (1) Headline: 'failed independent verification' -> 'failed verification by a verifier separate from the agent' in README.md (only occurrence; README_V06.md has no headline) and E103 statement. No 'agent-independent' in the sentence. veap/
+scripts/generate_m3_fixture_set.py:48:    patch('truncated_one_sample',lambda v:v.__setitem__(slice(None),[r for r in v if r['log_time_ns'] <1_200_000_000]),True,'Bounded window is inferred from recorded data; truncation is not independently observable without
+scripts/run_m3_controls.py:29:        b=monitor.independently_check(ROOT/'contracts/m3_nav_v1.template.json',raw)
+scripts/run_m3_controls.py:31:        independently_rejected=b['verdict']!='OBSERVED'
+scripts/run_m3_controls.py:37:        if reject!=independently_rejected:disagreements.append(name)
+scripts/run_m3_controls.py:39:                     'process_rejected':reject,'separate_monitor_rejected':independently_rejected,
+scripts/veap_integrated_gate.py:64:            if not report["no_independent_scenes"] or not report["no_experimental_p_value_or_sota_claim"]:
+scripts/veap_integrated_gate.py:77:            if z["independent_heldout_environments"] or z["physical_sensor_ground_truth"]:
+scripts/veap_integrated_gate.py:82:                "independent_monitor_disagreements",
+scripts/veap_integrated_gate.py:97:            if r13.get("study_scope") == "DEVELOPMENT_PILOT_SYNTHETIC_SEALED_HARNESS" and r13.get("independent_external_authorship"):
+scripts/veap_integrated_gate.py:98:                errors.append("R1.3 synthetic development pilot cannot claim independent external authorship")
+scripts/veap_integrated_gate.py:120:        "independent_external_ground_truth": "NOT_ESTABLISHED",
+tests/test_adversarial_fixtures.py:208:    assert any("external telemetry provenance not independently established" in r for r in result["failure_reasons"])
+tests/test_assurance_controls.py:115:    assert result['estimated_independent_scenes']>=30
+tests/test_claims_v06.py:28:        with pytest.raises(ValueError,match='independent reviewer'):
+tests/test_enterprise_studio.py:142:def test_independent_reviewer_records_decision(env):
+tests/test_enterprise_studio.py:156:    body={'verdict':'rejected','rationale':'Ground truth is not independently established.'}
+tests/test_locked_replay_v06.py:169:    assert not result["independently_attested_ground_truth"]
+tests/test_locked_replay_v06.py:245:    assert paired["independently_attested_ground_truth"] is False
+tests/test_locked_replay_v06.py:351:        reviewer_assessment=saved_report.get("independent_reviewer_assessment"),
+tests/test_locked_replay_v06.py:362:    assert report["independently_attested_ground_truth"] is False
+tests/test_m3_contract.py:156:def test_independent_monitor_import_isolation():
+tests/test_m3_contract.py:170:def test_independent_monitor_agrees_on_constructed_cases(case,pass_expected):
+tests/test_m3_contract.py:175:    verdict=mod.independently_check(CONTRACT,FIX/(case+'.jsonl'))
+tests/test_m3_contract.py:188:        b=mod.independently_check(CONTRACT,FIX/(case+'.jsonl'))['verdict']=='OBSERVED'
+tests/test_readme_public_copy.py:10:def test_old_independent_verification_phrase_absent():
+tests/test_readme_public_copy.py:13:        assert not re.search(r"(?i)independent verification", body), f"{name} reintroduces 'independent verification'"
+tests/test_readme_public_copy.py:20:    assert "agent-independent" not in headline
+tests/test_veap_integrated_gate.py:23:        "no_independent_scenes": True,
+tests/test_veap_integrated_gate.py:32:        "independent_heldout_environments": False,
+tests/test_veap_integrated_gate.py:35:                    "independent_monitor_disagreements": 0,
+tests/test_veap_integrated_gate.py:64:    data["independent_heldout_environments"] = True
+tests/test_veap_integrated_gate.py:85:    data["summary"]["independent_monitor_disagreements"] = 1
+tests/test_veap_integrated_gate.py:95:        "independent_external_authorship": False,
+tests/test_veap_integrated_gate.py:112:        "independent_external_authorship": True,
+veap/__init__.py:1:"""VEAP: simulation-only benchmark runtime and independent trace verifier."""
+veap/adapters/mcap_telemetry.py:110:        # Cross-examine sensor evidence against independent ground truth (e.g. mocap/sim)
+veap/enterprise/api.py:419:                               'No independent physical safety certification']}
+veap/enterprise/auth.py:1:"""Identity is independent of tenant choice; membership is always server-side.
+veap/enterprise/db.py:304:                'caveat':'Local database chain; administrators can rehash without independent anchoring.'}
+veap/governance/claims.py:15:                     r"(?<!agent-)independent verification|state[- ]of[- ]the[- ]art|SOTA|trusted provenance)\b")
+veap/governance/claims.py:55:                raise ValueError(f'{code} needs independent reviewer and intended use')
+veap/m3_replay/cli.py:36:                     'message':'Decoding headers does not calibrate clocks, TF transforms, range accuracy or independent ground truth'})
+veap/protocol.py:6:independently checkable evidence under controlled faults.
+veap/reproducibility.py:7:4. Bit-exact reproducibility audit across duplicate independent executions.
+veap/research/analyse.py:35:                "trial_rows_are_not_independent_hardware_replications": True,
+veap/sim.py:1:"""Sandboxed, deterministic 2-D dynamics and an optional independent safety gate.
+veap/simulation/engine.py:15:        "unreal":{"available":False,"interface":"USD Stage import and optional Pixel Streaming","execution":"requires independent Unreal Editor install"},
+veap/simulation/locked_replay.py:42:    independently calibrated and reported. The hash provides integrity only.
+veap/simulation/locked_replay.py:209:        "independently_attested_ground_truth": False,
+veap/simulation/native_locked_runner.py:88:        "scope": "Uncalibrated planar surrogate; native engine execution is not independent ground truth",
+veap/simulation/ros2_capture.py:79:            "warning":"Capture is ROS 2 transport evidence, not independent hardware attestation"}
+veap/simulation/scene.py:1:"""Simulator-independent, strictly bounded physical scene description.
+veap/simulation/telemetry.py:1:"""Portable, bounded, independent trajectory verification for native adapters.
+veap/simulation/telemetry.py:81:                   "frame":"ENU_z_up_m", "note":"Not independently attested ground truth"}
+veap/simulation/telemetry.py:122:    """Independent geometric/trace checks; neither source authenticity nor physics certification."""
+veap/simulation/v06_gate.py:380:        "independent_reviewer_assessment": reviewer_assessment or {
+veap/simulation/v06_gate.py:381:            "status": "pending_independent_review",
+veap/simulation/v06_gate.py:384:        "independently_attested_ground_truth": False,
+veap/statistics.py:43:            'caveat':'Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation.'}
+veap/verifier.py:1:"""Independent, read-only, trace-only process and safety checks.
+veap/verifier.py:43:    """Independently sample a motion segment at <= 2 cm resolution."""
+veap/verifier.py:191:        errors.append("external telemetry provenance not independently established")
+veap_evidence_r1_1/VEAP_R1_1_Offline_Identifiability_Lab.html:34:<section class="metrics"><div class="metric"><div class="k">Synthetic stress cases</div><div class="v">96</div><div class="d">16 correlated geometric translations × 6 conditions</div></div><div c
+veap_evidence_r1_1/VEAP_R1_1_Offline_Identifiability_Lab.html:36:<section class="panel"><div class="head">Evidence and proof obligations <span class="tag">CONTRACT-BOUND</span></div><div class="content"><div class="flag">RESULT: INCONCLUSIVE · MORE EVIDENCE RE
+veap_evidence_r1_1/VEAP_R1_1_Offline_Identifiability_Lab.html:38:<section class="panel"><div class="head">Validity and publication gate <span class="tag">R1-G1 · MECHANISM ONLY</span></div><div class="content"><div class="flag">NO REAL ROBOT OR EXTERNAL GROUND
+veap_evidence_r1_1/VEAP_R1_Offline_Assurance_Explorer.html:8:<main><aside><div class="section-label">Controlled executions · 6</div><div id="scenarioList"></div><div class="section-label" style="margin-top:25px">Research boundary</div><div class="sidebar-note"
+veap_evidence_r1_1/VEAP_R1_Offline_Assurance_Explorer.html:13:<div class="grid" style="grid-template-columns:1fr;gap:14px;margin-top:14px"><section class="panel"><h2>Time-indexed evidence and unresolved coverage</h2><svg id="timeline" viewBox="0 0 850 112" cla
+veap_evidence_r1_1/VEAP_R1_Offline_Assurance_Explorer.html:16:<aside class="right"><div class="section-label">Evidence / independent check</div><section class="panel"><h2>Proof summary</h2><div class="chip-row"><span class="chip" id="sourceKind"></span><span c
+veap_evidence_r1_1/artifacts/r12_assumptions.json:7:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:17:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:27:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:37:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:47:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:57:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:67:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:77:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:87:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:97:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:107:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:117:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:127:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:137:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:147:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:157:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:167:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:177:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:187:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:197:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:207:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:217:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:227:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:237:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:247:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:257:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:267:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:277:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:287:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:297:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:307:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:317:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:327:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:337:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:347:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:357:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:367:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:377:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:387:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:397:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:407:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:417:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:427:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:437:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:447:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:457:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:467:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:477:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:487:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:497:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:507:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:517:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:527:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:537:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:547:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:557:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:567:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:577:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:587:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:597:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:607:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:617:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:627:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:637:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:647:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:657:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:667:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:677:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:687:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:697:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:707:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:717:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:727:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:737:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:747:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:757:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:767:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:777:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:787:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:797:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:807:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:817:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:827:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:837:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:847:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:857:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:867:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:877:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:887:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:897:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:907:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:917:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:927:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:937:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:947:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:957:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:967:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:977:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:987:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:997:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1007:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1017:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1027:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1037:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1047:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1057:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1067:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1077:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1087:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1097:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1107:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1117:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1127:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1137:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1147:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1157:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1167:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1177:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1187:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1197:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1207:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1217:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1227:      "independent_verdict": "COMPLIANT",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1237:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1247:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1257:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1267:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1277:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1287:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1297:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1307:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1317:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1327:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1337:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1347:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1357:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1367:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1377:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1387:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1397:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1407:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1417:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1427:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1437:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1447:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1457:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1467:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1477:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1487:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1497:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1507:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1517:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1527:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1537:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1547:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1557:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1567:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1577:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1587:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1597:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1607:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1617:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1627:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1637:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1647:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1657:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1667:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1677:      "independent_verdict": "INCONCLUSIVE",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1687:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1697:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1707:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1717:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1727:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1737:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1747:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1757:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1767:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1777:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1787:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1797:      "independent_verdict": "VIOLATING",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1809:  "independent_heldout_environments": false,
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1812:    "A separate checker is implementation-independent, not organisationally independent.",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1813:    "Fixtures are authored by the development team, not independent held-out scenes.",
+veap_evidence_r1_1/artifacts/r12_assumptions.json:1836:    "independent_monitor_disagreements": 0,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:15:  "independent_external_authorship": false,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:183:    "unit_of_generalisation": "independently_authored_scene"
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:200:      "n_independent_scenes": 30,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:217:      "n_independent_scenes": 30,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:234:      "n_independent_scenes": 30,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:251:      "n_independent_scenes": 30,
+veap_evidence_r1_1/artifacts/r13_pilot_report.json:268:      "n_independent_scenes": 30,
+veap_evidence_r1_1/artifacts/r1_identifiability/stress_report.json:2668:  "method": "Rigid translations of author-specified examples; do not treat as independent replications",
+veap_evidence_r1_1/artifacts/r1_identifiability/stress_report.json:2671:  "no_independent_scenes": true,
+veap_evidence_r1_1/docs/ABC_APPLIED_TO_VEAP_R11.md:7:| I. Outcome validity — accurate grading | Author-labelled synthetic trace cases, independent rule monitor, constructive ambiguity witness | Software demonstration; **not independently adjudicated** |
+veap_evidence_r1_1/docs/ABC_APPLIED_TO_VEAP_R11.md:12:| II. Environment reset and leakage | Evaluator input directory separate from reference-only truth; no physical instrumentation | Partial; no independent dataset audit |
+veap_evidence_r1_1/docs/ABC_APPLIED_TO_VEAP_R11.md:16:| III. Contamination/holdout | Six author-defined cases only, no hidden independently authored test set | **NOT SATISFIED** |
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:9:**When/Where:** Initially offline, on RTX 4080 SUPER Ubuntu 22.04 with synthetic reference trajectories; then independently authored Isaac Lab/MuJoCo scenes; then controlled, stationary or supervised ROSMAST
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:15:- H3: A separately implemented checker confirms >=99% of certificate-to-evidence relationships under independently authored input fixtures, while identifying deliberate tampering and invalid source referenc
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:22:- Primary unit: **independently authored scene/mission**, not random seed or duplicated trace row.
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:24:- Confirmatory design: independently authored held-out task/scene families with predeclared required zones, mission times and calibration; scene-clustered paired comparisons; sample-size determined by simul
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:42:- **False violation:** violation verdict on independently compliant reference traces.
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:45:- **Certificate soundness:** correct references, hashes, requirement and interval justification; how often independent checker disagrees.
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:52:Report scene-clustered paired bootstrap confidence intervals or suitable paired tests. Compare false-compliant rates at a matched false-violation bound and report coverage. If the strong monitor ties or out
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:57:- Initial checker could reject obvious violations but could not independently check a positive verdict.
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:65:R1-G2: independently authored and labelled held-out scenes; strong external comparators; calibrated sensing; blinded reviews.
+veap_evidence_r1_1/docs/PROSPECTIVE_R1_PROTOCOL.md:67:R1-G4: peer-reviewed publication and external independent reproduction (future goal).
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:3:**Proposed hypothesis H1:** For independently authored embodied-navigation scenarios with partial and noisy recording conditions, adding checkable evidence-sufficiency certificates to an abstaining evaluat
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:9:1. **Sampling unit:** independent scene/task family and recording configuration. Seeds and rigid translations are repeated measures, never independent scenes. Size determined by a prespecified power study 
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:12:4. **Fair comparators:** goal-only as a sanity baseline; strong safety-aware terminal and gap-aware scripts; independently implemented uncertainty-aware temporal/reachability monitor; task-specific script
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:15:7. **Checker:** separately written implementation with hashed contract/trace references. A separate physical reference or accredited external auditor is required before calling the experimental outcome in
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:16:8. **Training/held-out governance:** public development trials, frozen preregistered comparator configuration, independently authored blinded test scenes, versioned software and sealed scoring code. Never
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:29:Use paired, scene-clustered analysis with confidence intervals; report denominators separately. Predeclare effect-size threshold, acceptable false-decisive rate and review-time non-inferiority threshold a
+veap_evidence_r1_1/docs/R11_CONFIRMATORY_PROTOCOL.md:44:First, use synthetic controlled partial traces with external checkers. Second, ingest real MCAP/ROS 2 recordings **from a qualified evidence collector**. Third, calibrated Isaac Lab ↔ MuJoCo cross-engine 
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:9:**Falsifier:** A separate checker finds a positive or negative claim that is unsupported under the stated bounded-speed and error assumptions, or a strong independent baseline generates equivalent explanations 
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:18:- **How:** six author-defined conditions under 16 rigid scene translations (96 **correlated** test cases); independent checker re-evaluates every certificate. Six of the conditions involve different evidence i
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:30:96/96 certificates passed the separate checker, and 16/16 constructive ambiguity pairs passed the independent path checker. **The two strong evaluators tie.** This experiment does not show a generalizable accu
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:39:Both are consistent with the available evidence; therefore neither `COMPLIANT` nor `VIOLATING` is justified from that partial record, absent extra evidence or stronger valid assumptions. The checker verifies p
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:46:4. A generated scenario's translational copies are correlated. The 96 cases are not 96 independent task families and justify **no p-value, confidence interval or SOTA claim**.
+veap_evidence_r1_1/docs/R11_RESEARCH_RESULTS.md:47:5. Verification does not establish that the underlying data were captured by a trusted recorder or reviewed by an independent organisation.
+veap_evidence_r1_1/docs/R13_COMPARATOR_REGISTER.md:12:| `separate_reachability_monitor` | `external_monitor.monitor.independent_verdict` | Independently coded endpoint-scan reachability monitor under identical declared motion assumptions | No standalone certif
+veap_evidence_r1_1/docs/R13_COMPARATOR_REGISTER.md:32:1. **`veap` vs `separate_reachability_monitor`:** Preserves the exact tie (`120/120`) on three-valued verdicts. Both implement sound bounded-speed reachability semantics under shared assumptions. VEAP's dis
+veap_evidence_r1_1/docs/R13_EVIDENCE_REGISTER.md:24:- **Development Pilot Scope:** The 30-scene (`120`-case) dataset produced by `generate_r13_pilot_split` is a **synthetic development pilot** (`independent_external_authorship: false`, `physical_sensor_ground_
+veap_evidence_r1_1/docs/R13_EVIDENCE_REGISTER.md:25:- **External Held-Out Requirement:** Claiming empirical confirmation of R1.3 requires replacing the development pilot inputs with externally authored, access-controlled navigation traces ($N \ge 57$ independe
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:1:# VEAP R1.3 Prospective Protocol — Independently Checkable Evidence-Sufficiency Certificates
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:10:**Title:** *VEAP-R1.3: Independently Checkable Evidence-Sufficiency Certificates for Embodied-Agent Evaluation*
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:15:Instead, R1.3 tests whether **requirement-linked, independently checkable evidence-sufficiency certificates** reduce unsupported decisive verdicts or localize human audit effort compared with existing unce
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:21:- **Primary Hypothesis ($H_1$):** Under matched observation traces, requirement contracts, and explicit motion assumptions, VEAP's requirement-linked evidence certificates (a) eliminate false decisive verd
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:28:The primary unit of generalisation is the **independently authored navigation scene** ($s \in \{1, \dots, N\}$). Each scene generates four blinded observation conditions:
+veap_evidence_r1_1/docs/R13_PROSPECTIVE_PROTOCOL.md:64:Using scene clusters as the independent unit of analysis (`alpha = 0.05` two-sided, `power = 0.80`, assumed scene-level paired difference $\sigma = 0.25$, minimum detectable effect $\Delta = 0.10$ with a 1
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:3:**Status:** locally tested software extension; not an independent human study, trusted timestamp, physical robot validation, or safety certification.
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:9:The existing R1.3 development pilot uses HMAC-SHA256 receipts and disjoint directory checks. Those are legitimate development controls, but an independent reviewer must know the HMAC secret to verify
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:23:| Independent custodian | Reference vault, private Ed25519 key, random 32-byte nonce, published frozen input | Evaluator’s permission to change reference labels |
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:27:**Real separation requires separate OS principals/hosts, access controls, a logged independent custodian, and a trusted pre-submission timestamp or externally witnessed publication.** The software's
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:38:6. Only after the signed receipt is committed and protected may the custodian reveal/check the reference nonce, run the existing `r13.reference_scorer.score_submission` procedure, and sign the resul
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:46:On the **custodian machine/account**, with independent author-controlled reference files and `cryptography` installed:
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:63:Publish the precommit and public-key fingerprint **before running evaluators**, using an independently witnessed record or credible timestamping mechanism. Do not treat the local informational clock
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:114:The public signature only validates the report bytes as signed. Independent reviewers must still verify that the referenced scorer and scientific evidence actually justify the interpretations.
+veap_evidence_r1_1/docs/R13_PUBLIC_KEY_CUSTODY_PROTOCOL.md:140:The public-key mechanism is not a complete independent study. It requires: independently authored scenes and reference truth; unbiased randomisation; genuine separated custodial infrastructure; clo
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:5:**Question (prospective, not validated):** Can an evaluator distinguish robot execution that is compliant with *specified requirements*, demonstrably violating those requirements, or inconclusive because ev
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:32:## Independent checker
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:34:`external_monitor/monitor.py` is a separately implemented, standard-library-only process. It receives (1) contract JSON, (2) trace JSON, and (3) VEAP certificate JSON. It checks SHA-256 digests, ensures ev
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:52:- No independent physical ground truth, blinded external human adjudication or real MCAP experiments.
+veap_evidence_r1_1/docs/SCIENTIFIC_SPECIFICATION.md:54:- Six illustrative cases are *not* statistically independent scenes or a generalisable sample.
+veap_evidence_r1_1/external_monitor/monitor.py:1:"""Independent-implementation VEAP R1 certificate monitor.
+veap_evidence_r1_1/external_monitor/monitor.py:4:or a claimed verdict. Independently reconstructs evidence-sufficiency intervals
+veap_evidence_r1_1/external_monitor/monitor.py:8:not independent sensor attestation, organisational IV&V or safety certification.
+veap_evidence_r1_1/external_monitor/monitor.py:36:    """Return independent rule verdicts plus self-computed proof obligations."""
+veap_evidence_r1_1/external_monitor/monitor.py:141:def independent_verdict(contract, trace):
+veap_evidence_r1_1/external_monitor/monitor.py:279:            print(json.dumps({"monitor": "independent-implementation", "reference": independent_verdict(contract, trace)}, indent=2))
+veap_evidence_r1_1/r13/__init__.py:1:"""VEAP R1.3: Sealed independent evidence-sufficiency evaluation harness."""
+veap_evidence_r1_1/r13/blinded_runner.py:8:from external_monitor.monitor import independent_verdict
+veap_evidence_r1_1/r13/blinded_runner.py:83:        ind = independent_verdict(contract, trace)
+veap_evidence_r1_1/r13/certificate_audit.py:1:"""VEAP R1.3 independent certificate-obligation and witness-citation auditor."""
+veap_evidence_r1_1/r13/certificate_audit.py:10:    """Raised when a certificate fails independent evidence-citation or proof checks."""
+veap_evidence_r1_1/r13/certificate_audit.py:78:    """Independently check a single certificate against its contract and trace."""
+veap_evidence_r1_1/r13/public_custody.py:5:attestation nor hashing proves physical truth, independent authorship, trusted
+veap_evidence_r1_1/r13/public_custody.py:8:Envelope protocol 1 is intentionally self-contained and independently usable by
+veap_evidence_r1_1/r13/public_custody.py:384:    """Custodian-only step: verify all bindings, independently recheck, score, attest.
+veap_evidence_r1_1/r13/public_custody.py:386:    The existing `r13.reference_scorer.score_submission` performs independent
+veap_evidence_r1_1/r13/public_custody.py:404:    # The existing HMAC status is independent of this Ed25519 protocol.
+veap_evidence_r1_1/r13/public_custody.py:411:        "independent_external_custodian": False,
+veap_evidence_r1_1/r13/reference_scorer.py:173:        "independent_external_authorship": bool(evaluator_bundle.get("independent_external_authorship", False)),
+veap_evidence_r1_1/r13/split_integrity.py:6:3. Purportedly independent scenes share duplicated or rigid-translation-equivalent
+veap_evidence_r1_1/r13/split_integrity.py:113:        errors.append(f"Non-independent or translated-copy scenes detected: {translated_or_duplicate_scenes}")
+veap_evidence_r1_1/r13/statistics.py:3:Treats independently authored scenes (not frames, seeds, or correlated condition
+veap_evidence_r1_1/r13/statistics.py:67:        "n_independent_scenes": n_scenes,
+veap_evidence_r1_1/r13/statistics.py:83:    """Compute required independent scene count N for confirmatory R1.3 evaluation."""
+veap_evidence_r1_1/r13/statistics.py:94:        "unit_of_generalisation": "independently_authored_scene",
+veap_evidence_r1_1/r13/study_schema.py:279:        "independent_external_authorship": False,
+veap_evidence_r1_1/scripts/build_dashboard.py:36:<main><aside><div class="section-label">Controlled executions · 6</div><div id="scenarioList"></div><div class="section-label" style="margin-top:25px">Research boundary</div><div class="sidebar-note">These are a
+veap_evidence_r1_1/scripts/build_dashboard.py:41:<div class="grid" style="grid-template-columns:1fr;gap:14px;margin-top:14px"><section class="panel"><h2>Time-indexed evidence and unresolved coverage</h2><svg id="timeline" viewBox="0 0 850 112" class="timeline"
+veap_evidence_r1_1/scripts/build_dashboard.py:44:<aside class="right"><div class="section-label">Evidence / independent check</div><section class="panel"><h2>Proof summary</h2><div class="chip-row"><span class="chip" id="sourceKind"></span><span class="chip">U
+veap_evidence_r1_1/scripts/build_r11_viewer.py:46:<section class="metrics"><div class="metric"><div class="k">Synthetic stress cases</div><div class="v">96</div><div class="d">16 correlated geometric translations × 6 conditions</div></div><div class="metric"><
+veap_evidence_r1_1/scripts/build_r11_viewer.py:48:<section class="panel"><div class="head">Evidence and proof obligations <span class="tag">CONTRACT-BOUND</span></div><div class="content"><div class="flag">RESULT: INCONCLUSIVE · MORE EVIDENCE REQUIRED</div><h3
+veap_evidence_r1_1/scripts/build_r11_viewer.py:50:<section class="panel"><div class="head">Validity and publication gate <span class="tag">R1-G1 · MECHANISM ONLY</span></div><div class="content"><div class="flag">NO REAL ROBOT OR EXTERNAL GROUND TRUTH</div><p 
+veap_evidence_r1_1/scripts/create_blinded_study.py:18:    # Independent of evaluate(): full piecewise-linear trajectory used to
+veap_evidence_r1_1/scripts/evaluate_blinded_study.py:21:            raise RuntimeError(f'Independent checker rejected {p.parent.name}: {check.stdout}{check.stderr}')
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:17:from external_monitor.monitor import independent_verdict, inspect
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:39:                independent = independent_verdict(contract, record["trace"])
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:43:                if verdict != independent["verdict"]:
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:54:                    "independent_verdict": independent["verdict"],
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:82:        "independent_monitor_disagreements": len(mismatches),
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:89:        "independent_heldout_environments": False,
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:94:            "A separate checker is implementation-independent, not organisationally independent.",
+veap_evidence_r1_1/scripts/run_r12_assumption_sensitivity.py:95:            "Fixtures are authored by the development team, not independent held-out scenes.",
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:4:cases, not independent held-out scenes. No scientific confidence intervals or
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:21:from external_monitor.monitor import inspect, independent_verdict
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:34:    This is deliberately *not* a new independent scene; translations are used
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:61:            monitor=independent_verdict(contract,trace)
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:100:        "no_independent_scenes":True,
+veap_evidence_r1_1/scripts/run_r1_identifiability.py:105:        "method":"Rigid translations of author-specified examples; do not treat as independent replications",
+veap_evidence_r1_1/tests/test_evidence.py:112:    def test_independent_monitor_import_isolation(self):
+veap_evidence_r1_1/tests/test_evidence.py:117:    def test_independent_monitor_agrees_all_fixture_cases(self):
+veap_evidence_r1_1/tests/test_possible_worlds.py:27:    def test_independent_checker_no_veap_imports(self):
+veap_evidence_r1_1/tests/test_possible_worlds.py:106:        self.assertTrue(result['no_independent_scenes'])
+veap_evidence_r1_1/tests/test_r12_assumptions.py:19:        self.assertEqual(self.report["summary"]["independent_monitor_disagreements"], 0)
+veap_evidence_r1_1/tests/test_r12_assumptions.py:37:    def test_stress_does_not_claim_independent_holdout(self):
+veap_evidence_r1_1/tests/test_r12_assumptions.py:38:        self.assertFalse(self.report["independent_heldout_environments"])
+veap_evidence_r1_1/tests/test_r13_certificate_audit.py:1:"""Tests for VEAP R1.3 independent certificate auditing and citation verification."""
+veap_evidence_r1_1/tests/test_r13_certificate_audit.py:22:    def test_all_pilot_certificates_pass_independent_audit(self) -> None:
+veap_evidence_r1_1/tests/test_r13_public_custody.py:176:        self.assertFalse(report['public_custody_attestation']['independent_external_custodian'])
+veap_evidence_r1_1/veap_evidence/possible_worlds.py:16:    An external implementation MUST independently validate all knots, bound
+veap_studio_r03/README.md:78:## First-party contract authoring and agent-independent monitoring
+veap_studio_r03/README.md:82:Every result states `source_authenticity=NOT_ESTABLISHED` and `physical_safety=NOT_ESTABLISHED`. Contract calibration is user-declared, not independently verified. Recording success is not robot safety certification.
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:123:        <div class="workspace-top"><div><span class="eyebrow">MISSION CONTROL / SYNCHRONIZED REPLAY</span><h1>Physical AI Operations <span class="replay-tag">REPLAY</span></h1><p id="runSubtitle">Independen
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:130:          <div class="stat"><div class="label">PROCESS VERDICT <span>◆</span></div><strong id="statVerdict">—</strong><small>Agent-independent trace check</small></div>
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:169:        <div class="page-split"><div class="panel"><div class="panel-title">Asset analysis and 3D preview</div><div class="model-choice"><select id="geometrySelect" aria-label="Select imported robot model o
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:182:      <section id="pageAssurance" class="page"><div class="page-header"><span class="eyebrow">VEAP CONTRACT / MONITOR / REPORT</span><h1>Assurance & Verification</h1><p>Agent-independent replay verdicts, ev
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:200:        <div class="panel"><div class="panel-title">Evidence claim ladder</div><div class="cap-row"><span>G0 · Implemented</span><strong class="status-ok">TESTED FEATURES</strong></div><div class="cap-row">
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:219:const demo={"assets":{"assets":[{"id":"ae05a8972bb846d88c2f08d350c8464d","name":"M3 \u00b7 Yard Inspection.jsonl","kind":"TRAJECTORY","sha256":"79cc8a25ea344e223ece3116249e7c9136852fd99dd1924fb7351e5415a79c
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:278:async function doCompare(notify=true){if(!st.current||!$('#compareSelect').value)return;try{let c=await api('/api/compare',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ref
+veap_studio_r03/VEAP_Studio_R03_Offline_Demo.html:328:function renderAssuranceCards(){let s=st.report,fields=[['CONTRACT STATUS',s?(s.process_accepted===null?'NO CONTRACT':s.process_accepted?'PASS':'REVIEW'):'PENDING','Against recorded trace; not physical vali
+veap_studio_r03/docs/ARCHITECTURE.md:17:   ROS2 MCAP       Isaac Lab/PhysX       MuJoCo 4.x     Independent monitor
+veap_studio_r03/docs/ARCHITECTURE.md:33:A native Physics comparison requires the same sample grid and different engine outputs; reports measure 3D divergences and disclose missing contact instrumentation. Any real robot comparison requires external measurement
+veap_studio_r03/docs/CLAIMS_POLICY.md:7:- `VALIDATED`: independently supported fitness for a specific intended use; this is not equivalent to test pass.
+veap_studio_r03/docs/ENGINE_ACCEPTANCE.md:13:| G8 Digital twin | Calibrated physics/sensors and independently measured target | NOT VALIDATED |
+veap_studio_r03/docs/ENGINE_ACCEPTANCE.md:17:**Scientific hypothesis:** Controlled, agent-independent process verification identifies independently adjudicated failure classes not captured by credible terminal grading at a predeclared false-rejection rate.
+veap_studio_r03/docs/ENGINE_ACCEPTANCE.md:23:A separate executable under `external_monitor/` rechecks recorded observations without importing VEAP. It is **agent-independent at the code boundary**, not organisationally independent IV&V. Its acceptance results 
+veap_studio_r03/docs/ROADMAP.md:10:- Execute and record independent Isaac Lab 2.3.2 and MuJoCo 4.0.1 physics on RTX workstation.
+veap_studio_r03/docs/ROADMAP.md:20:- Independent monitors with blinded adjudication, fault recovery metrics and null-result publication.
+veap_studio_r03/docs/ROADMAP.md:26:No stage is labelled production validated unless its own acceptance criteria are independently met.
+veap_studio_r03/docs/SECURITY_AND_EVIDENCE.md:7:The native job worker uses a fixed allowlist of scripts and a single-thread queue with process-level timeouts. It does not accept arbitrary shell commands from web clients. Generated physics evidence reports actu
+veap_studio_r03/docs/SECURITY_AND_EVIDENCE.md:11:For production, implement OIDC/SAML, tenant-scoped authorisation, PostgreSQL, isolated workers, protected retention keys, signed builds/SBOM, independent security review, incident response and restore testing. D
+veap_studio_r03/docs/VALIDATION_REPORT_R03.txt:15:Formal scientific validity, physical safety, independent certification and enterprise production readiness are NOT CLAIMED.
+veap_studio_r03/external_monitor/contract_monitor.py:2:"""Independent-implementation, standard-library-only recorded 2D constraint monitor.
+veap_studio_r03/external_monitor/contract_monitor.py:62:            'reference_truth':'RECORDED_SOURCE_ONLY','monitor_independence':'CODE_SEPARATE_NOT_ORGANISATIONALLY_INDEPENDENT'}
+veap_studio_r03/veap_studio/analysis.py:145:    return {'task_complete':reached,'process_accepted':accepted,'violations':crossings,'kinematic_mismatch_count':kinematic_mismatch,'overspeed_count':overspeed,'dropouts':dropouts,'gaps':gaps,'path_m':round(dist,3),
+veap_studio_r03/veap_studio/store.py:140:        result['not_claimed']=['independent sensor truth','physical safety','digital twin validated','certification','SOTA']
+veap_studio_r03/web/app.js:33:async function doCompare(notify=true){if(!st.current||!$('#compareSelect').value)return;try{let c=await api('/api/compare',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reference_id:st.current.id,
+veap_studio_r03/web/app.js:83:function renderAssuranceCards(){let s=st.report,fields=[['CONTRACT STATUS',s?(s.process_accepted===null?'NO CONTRACT':s.process_accepted?'PASS':'REVIEW'):'PENDING','Against recorded trace; not physical validation'],['VIOLATION TIM
+veap_studio_r03/web/index.html:83:        <div class="workspace-top"><div><span class="eyebrow">MISSION CONTROL / SYNCHRONIZED REPLAY</span><h1>Physical AI Operations <span class="replay-tag">REPLAY</span></h1><p id="runSubtitle">Independent process evidence, 
+veap_studio_r03/web/index.html:90:          <div class="stat"><div class="label">PROCESS VERDICT <span>◆</span></div><strong id="statVerdict">—</strong><small>Agent-independent trace check</small></div>
+veap_studio_r03/web/index.html:129:        <div class="page-split"><div class="panel"><div class="panel-title">Asset analysis and 3D preview</div><div class="model-choice"><select id="geometrySelect" aria-label="Select imported robot model or point cloud"></se
+veap_studio_r03/web/index.html:142:      <section id="pageAssurance" class="page"><div class="page-header"><span class="eyebrow">VEAP CONTRACT / MONITOR / REPORT</span><h1>Assurance & Verification</h1><p>Agent-independent replay verdicts, evidence completeness
+veap_studio_r03/web/index.html:160:        <div class="panel"><div class="panel-title">Evidence claim ladder</div><div class="cap-row"><span>G0 · Implemented</span><strong class="status-ok">TESTED FEATURES</strong></div><div class="cap-row"><span>G1 · Controll
+web/app.js:24:function aggregate(){const done=state.runs.filter(r=>r.status==='completed'&&r.summary);let trials=done.length;const sum=(key)=>done.reduce((a,r)=>a+(Number(r.summary[key])||0),0);text('metric-rate',trials?(100*sum('verified')/trials).toFixed(1)+
+web/assurance_studio/index.html:18:  <div class="page-top"><div><div class="eyebrow">OPERATIONAL INTELLIGENCE / RESEARCH ENVIRONMENT</div><h1>Evidence over assumptions<span class="accent">.</span></h1><p>Evaluate what autonomous agents actually demonstrate, un
+web/assurance_studio/index.html:23:  <div class="lower-grid"><section class="panel"><div class="panel-head"><div><div class="eyebrow">PROJECT / EXPERIMENTS</div><h2>Recent runs</h2></div><span class="panel-chip" id="run-count">0 RECORDS</span></div><div class=
+web/assurance_studio/index.html:27:<section class="view" id="view-reviews" hidden><div class="page-top"><div><div class="eyebrow">INDEPENDENT HUMAN JUDGEMENT</div><h1>Review board<span class="accent">.</span></h1><p>Reviewers cannot sign off their own experime
+web/assurance_studio/index.html:28:<section class="view" id="view-audit" hidden><div class="page-top"><div><div class="eyebrow">PROVENANCE AND CHANGE HISTORY</div><h1>Audit ledger<span class="accent">.</span></h1><p>Per-tenant SHA-256 event chaining. Local con
+web/index.html:28:    <div class="side-quote"><span class="quote-icon">“</span> An outcome is not evidence unless the trajectory can be independently checked. <div class="quote-credit">VEAP DESIGN CONTRACT / V0.1</div></div>
+web/index.html:78:    <main id="page-research" class="page subpage"><div class="section-head"><div class="eyebrow">METHODOLOGY / EXPERIMENTAL CONTROL</div><h1>Research & ablations<span class="title-dot">.</span></h1><p>Compare matched baselines with safety gat
+web/v06_product_positioning.md:5:**Research maturity:** Selected deterministic toy-world and synthetic negative-control mechanisms have been demonstrated in local development. Native Isaac Lab/MuJoCo calibration, physical measurement, organisationally independ
+web/v06_product_positioning.md:7:**Critical boundary:** VEAB does not issue robot control commands; its reports support human engineering judgement and do not replace a robot's independent functional safety systems or regulatory assessment.
+x1/step1/suite-summary.json:2337:    "caveat": "Toy-world small-sample percentile bootstrap; scenario and seed coverage is not independent hardware validation."
+x1/step3/X1_TEST_ANALYSIS.json:595:  "Test n = 3 scenarios (train 1, val 1); seeds within a scenario are not independent; CIs are scenario-clustered and coarse.",
+x1/step3_analyze.py:50:    "Test n = 3 scenarios (train 1, val 1); seeds within a scenario are not independent; CIs are scenario-clustered and coarse.",

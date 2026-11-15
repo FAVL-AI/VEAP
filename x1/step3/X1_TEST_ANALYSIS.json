@@ -1,0 +1,600 @@
+{
+ "prereg_sha256": "784382afe11be46c7863ef1a2a02f4f72a66d0cf1c57421f1830fa84f6aa10c7",
+ "params_sha256": "7924e78ec25fd5b52b27d49e229d310533c3e3fe6ea6efdd79b5141df0c3cd94",
+ "records_sha256": "0b66a0cb1a6fd16b0e7388e093c483253075c0c2c9ee8a81db5f1031ae7de33f",
+ "split": "test (run once)",
+ "n_scenarios_test": 3,
+ "seeds": "0..19",
+ "level": "L3",
+ "bootstrap": {
+  "method": "scenario-clustered percentile bootstrap: scenarios with replacement, then seeds within each",
+  "resamples": 10000,
+  "seed": 0
+ },
+ "PRIMARY_greedy_gate_off_completed_minus_verified_rate": {
+  "estimate": 0.5666666666666667,
+  "ci_low": 0.0,
+  "ci_high": 1.0,
+  "resamples": 10000,
+  "seed": 0,
+  "n_clusters": 3,
+  "n_units": 60,
+  "method": "scenario-clustered percentile bootstrap",
+  "completed": 40,
+  "verified": 6,
+  "n_nominal": 60,
+  "n_effective_distinct_digests": 60
+ },
+ "SECONDARY_route_gate_off_mean_violations": {
+  "estimate": 0.05,
+  "ci_low": 0.0,
+  "ci_high": 0.2,
+  "resamples": 10000,
+  "seed": 0,
+  "n_clusters": 3,
+  "n_units": 60,
+  "method": "scenario-clustered percentile bootstrap"
+ },
+ "secondary_all_cells_clustered": {
+  "greedy__gate_off": {
+   "completed_rate": {
+    "estimate": 0.6666666666666666,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "verified_rate": {
+    "estimate": 0.1,
+    "ci_low": 0.0,
+    "ci_high": 0.3,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "gap_rate": {
+    "estimate": 0.5666666666666667,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_violations": {
+    "estimate": 9.383333333333333,
+    "ci_low": 0.0,
+    "ci_high": 21.8,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_interventions": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_steps": {
+    "estimate": 83.61666666666666,
+    "ci_low": 69.15,
+    "ci_high": 111.31666666666666,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "n_nominal": 60,
+   "n_effective_distinct_digests": 60
+  },
+  "greedy__gate_on": {
+   "completed_rate": {
+    "estimate": 0.6666666666666666,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "verified_rate": {
+    "estimate": 0.6666666666666666,
+    "ci_low": 0.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "gap_rate": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_violations": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_interventions": {
+    "estimate": 5.533333333333333,
+    "ci_low": 0.0,
+    "ci_high": 14.066666666666666,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_steps": {
+    "estimate": 86.88333333333334,
+    "ci_low": 69.95,
+    "ci_high": 119.85,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "n_nominal": 60,
+   "n_effective_distinct_digests": 60
+  },
+  "route__gate_off": {
+   "completed_rate": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "verified_rate": {
+    "estimate": 0.9833333333333333,
+    "ci_low": 0.9333333333333333,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "gap_rate": {
+    "estimate": 0.016666666666666666,
+    "ci_low": 0.0,
+    "ci_high": 0.06666666666666667,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_violations": {
+    "estimate": 0.05,
+    "ci_low": 0.0,
+    "ci_high": 0.2,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_interventions": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_steps": {
+    "estimate": 72.73333333333333,
+    "ci_low": 3.0,
+    "ci_high": 131.8,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "n_nominal": 60,
+   "n_effective_distinct_digests": 60
+  },
+  "route__gate_on": {
+   "completed_rate": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "verified_rate": {
+    "estimate": 1.0,
+    "ci_low": 1.0,
+    "ci_high": 1.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "gap_rate": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_violations": {
+    "estimate": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_interventions": {
+    "estimate": 0.016666666666666666,
+    "ci_low": 0.0,
+    "ci_high": 0.06666666666666667,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "mean_steps": {
+    "estimate": 72.73333333333333,
+    "ci_low": 3.0,
+    "ci_high": 131.8,
+    "resamples": 10000,
+    "seed": 0,
+    "n_clusters": 3,
+    "n_units": 60,
+    "method": "scenario-clustered percentile bootstrap"
+   },
+   "n_nominal": 60,
+   "n_effective_distinct_digests": 60
+  }
+ },
+ "per_scenario_descriptive_wilson": {
+  "absence-rejection|greedy|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 0,
+   "completed_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "verified": 0,
+   "verified_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 70.0,
+   "evaluation_valid": 0,
+   "dropout_ticks_total": 204
+  },
+  "absence-rejection|greedy|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 0,
+   "completed_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "verified": 0,
+   "verified_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 70.0,
+   "evaluation_valid": 0,
+   "dropout_ticks_total": 204
+  },
+  "absence-rejection|route|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 3.0,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 11
+  },
+  "absence-rejection|route|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 3.0,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 11
+  },
+  "distribution-shift|greedy|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 6,
+   "verified_wilson95": [
+    0.1455,
+    0.519
+   ],
+   "completed_minus_verified": 14,
+   "gap_wilson95": [
+    0.481,
+    0.8545
+   ],
+   "violations_total": 121,
+   "interventions_total": 0,
+   "mean_steps": 69.25,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 202
+  },
+  "distribution-shift|greedy|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 47,
+   "mean_steps": 70.4,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 204
+  },
+  "distribution-shift|route|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 19,
+   "verified_wilson95": [
+    0.7639,
+    0.9911
+   ],
+   "completed_minus_verified": 1,
+   "gap_wilson95": [
+    0.0089,
+    0.2361
+   ],
+   "violations_total": 3,
+   "interventions_total": 0,
+   "mean_steps": 83.05,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 225
+  },
+  "distribution-shift|route|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 1,
+   "mean_steps": 83.05,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 225
+  },
+  "hospital-inspection|greedy|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 0,
+   "verified_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "completed_minus_verified": 20,
+   "gap_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "violations_total": 442,
+   "interventions_total": 0,
+   "mean_steps": 111.6,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 312
+  },
+  "hospital-inspection|greedy|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 285,
+   "mean_steps": 120.25,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 339
+  },
+  "hospital-inspection|route|gate_off": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 132.15,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 377
+  },
+  "hospital-inspection|route|gate_on": {
+   "n": 20,
+   "distinct_trace_digests": 20,
+   "completed": 20,
+   "completed_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "verified": 20,
+   "verified_wilson95": [
+    0.8389,
+    1.0
+   ],
+   "completed_minus_verified": 0,
+   "gap_wilson95": [
+    0.0,
+    0.1611
+   ],
+   "violations_total": 0,
+   "interventions_total": 0,
+   "mean_steps": 132.15,
+   "evaluation_valid": 20,
+   "dropout_ticks_total": 377
+  }
+ },
+ "faults": {
+  "injected_actuation_dropout": {
+   "faults": "not measured",
+   "recovered_faults": "not measured"
+  },
+  "scenario_scheduled_faults_ledger_counts": "per-record fields scenario_faults_ledger / scenario_recovered_faults_ledger cover only scenario-contract faults"
+ },
+ "limitations": [
+  "The ledger cannot see the injected actuation dropout as a fault event: it is only a flag on state payloads (hashed), so the verifier's faults/recovered_faults do not count it.",
+  "Test n = 3 scenarios (train 1, val 1); seeds within a scenario are not independent; CIs are scenario-clustered and coarse.",
+  "C2 remains a metric demonstration: greedy ignores obstacles by construction.",
+  "absence-rejection is the one absence scenario: completed = correct abstention within budget; verified = that plus verifier acceptance.",
+  "Selected level L3 is the ladder ceiling; selection rule did not bind."
+ ]
+}

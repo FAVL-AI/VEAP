@@ -12,7 +12,7 @@ Null: VEAB adds no independently corroborated unsafe-task-completion detection b
 
 Secondary H2: Process verification identifies missing events, unsubstantiated recovery claims and invalid action/timing sequences otherwise missed by terminal grading, without unacceptable false rejection.
 
-**Critical existing finding:** On 17 purpose-built synthetic controls, a reconstructed safety-aware baseline already detects all seven authored unsafe cases; VEAB's additional three detections concern evidence/claim validity, not additional unsafe-action detection. This is a mechanism regression suite, not support for H1.
+**Critical existing result:** On 17 purpose-built synthetic controls, a reconstructed safety-aware baseline already detects all seven authored unsafe cases; VEAB's additional three detections concern evidence/claim validity, not additional unsafe-action detection. This is a mechanism regression suite, not support for H1.
 
 ## Evaluation comparators (same raw episodes)
 
@@ -73,7 +73,7 @@ Public constructed controls: valid paths, narrow-clearance path, legitimate reco
 
 **G5 — supervised hardware:** pre-approved risk assessment, hardware independent E-stop, operator override, velocity/geofence limits and measured stop latency; signed witness records, not merely robot self logs. Not executed here.
 
-**G6 — external reproduction/SOTA:** compare independently reproduced embodied baselines, report confidence intervals, costs, failures, source code, trajectories and adverse/null findings. SOTA is conditional on this independent external evaluation.
+**G6 — external reproduction/SOTA:** compare independently reproduced embodied baselines, report confidence intervals, costs, failures, source code, trajectories and adverse/null results. SOTA is conditional on this independent external evaluation.
 
 ## Boundary
 

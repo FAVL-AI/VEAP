@@ -1,6 +1,6 @@
 {
   "schema_version": "veab-claims/1",
-  "source_notice": "Reconstructed from local v0.5 snapshot; connected GitHub main is separate and read-only to this account.",
+  "source_notice": "E100-E102 reconstructed from local v0.5 snapshot; connected GitHub main is separate and read-only to this account. E103-E108 added on local branch x1-rebaseline (X1 re-baseline, prereg X1_PREREG_v3 sha 784382af...10c7, params X1_PARAMS.json sha 7924e78e...cd94); reviewer-accepted internally, not externally reviewed.",
   "claims": [
     {
       "id": "E100",
@@ -34,6 +34,78 @@
       "limitations": "Does not demonstrate external security review or deployment readiness",
       "artifact": "veap/enterprise/api.py",
       "artifact_sha256": "2a04e53cfe45ebb920976cdac4ca30e425580c3bcc639061736b52e608b55edc",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E103",
+      "status": "DEMONSTRATED",
+      "statement": "In VEAP's deterministic 2-D toy benchmark (v0.7-x1; 3 held-out test scenarios x 20 seeded perturbations), the obstacle-ignoring greedy baseline without the safety gate reached its goal but failed verification by a verifier separate from the agent in 34 of 60 runs (0.57; scenario-clustered 95% CI 0-1, n = 3 scenarios); 34 of 40 conditional on completion; greedy never completes absence-rejection (0/20).",
+      "scope": "Toy 2-D kinematic simulator, test split run once at frozen perturbation level L3; metric demonstration only",
+      "limitations": "Not an estimate of real-agent behaviour; greedy ignores obstacles by construction; n = 3 scenarios gives an uninformative clustered CI; injected-dropout faults not measured (ledger has no fault event for dropout)",
+      "artifact": "x1/step3/X1_TEST_ANALYSIS.json",
+      "artifact_sha256": "bfcac6bc3e93d69bdff62b4732fe8117d13b7ca7020b02ec2552d85ecd584d7c",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E104",
+      "status": "DEMONSTRATED",
+      "statement": "With the geometric safety gate on, safety violations were 0 in all 60 v0.7-x1 test runs of the greedy baseline (also 0 in all 60 route-planner runs).",
+      "scope": "Toy 2-D kinematic simulator, v0.7-x1 test split, perturbation level L3, seeds 0..19",
+      "limitations": "Geometric gate checked against the same toy geometry it uses; not a physical safety or control-barrier guarantee",
+      "artifact": "x1/step3/X1_TEST_ANALYSIS.json",
+      "artifact_sha256": "bfcac6bc3e93d69bdff62b4732fe8117d13b7ca7020b02ec2552d85ecd584d7c",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E105",
+      "status": "DEMONSTRATED",
+      "statement": "Exploratory: the route planner without the gate failed verification in 1 of 60 v0.7-x1 test runs (3 violations, distribution-shift).",
+      "scope": "Exploratory secondary observation, toy 2-D simulator, v0.7-x1 test split",
+      "limitations": "Not pre-registered as an endpoint; single failing run; clustered 95% CI for mean violations 0-0.2 with n = 3 scenarios",
+      "artifact": "x1/step3/X1_TEST_ANALYSIS.json",
+      "artifact_sha256": "bfcac6bc3e93d69bdff62b4732fe8117d13b7ca7020b02ec2552d85ecd584d7c",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E106",
+      "status": "DEMONSTRATED",
+      "statement": "v0.6 kinematic planar cross-engine replay agreement (MuJoCo x Isaac Lab): release gate FAILED 18/20 (gate_passed = false; insp-07, insp-08 failed on contact-state disagreement).",
+      "scope": "40 kinematic traces (372 samples), gravity disabled planar surrogate at z = 0.16 m, tapes from the same generator as the manifest",
+      "limitations": "Not native-physics equivalence; gravity disabled; about 9 samples per trace; audit was internal (labelled 'Independent Audit Subagent' in the artifact, which is an internal agent)",
+      "artifact": "artifacts/research/v06-release-gate-report.json",
+      "artifact_sha256": "fd42fa918d8bac716eeac9614920882c78d36a894d9bb55a8afc314b7977dbf6",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E107",
+      "status": "IMPLEMENTED",
+      "statement": "Protocol and custody: hash-linked event ledger and trace verifier, exercised by tests/test_adversarial_fixtures.py with fixtures numbered 1..37 and 38 test functions.",
+      "scope": "Software-unit tests of the toy-world ledger and verifier",
+      "limitations": "Adversarial fixtures are author-written; no external red-team or external custody demonstrated",
+      "artifact": "tests/test_adversarial_fixtures.py",
+      "artifact_sha256": "7104340a09001f95d2571af310c9240a7185c6fd8db18785e17b3b727e35243e",
+      "reviewer": null,
+      "intended_use": null,
+      "external_certification": null
+    },
+    {
+      "id": "E108",
+      "status": "DEMONSTRATED",
+      "statement": "Legacy table, v0.x, seed-invariant (effective n = 5 scenarios): greedy gate-off 12/15 completed, 3/15 verified, 147 violations; ungated greedy completion-without-verification occurs in 3 of 5 scenarios.",
+      "scope": "Legacy 60 nominal runs (5 scenarios x 3 seeds x 2 policies x 2 gates); artifact regenerated so scenario_sha256 matches current contracts",
+      "limitations": "16 of 20 cells seed-invariant; splits mixed; no CIs; metric demonstration by construction; superseded by E103",
+      "artifact": "artifacts/research/reexecuted-factorial.json",
+      "artifact_sha256": "682d53221a6c9d94f6d51269d88401c27f024c44353a5dc69abd6cc5039215e1",
       "reviewer": null,
       "intended_use": null,
       "external_certification": null

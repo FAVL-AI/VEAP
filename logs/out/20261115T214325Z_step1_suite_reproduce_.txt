@@ -1,0 +1,33 @@
+{
+  "output": "x1/step1/suite-summary.json",
+  "groups": {
+    "greedy__shield_False": {
+      "n": 15,
+      "verified_completion": 0.2,
+      "mean_progress": 0.8,
+      "mean_safety_violations": 9.8,
+      "mean_energy_proxy": 15.0108
+    },
+    "greedy__shield_True": {
+      "n": 15,
+      "verified_completion": 0.8,
+      "mean_progress": 0.8,
+      "mean_safety_violations": 0.0,
+      "mean_energy_proxy": 14.7327
+    },
+    "route__shield_False": {
+      "n": 15,
+      "verified_completion": 1.0,
+      "mean_progress": 1.0,
+      "mean_safety_violations": 0.0,
+      "mean_energy_proxy": 16.7137
+    },
+    "route__shield_True": {
+      "n": 15,
+      "verified_completion": 1.0,
+      "mean_progress": 1.0,
+      "mean_safety_violations": 0.0,
+      "mean_energy_proxy": 16.0225
+    }
+  }
+}

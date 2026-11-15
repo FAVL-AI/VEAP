@@ -1,0 +1,34 @@
+Python 3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 02:00:33) [GCC 14.3.0]
+/home/favl/veap_x1/.venv/bin/python
+annotated-doc==0.0.6
+annotated-types==0.8.0
+anyio==4.16.0
+certifi==2026.10.23
+click==8.5.1
+fastapi==0.163.1
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.20
+iniconfig==2.3.1
+opentelemetry-api==1.45.2
+packaging==26.3
+pluggy==1.7.0
+pydantic==2.14.3
+pydantic_core==2.50.4
+Pygments==2.21.0
+pytest==9.2.0
+starlette==1.10.0
+typing-inspection==0.4.5
+typing_extensions==4.16.0
+uvicorn==0.54.0
+pip 26.0.1 from /home/favl/veap_x1/.venv/lib/python3.13/site-packages/pip (python 3.13)
+13ef67e1bf132b19af5a211ebca9d0e0728e520f
+?? logs/
+Linux favl 6.8.0-149-generic #149~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Oct 28 20:58:45 UTC  x86_64 x86_64 x86_64 GNU/Linux
+CPU(s):                                  28
+Model name:                              Intel(R) Core(TM) i7-14700K
+               total        used        free      shared  buff/cache   available
+Mem:     33317462016  8092614656 14479695872   181051392 10745151488 24929906688
+NVIDIA GeForce RTX 4080 SUPER, 580.178.04
+CUDA_VISIBLE_DEVICES=[]

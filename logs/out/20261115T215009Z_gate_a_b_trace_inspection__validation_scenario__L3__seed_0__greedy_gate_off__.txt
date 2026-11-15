@@ -1,0 +1,7 @@
+A dropout_state_events 8 manifest_dropout_ticks 8
+A event 3 hash f8c9f900af86d462532a9b69f5715b0d213e0eac81593b1a0809f57587fe164a recomputed_with_flag True
+A recomputed_without_flag_equals_hash False
+A check_chain_original (True, 'valid SHA-256 chain') | flag_stripped (False, 'event digest mismatch at 3')
+A root f5ed5cea0adfe4a9df170c198d60f695596786625b61efcc60b8eea9f388bfee == last hash True
+B verifier_violations 29 | point hits on state poses 14 | on observations 15 | max |obs - true pose prior tick| m 1.9789
+B note: verifier loop ignores observation x/y (only target_present/sensor_ok read)

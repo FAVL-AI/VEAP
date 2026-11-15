@@ -46,4 +46,4 @@ Seek an eligible UK SME lead, an operational industrial deployer, and an indepen
 - Engineering: native engine traces, provenance-constrained telemetry, no cross-tenant access in external security testing, restore success, measured SLA baseline.
 - Commercial: at least one contracted paid pilot or customer-accepted evaluation with quantified review-time reduction and defined limitations.
 
-Record negative and adverse findings as research outputs. Underperformance versus a strong comparator should trigger method refinement rather than withheld reporting.
+Record negative and adverse results as research outputs. Underperformance versus a strong comparator should trigger method refinement rather than withheld reporting.

@@ -38,7 +38,7 @@ For the available four pose samples `t={0,0.5,1.5,2.0}` seconds, the `0.5–1.5 
 
 Both are consistent with the available evidence; therefore neither `COMPLIANT` nor `VIOLATING` is justified from that partial record, absent extra evidence or stronger valid assumptions. The checker verifies path geometry, continuous segment-to-rectangle clearance, speed and observed pose consistency without importing the generator. This is **implementation-independent verification of the stated model**, not actual sensor authentication.
 
-### Failed and adverse findings retained
+### Failed and adverse results retained
 
 1. A heuristic gap-aware monitor incorrectly abstains on a distant harmless pose gap: its extra abstention is not essential when motion bounds prove clearance. This does not establish superiority over a sound reachability monitor, which makes the same decision as VEAP.
 2. A trajectory whose recorded claims are internally coherent may still be factually false. Rehashing cannot prove original telemetry truthful.
