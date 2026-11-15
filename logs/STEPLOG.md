@@ -282,3 +282,8 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - (2) docs/ASSURANCE_v0.4_SHA256_MANIFEST.json untouched; sidecar docs/ASSURANCE_v0.4_SHA256_MANIFEST.ERRATUM.md records stale f45c908680766229be98876d608ed593793c523f0b75c0b4291cb8539839c15c, current 682d53221a6c9d94f6d51269d88401c27f024c44353a5dc69abd6cc5039215e1, date 2026-11-15. grep: README.md, README_V06.md, CLAIMS_REGISTER.json do not cite the v0.4 manifest.
 - SHA256SUMS: root SHA256SUMS.txt covers none of the changed files (33/33 OK, unchanged). veap_studio_r03/SHA256SUMS.txt has 11 pre-existing FAILED lines at base 13ef67e1 (files untouched by X1), left unchanged.
 - check_claims exit 0 (9 claims; copy 6 files). pytest 229 passed, 2 skipped, 0 failed.
+
+### commit.ruling
+- prev_entry_sha256: 92a07605fc12e7f6dbd4de0cb3884ac6e6506a1b061ca0f69806774878874216
+- utc: 2026-11-15T22:02:31Z | london: 2026-11-15T22:02:31+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50622410752
+- Rulings committed locally as 41a49901229776a0a03579f7f44601f4cd6212d1 (Frank sole author/committer, not pushed). This entry is committed in a follow-up steplog-only commit.
