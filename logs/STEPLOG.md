@@ -320,3 +320,12 @@ Host: favl Linux 6.8.0-149-generic x86_64, 28 CPUs. Entries are appended by logs
 - Left as instructed: NASA IV&V citation, claims.py HIGH_RISK regex, guard-test phrase literals. Not in scope, flagged: web/app.js renders '<n> independently evaluated trial(s)' into the metric-rate note (unchanged).
 - SHA256SUMS: root SHA256SUMS.txt covers none of these files (all entries OK); veap_studio_r03 sums handled in the separate commit.
 - pytest 229 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 7). Sweep regenerated (x1/step5/forbidden_grep.txt): independent 768 -> 767 (web/index.html -4; banners +2; steplog +1; other changes are line-number shifts from the banners); finding 18 -> 18; first 87 -> 87; 0.57 33 -> 33; shows agents 0 -> 0.
+
+### commit.studio_sums_known_issue (pre-push item b; separate from X1)
+- prev_entry_sha256: e4694e4049a1801c7bf68cd0b8fd86df3bff6b7eebcfbb02adf3c3ba5853c2a3
+- utc: 2026-11-15T22:07:32Z | london: 2026-11-15T22:07:32+0000 | cwd: /home/favl/veap_x1 | df -B1 avail: 50620329984
+- Previous commit (pre-push item a, X1): 4ad2d9799942a6cb5644280a5d81c6f1a48e535c.
+- Added veap_studio_r03/SHA256SUMS.KNOWN_ISSUE.md listing the 11 failing entries of veap_studio_r03/SHA256SUMS.txt at base 13ef67e1 (file, expected sha, actual sha). SHA256SUMS.txt not regenerated or edited. veap_studio_r03/ tree on x1-rebaseline is byte-identical to 13ef67e1 (git diff --quiet).
+- Cause: unknown. Evidence: SUMS file and the 11 files were all added in commit 2d5d16c (2026-11-14) and never changed afterwards; no CR characters in any of the 11 files; reversing the VEAB->VEAP rename (several variants) reproduces none of the expected shas (store.py has no VEAP/veap string and still fails); none of 767 blobs in this clone's object store (42 commits) has any expected sha.
+- Checks after adding the note: pytest 229 passed, 2 skipped, 0 failed; check_claims exit 0 (9 claims; check_public_copy files_checked 7). The note itself has 0 forbidden-word hits (one ordinal 'first' reworded to 'were added').
+- Sweep: x1/step5/forbidden_grep.txt is kept as committed in 4ad2d9799942a6cb5644280a5d81c6f1a48e535c (sweep run before that commit's steplog entry). A sweep rerun now differs only by steplog lines that quote the words (finding 18->19, shows agents 0->1, 0.57 33->34, first 87->88, independent 767->771; all in logs/STEPLOG.md, append-only); the file is not re-committed here so this commit stays limited to veap_studio_r03 plus its steplog entry.
