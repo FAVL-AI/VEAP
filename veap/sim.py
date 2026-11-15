@@ -55,10 +55,18 @@ def shield_velocity(s: Scenario, pos: tuple[float, float], desired: tuple[float,
 
 def run_episode(s: Scenario, policy: str = "route", seed: int = 0, shield: bool = True,
                 callback: Callable[[dict], None] | None = None,
-                attestation_key: str | None = None) -> dict:
+                attestation_key: str | None = None, perturbation=None) -> dict:
     if not 0 <= seed <= 2**32-1:
         raise ValueError("seed out of range")
     rng = random.Random(seed)
+    nominal_sha = None
+    if perturbation is not None:  # X1 (v0.7-x1) seed-driven perturbation ladder; None = legacy behaviour
+        from .x1_perturb import perturb_scenario, stream
+        nominal_sha = digest(s.model_dump(mode="json", exclude_none=True))
+        s, perturb_info = perturb_scenario(s, perturbation, seed)
+        obs_rng = stream(seed, "obs_noise")
+        drop_rng = stream(seed, "actuation_dropout")
+        dropout_ticks = 0
     agent = BaselineAgent(policy, s)
     pos = (s.start.x, s.start.y)
     stage = 0
@@ -91,6 +99,9 @@ def run_episode(s: Scenario, policy: str = "route", seed: int = 0, shield: bool 
         visible_pos = last_known_pos if dropout else pos
         if noise:
             visible_pos = (visible_pos[0]+rng.uniform(-0.24,0.24),visible_pos[1]+rng.uniform(-0.24,0.24))
+        if perturbation is not None and perturbation.obs_noise_sigma_m > 0:
+            visible_pos = (visible_pos[0]+obs_rng.gauss(0.0,perturbation.obs_noise_sigma_m),
+                           visible_pos[1]+obs_rng.gauss(0.0,perturbation.obs_noise_sigma_m))
         if not dropout:
             last_known_pos = pos
             observations += 1
@@ -112,13 +123,22 @@ def run_episode(s: Scenario, policy: str = "route", seed: int = 0, shield: bool 
         cmd_history.append(applied)
         if stall:
             applied = (0.0,0.0)
+        x1_drop = False
+        if perturbation is not None and perturbation.actuation_dropout_p > 0:
+            if drop_rng.random() < perturbation.actuation_dropout_p:
+                applied = (0.0,0.0)
+                x1_drop = True
+                dropout_ticks += 1
         if intervention is not None:
             emit(tick, "intervention", {"reason":intervention,"proposed_vx":desired[0],"proposed_vy":desired[1],
                                        "applied_vx":round(applied[0],6),"applied_vy":round(applied[1],6)})
         x = round(pos[0]+applied[0]*s.dt, 5)
         y = round(pos[1]+applied[1]*s.dt, 5)
         pos = (x,y)
-        emit(tick, "state", {"x":x,"y":y,"vx":round(applied[0],6),"vy":round(applied[1],6), "stage":stage})
+        state = {"x":x,"y":y,"vx":round(applied[0],6),"vy":round(applied[1],6), "stage":stage}
+        if x1_drop:
+            state["x1_actuation_dropout"] = True
+        emit(tick, "state", state)
         if s.target_present and stage < len(s.waypoints):
             p = s.waypoints[stage]
             if math.hypot(x-p.x,y-p.y) <= s.waypoint_tolerance:
@@ -137,5 +157,9 @@ def run_episode(s: Scenario, policy: str = "route", seed: int = 0, shield: bool 
         "simulation_steps":ticks,
         "ledger_root_sha256":ledger.root,
     }
+    if perturbation is not None:
+        manifest["harness_version"] = "0.7-x1"
+        manifest["nominal_scenario_sha256"] = nominal_sha
+        manifest["perturbation"] = {**perturbation.as_dict(), **perturb_info, "actuation_dropout_ticks": dropout_ticks}
     bundle = {"manifest":manifest,"events":ledger.events,"attestation":sign(digest(manifest),attestation_key)}
     return bundle
