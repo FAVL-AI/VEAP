@@ -47,6 +47,44 @@
         "n_ref_false_claims": 30,
         "n_ref_true_claims": 40,
         "n_scenarios": 10,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 2000,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 1.0,
+              "supported": 0.0
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1998,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.999,
+              "supported": 0.0
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1472,
+              "supported": 526
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.736,
+              "supported": 0.263
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.0,
         "p_resolve_joint": 0.0,
         "p_resolve_recall": 0.263
@@ -58,6 +96,44 @@
         "n_ref_false_claims": 45,
         "n_ref_true_claims": 60,
         "n_scenarios": 15,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 2000,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 1.0,
+              "supported": 0.0
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 2000,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 1.0,
+              "supported": 0.0
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1140,
+              "supported": 860
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.57,
+              "supported": 0.43
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.0,
         "p_resolve_joint": 0.0,
         "p_resolve_recall": 0.43
@@ -69,6 +145,44 @@
         "n_ref_false_claims": 60,
         "n_ref_true_claims": 80,
         "n_scenarios": 20,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1226,
+              "supported": 774
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.613,
+              "supported": 0.387
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1567,
+              "supported": 433
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.7835,
+              "supported": 0.2165
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 840,
+              "supported": 1160
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.42,
+              "supported": 0.58
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.387,
         "p_resolve_joint": 0.2165,
         "p_resolve_recall": 0.58
@@ -80,6 +194,44 @@
         "n_ref_false_claims": 90,
         "n_ref_true_claims": 120,
         "n_scenarios": 30,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 874,
+              "supported": 1126
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.437,
+              "supported": 0.563
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1150,
+              "supported": 850
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.575,
+              "supported": 0.425
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 461,
+              "supported": 1539
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.2305,
+              "supported": 0.7695
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.563,
         "p_resolve_joint": 0.425,
         "p_resolve_recall": 0.7695
@@ -91,6 +243,44 @@
         "n_ref_false_claims": 120,
         "n_ref_true_claims": 160,
         "n_scenarios": 40,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 633,
+              "supported": 1367
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.3165,
+              "supported": 0.6835
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 776,
+              "supported": 1224
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.388,
+              "supported": 0.612
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 196,
+              "supported": 1804
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.098,
+              "supported": 0.902
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.6835,
         "p_resolve_joint": 0.612,
         "p_resolve_recall": 0.902
@@ -102,6 +292,44 @@
         "n_ref_false_claims": 180,
         "n_ref_true_claims": 240,
         "n_scenarios": 60,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 174,
+              "supported": 1826
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.087,
+              "supported": 0.913
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 199,
+              "supported": 1801
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.0995,
+              "supported": 0.9005
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 26,
+              "supported": 1974
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.013,
+              "supported": 0.987
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.913,
         "p_resolve_joint": 0.9005,
         "p_resolve_recall": 0.987
@@ -115,6 +343,44 @@
         "n_ref_false_claims": 30,
         "n_ref_true_claims": 40,
         "n_scenarios": 10,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 2000,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 1.0,
+              "supported": 0.0
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1998,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.999,
+              "supported": 0.0
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1749,
+              "supported": 249
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.8745,
+              "supported": 0.1245
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.0,
         "p_resolve_joint": 0.0,
         "p_resolve_recall": 0.1245
@@ -126,6 +392,44 @@
         "n_ref_false_claims": 45,
         "n_ref_true_claims": 60,
         "n_scenarios": 15,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 2000,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 1.0,
+              "supported": 0.0
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 4,
+              "inconclusive": 1996,
+              "supported": 0
+            },
+            "rates": {
+              "contradicted": 0.002,
+              "inconclusive": 0.998,
+              "supported": 0.0
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 4,
+              "inconclusive": 1541,
+              "supported": 455
+            },
+            "rates": {
+              "contradicted": 0.002,
+              "inconclusive": 0.7705,
+              "supported": 0.2275
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.0,
         "p_resolve_joint": 0.0,
         "p_resolve_recall": 0.2275
@@ -137,6 +441,44 @@
         "n_ref_false_claims": 60,
         "n_ref_true_claims": 80,
         "n_scenarios": 20,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1543,
+              "supported": 457
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.7715,
+              "supported": 0.2285
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1859,
+              "supported": 139
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.9295,
+              "supported": 0.0695
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 2,
+              "inconclusive": 1381,
+              "supported": 617
+            },
+            "rates": {
+              "contradicted": 0.001,
+              "inconclusive": 0.6905,
+              "supported": 0.3085
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.2285,
         "p_resolve_joint": 0.0695,
         "p_resolve_recall": 0.3085
@@ -148,6 +490,44 @@
         "n_ref_false_claims": 90,
         "n_ref_true_claims": 120,
         "n_scenarios": 30,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1368,
+              "supported": 632
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.684,
+              "supported": 0.316
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1723,
+              "supported": 277
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.8615,
+              "supported": 0.1385
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1110,
+              "supported": 890
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.555,
+              "supported": 0.445
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.316,
         "p_resolve_joint": 0.1385,
         "p_resolve_recall": 0.445
@@ -159,6 +539,44 @@
         "n_ref_false_claims": 120,
         "n_ref_true_claims": 160,
         "n_scenarios": 40,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1144,
+              "supported": 856
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.572,
+              "supported": 0.428
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 1495,
+              "supported": 505
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.7475,
+              "supported": 0.2525
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 816,
+              "supported": 1184
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.408,
+              "supported": 0.592
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.428,
         "p_resolve_joint": 0.2525,
         "p_resolve_recall": 0.592
@@ -170,6 +588,44 @@
         "n_ref_false_claims": 180,
         "n_ref_true_claims": 240,
         "n_scenarios": 60,
+        "outcomes": {
+          "false_rejection": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 631,
+              "supported": 1369
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.3155,
+              "supported": 0.6845
+            }
+          },
+          "joint": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 914,
+              "supported": 1086
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.457,
+              "supported": 0.543
+            }
+          },
+          "recall": {
+            "counts": {
+              "contradicted": 0,
+              "inconclusive": 435,
+              "supported": 1565
+            },
+            "rates": {
+              "contradicted": 0.0,
+              "inconclusive": 0.2175,
+              "supported": 0.7825
+            }
+          }
+        },
         "p_resolve_false_rejection_ceiling": 0.6845,
         "p_resolve_joint": 0.543,
         "p_resolve_recall": 0.7825

@@ -13,8 +13,15 @@ from x2.detection_attribution import (
     attribute_records,
     run_serialized_fixture_suite,
 )
+from x2.leakage_controls import (
+    DEFAULT_REPORT_PATH as DEFAULT_LEAKAGE_REPORT_PATH,
+    check_endpoint_bytes,
+    check_trajectory_bytes,
+    run_leakage_controls,
+)
 from x2.precision_analysis import (
     DEFAULT_OUTPUT_PATH,
+    fpr_ci,
     run_precision_analysis,
     simulate_regime_for_n,
     t_critical_95,
@@ -195,10 +202,62 @@ def test_precision_report_json_matches_script_output() -> None:
     assert data["scope"] == "development-only"
     assert data["recommended_n"] == 60
     assert data["config"]["candidate_n"] == [10, 15, 20, 30, 40, 60]
+    n_rep = data["config"]["n_replicates"]
     for regime in ("nominal", "pessimistic"):
         for row in data["results"][regime]:
             assert "n_genuine_claims" in row
             assert row["n_genuine_claims"] == row["n_ref_true_claims"]
+            for endpoint in ("recall", "false_rejection", "joint"):
+                counts = row["outcomes"][endpoint]["counts"]
+                rates = row["outcomes"][endpoint]["rates"]
+                assert set(counts.keys()) == {"supported", "contradicted", "inconclusive"}
+                assert sum(counts.values()) == n_rep
+                assert sum(rates.values()) == pytest.approx(1.0)
+
+
+def test_zero_false_rejection_guard_does_not_collapse_to_zero() -> None:
+    lo, hi = fpr_ci([0.0] * 10, false_rejections_total=0, m_true_total=40)
+    assert lo == 0.0
+    assert hi > 0.05  # 0/40 must not collapse to [0, 0] or clear 5% ceiling
+    assert hi == pytest.approx(wilson_ci(0, 40)[1])
+
+
+def test_leakage_controls_byte_entry_points_and_report() -> None:
+    # Rejects hidden reference label keys in serialized payloads
+    with pytest.raises(ValueError, match="Forbidden reference label key"):
+        check_trajectory_bytes(
+            json.dumps({"adjudicator_done": False, "trajectory_steps": []}).encode("utf-8")
+        )
+    with pytest.raises(ValueError, match="Forbidden reference label key"):
+        check_endpoint_bytes(
+            json.dumps({"reference_label": True, "endpoint_state": None}).encode("utf-8")
+        )
+
+    report = run_leakage_controls(output_path=None)
+    assert report["schema"] == "veap-x2-leakage-controls/1"
+    assert report["n_pairs"] == 6
+    assert report["n_episodes"] == 12
+    assert report["all_controls_passed"] is True
+    assert len(report["hidden_truth_pairs"]) == 3
+    assert len(report["visible_history_pairs"]) == 3
+
+    for ht in report["hidden_truth_pairs"]:
+        assert ht["trajectory_bytes_match"] is True
+        assert ht["endpoint_bytes_match"] is True
+        assert ht["verdicts_match"] is True
+        assert ht["reference_labels_differ"] is True
+        assert ht["control_passed"] is True
+
+    for vh in report["visible_history_pairs"]:
+        assert vh["endpoint_bytes_match"] is True
+        assert vh["trajectory_bytes_differ"] is True
+        assert vh["endpoint_verdicts_match"] is True
+        assert vh["trajectory_verdicts_differ"] is True
+        assert vh["control_passed"] is True
+
+    assert Path(DEFAULT_LEAKAGE_REPORT_PATH).exists()
+    disk_report = json.loads(Path(DEFAULT_LEAKAGE_REPORT_PATH).read_text(encoding="utf-8"))
+    assert disk_report == report
 
 
 def test_serialized_fixture_suite_and_report() -> None:

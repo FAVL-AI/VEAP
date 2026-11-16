@@ -56,6 +56,39 @@ def _clamp(value: float, low: float, high: float) -> float:
     return max(low, min(high, value))
 
 
+def fpr_ci(
+    scenario_fprs: list[float],
+    false_rejections_total: int,
+    m_true_total: int,
+) -> tuple[float, float]:
+    """Return 95% scenario-clustered Student-t CI for FPR with zero-variance Wilson guard.
+
+    When all scenario FPRs are ``0.0`` (``std == 0``), an ordinary Student-t interval
+    collapses to ``[0, 0]``. This function enforces the 95% Wilson upper-bound floor
+    so the interval is never degenerate at zero false rejections.
+    """
+    n_scenarios = len(scenario_fprs)
+    if n_scenarios < 2:
+        raise ValueError("n_scenarios must be >= 2")
+    w_low, w_high = wilson_ci(false_rejections_total, m_true_total)
+    mean_fpr = sum(scenario_fprs) / n_scenarios
+    var_fpr = sum((f - mean_fpr) ** 2 for f in scenario_fprs) / (n_scenarios - 1)
+    if var_fpr == 0.0 and mean_fpr == 0.0:
+        return (0.0, w_high)
+    t_crit = t_critical_95(n_scenarios - 1)
+    se_fpr = math.sqrt(var_fpr / n_scenarios)
+    t_low = max(0.0, mean_fpr - t_crit * se_fpr)
+    t_high = min(1.0, mean_fpr + t_crit * se_fpr)
+    return (min(t_low, w_low), max(t_high, w_high))
+
+
+def _state_summary(counts: dict[str, int], n_replicates: int) -> dict[str, Any]:
+    return {
+        "counts": dict(counts),
+        "rates": {k: v / n_replicates for k, v in counts.items()},
+    }
+
+
 def simulate_regime_for_n(
     n_scenarios: int,
     *,
@@ -77,9 +110,9 @@ def simulate_regime_for_n(
     rng = random.Random(seed)
     t_crit = t_critical_95(n_scenarios - 1)
 
-    resolve_recall_count = 0
-    resolve_fpr_count = 0
-    resolve_joint_count = 0
+    recall_counts = {"supported": 0, "contradicted": 0, "inconclusive": 0}
+    fpr_counts = {"supported": 0, "contradicted": 0, "inconclusive": 0}
+    joint_counts = {"supported": 0, "contradicted": 0, "inconclusive": 0}
     mean_recall_est_sum = 0.0
     mean_fpr_est_sum = 0.0
 
@@ -124,24 +157,35 @@ def simulate_regime_for_n(
         var_d = sum((d - mean_d) ** 2 for d in scenario_diffs) / (n_scenarios - 1)
         se_d = math.sqrt(var_d / n_scenarios)
         ci_low_recall = mean_d - t_crit * se_d
+        ci_high_recall = mean_d + t_crit * se_d
 
+        ci_low_fpr, ci_high_fpr = fpr_ci(scenario_fprs, false_rejections_total, m_true_total)
         mean_fpr = sum(scenario_fprs) / n_scenarios
-        var_fpr = sum((f - mean_fpr) ** 2 for f in scenario_fprs) / (n_scenarios - 1)
-        se_fpr = math.sqrt(var_fpr / n_scenarios)
-        t_ci_high_fpr = mean_fpr + t_crit * se_fpr
-        _, wilson_high_fpr = wilson_ci(false_rejections_total, m_true_total)
-        # Scenario-clustered Student-t upper bound; Wilson floor prevents 0.0 +- 0.0 degeneracy at k=0
-        ci_high_fpr = max(t_ci_high_fpr, wilson_high_fpr)
 
-        recall_ok = ci_low_recall >= min_meaningful_improvement
-        fpr_ok = ci_high_fpr <= max_false_rejection_rate
+        if ci_low_recall >= min_meaningful_improvement:
+            r_state = "supported"
+        elif ci_high_recall < min_meaningful_improvement:
+            r_state = "contradicted"
+        else:
+            r_state = "inconclusive"
 
-        if recall_ok:
-            resolve_recall_count += 1
-        if fpr_ok:
-            resolve_fpr_count += 1
-        if recall_ok and fpr_ok:
-            resolve_joint_count += 1
+        if ci_high_fpr <= max_false_rejection_rate:
+            f_state = "supported"
+        elif ci_low_fpr > max_false_rejection_rate:
+            f_state = "contradicted"
+        else:
+            f_state = "inconclusive"
+
+        if r_state == "supported" and f_state == "supported":
+            j_state = "supported"
+        elif r_state == "contradicted" or f_state == "contradicted":
+            j_state = "contradicted"
+        else:
+            j_state = "inconclusive"
+
+        recall_counts[r_state] += 1
+        fpr_counts[f_state] += 1
+        joint_counts[j_state] += 1
 
         mean_recall_est_sum += mean_d
         mean_fpr_est_sum += mean_fpr
@@ -151,9 +195,14 @@ def simulate_regime_for_n(
         "n_ref_false_claims": n_scenarios * claims_false_per_scenario,
         "n_ref_true_claims": m_true_total,
         "n_genuine_claims": m_true_total,
-        "p_resolve_recall": resolve_recall_count / n_replicates,
-        "p_resolve_false_rejection_ceiling": resolve_fpr_count / n_replicates,
-        "p_resolve_joint": resolve_joint_count / n_replicates,
+        "p_resolve_recall": recall_counts["supported"] / n_replicates,
+        "p_resolve_false_rejection_ceiling": fpr_counts["supported"] / n_replicates,
+        "p_resolve_joint": joint_counts["supported"] / n_replicates,
+        "outcomes": {
+            "recall": _state_summary(recall_counts, n_replicates),
+            "false_rejection": _state_summary(fpr_counts, n_replicates),
+            "joint": _state_summary(joint_counts, n_replicates),
+        },
         "mean_estimated_recall_improvement": mean_recall_est_sum / n_replicates,
         "mean_estimated_false_rejection_rate": mean_fpr_est_sum / n_replicates,
     }

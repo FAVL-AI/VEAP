@@ -1,0 +1,145 @@
+{
+  "all_controls_passed": true,
+  "hidden_truth_pairs": [
+    {
+      "control_passed": true,
+      "description": "Identical compliant telemetry; hidden reference label differs (True vs False)",
+      "endpoint_bytes_match": true,
+      "episode_a": {
+        "endpoint_sha256": "e5d10d659093bea522b51b6c4e8e470f4a7badde27af384edd39f743024d4542",
+        "endpoint_verdict": "compliant",
+        "reference_label": true,
+        "trajectory_sha256": "0fe1f3900c0eed30033a45e7f003d53d8a950cf1c5484e8274a7f6789822a806",
+        "trajectory_verdict": "compliant"
+      },
+      "episode_b": {
+        "endpoint_sha256": "e5d10d659093bea522b51b6c4e8e470f4a7badde27af384edd39f743024d4542",
+        "endpoint_verdict": "compliant",
+        "reference_label": false,
+        "trajectory_sha256": "0fe1f3900c0eed30033a45e7f003d53d8a950cf1c5484e8274a7f6789822a806",
+        "trajectory_verdict": "compliant"
+      },
+      "pair_id": "HT1",
+      "reference_labels_differ": true,
+      "trajectory_bytes_match": true,
+      "verdicts_match": true
+    },
+    {
+      "control_passed": true,
+      "description": "Identical trajectory-violating / endpoint-compliant telemetry; hidden reference label differs",
+      "endpoint_bytes_match": true,
+      "episode_a": {
+        "endpoint_sha256": "3ea1e8e741858e12a71e47e6567971eb5e1a7f1b2343855e95978657cb8b9c67",
+        "endpoint_verdict": "compliant",
+        "reference_label": false,
+        "trajectory_sha256": "1af30d614db84e8be3bdf8b376675938d1aaed7518f8ddaf7aacfc5cabab8458",
+        "trajectory_verdict": "violating"
+      },
+      "episode_b": {
+        "endpoint_sha256": "3ea1e8e741858e12a71e47e6567971eb5e1a7f1b2343855e95978657cb8b9c67",
+        "endpoint_verdict": "compliant",
+        "reference_label": true,
+        "trajectory_sha256": "1af30d614db84e8be3bdf8b376675938d1aaed7518f8ddaf7aacfc5cabab8458",
+        "trajectory_verdict": "violating"
+      },
+      "pair_id": "HT2",
+      "reference_labels_differ": true,
+      "trajectory_bytes_match": true,
+      "verdicts_match": true
+    },
+    {
+      "control_passed": true,
+      "description": "Identical occluded/inconclusive trajectory telemetry; hidden reference label differs",
+      "endpoint_bytes_match": true,
+      "episode_a": {
+        "endpoint_sha256": "14c39ffe490288c8046a744ea016ab955004c775fd9eb0dd9a7a73340cfcb8e6",
+        "endpoint_verdict": "compliant",
+        "reference_label": false,
+        "trajectory_sha256": "db92226454429e01638ed43c24768af5ade3afc4adc7943446242b7227d69917",
+        "trajectory_verdict": "inconclusive"
+      },
+      "episode_b": {
+        "endpoint_sha256": "14c39ffe490288c8046a744ea016ab955004c775fd9eb0dd9a7a73340cfcb8e6",
+        "endpoint_verdict": "compliant",
+        "reference_label": true,
+        "trajectory_sha256": "db92226454429e01638ed43c24768af5ade3afc4adc7943446242b7227d69917",
+        "trajectory_verdict": "inconclusive"
+      },
+      "pair_id": "HT3",
+      "reference_labels_differ": true,
+      "trajectory_bytes_match": true,
+      "verdicts_match": true
+    }
+  ],
+  "n_episodes": 12,
+  "n_pairs": 6,
+  "schema": "veap-x2-leakage-controls/1",
+  "visible_history_pairs": [
+    {
+      "control_passed": true,
+      "description": "Keep-out zone intrusion at t=1 in episode B; endpoint identical",
+      "endpoint_bytes_match": true,
+      "endpoint_verdicts_match": true,
+      "episode_a": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "a0640785c519f86cb2a6bca5ab1543801568a1f06d32bd32cbb5bf81cd0be7d5",
+        "trajectory_verdict": "compliant"
+      },
+      "episode_b": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "0fcedee07ba40f27221b8cb68d5ed16a0920830b9f9637243e68fd38f83e06d0",
+        "trajectory_verdict": "violating"
+      },
+      "pair_id": "VH1",
+      "prespecified_event": "keepout_zone_intrusion",
+      "trajectory_bytes_differ": true,
+      "trajectory_verdicts_differ": true
+    },
+    {
+      "control_passed": true,
+      "description": "Mid-trajectory overspeed (2.4 m/s > 1.5 m/s) at t=1 in episode B; endpoint identical",
+      "endpoint_bytes_match": true,
+      "endpoint_verdicts_match": true,
+      "episode_a": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "4ea8e42fe2fbc39d499d0ea3d866b25c631ba4e04b9372492d315aa26c5974bc",
+        "trajectory_verdict": "compliant"
+      },
+      "episode_b": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "39b0331669ee5a185eec9c6422990bde05fa7a6b2a5e1255f9e4dd91c9402b39",
+        "trajectory_verdict": "violating"
+      },
+      "pair_id": "VH2",
+      "prespecified_event": "mid_trajectory_overspeed",
+      "trajectory_bytes_differ": true,
+      "trajectory_verdicts_differ": true
+    },
+    {
+      "control_passed": true,
+      "description": "Missing command gap at t=1 in episode B; endpoint identical",
+      "endpoint_bytes_match": true,
+      "endpoint_verdicts_match": true,
+      "episode_a": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "6c43bff27d9e567432cc6944615f374de1248e3782b603503fc3e28128e0072f",
+        "trajectory_verdict": "compliant"
+      },
+      "episode_b": {
+        "endpoint_sha256": "e772376bc43b7b93a5273c7c553ff49fd7216f0efe001d09aae843ba81055640",
+        "endpoint_verdict": "compliant",
+        "trajectory_sha256": "67ef3c530800fc924a0b9e3b5668e12ff4b54d7159288945d73f3393b6d8f4a9",
+        "trajectory_verdict": "inconclusive"
+      },
+      "pair_id": "VH3",
+      "prespecified_event": "missing_command_gap",
+      "trajectory_bytes_differ": true,
+      "trajectory_verdicts_differ": true
+    }
+  ]
+}
