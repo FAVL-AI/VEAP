@@ -1,0 +1,330 @@
+{
+  "cluster_sizes": {
+    "max_claims": 7,
+    "mean_claims": 4.0,
+    "min_claims": 1,
+    "n_scenarios": 60,
+    "total_genuine_claims": 240
+  },
+  "estimand": "Equal-weighted scenario-averaged false-rejection rate across N = 60 scenarios",
+  "fpr_calibration_grid": [
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.871,
+      "inconclusive_rate": 0.1375,
+      "incorrect_support_rate": 0.8625,
+      "n_scenarios": 60,
+      "rho": 0.0,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.871,
+        "inconclusive_rate_scenario_floor": 0.1605,
+        "supported_rate_scenario_floor": 0.8395,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.8625,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.015,
+      "zero_event_rate": 0.023
+    },
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.8925,
+      "inconclusive_rate": 0.5335,
+      "incorrect_support_rate": 0.4665,
+      "n_scenarios": 60,
+      "rho": 0.0,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.893,
+        "inconclusive_rate_scenario_floor": 0.534,
+        "supported_rate_scenario_floor": 0.466,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.4665,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.03,
+      "zero_event_rate": 0.0005
+    },
+    {
+      "contradicted_rate": 0.0055,
+      "coverage_95": 0.901,
+      "inconclusive_rate": 0.901,
+      "incorrect_support_rate": 0.0935,
+      "n_scenarios": 60,
+      "rho": 0.0,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.901,
+        "inconclusive_rate_scenario_floor": 0.901,
+        "supported_rate_scenario_floor": 0.0935,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0935,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.05,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.0935,
+      "coverage_95": 0.9135,
+      "inconclusive_rate": 0.9005,
+      "incorrect_support_rate": 0.006,
+      "n_scenarios": 60,
+      "rho": 0.0,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.9135,
+        "inconclusive_rate_scenario_floor": 0.9005,
+        "supported_rate_scenario_floor": 0.006,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.006,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.07,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.637,
+      "coverage_95": 0.93,
+      "inconclusive_rate": 0.363,
+      "incorrect_support_rate": 0.0,
+      "n_scenarios": 60,
+      "rho": 0.0,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.93,
+        "inconclusive_rate_scenario_floor": 0.363,
+        "supported_rate_scenario_floor": 0.0,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.1,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.8675,
+      "inconclusive_rate": 0.223,
+      "incorrect_support_rate": 0.777,
+      "n_scenarios": 60,
+      "rho": 0.25,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.8675,
+        "inconclusive_rate_scenario_floor": 0.3165,
+        "supported_rate_scenario_floor": 0.6835,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.777,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.015,
+      "zero_event_rate": 0.0935
+    },
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.869,
+      "inconclusive_rate": 0.619,
+      "incorrect_support_rate": 0.381,
+      "n_scenarios": 60,
+      "rho": 0.25,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.8745,
+        "inconclusive_rate_scenario_floor": 0.6245,
+        "supported_rate_scenario_floor": 0.3755,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.381,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.03,
+      "zero_event_rate": 0.0055
+    },
+    {
+      "contradicted_rate": 0.0035,
+      "coverage_95": 0.8785,
+      "inconclusive_rate": 0.8785,
+      "incorrect_support_rate": 0.118,
+      "n_scenarios": 60,
+      "rho": 0.25,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.8785,
+        "inconclusive_rate_scenario_floor": 0.8785,
+        "supported_rate_scenario_floor": 0.118,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.118,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.05,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.058,
+      "coverage_95": 0.9115,
+      "inconclusive_rate": 0.9225,
+      "incorrect_support_rate": 0.0195,
+      "n_scenarios": 60,
+      "rho": 0.25,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.9115,
+        "inconclusive_rate_scenario_floor": 0.9225,
+        "supported_rate_scenario_floor": 0.0195,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0195,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.07,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.3765,
+      "coverage_95": 0.913,
+      "inconclusive_rate": 0.623,
+      "incorrect_support_rate": 0.0005,
+      "n_scenarios": 60,
+      "rho": 0.25,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.913,
+        "inconclusive_rate_scenario_floor": 0.623,
+        "supported_rate_scenario_floor": 0.0005,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0005,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.1,
+      "zero_event_rate": 0.0
+    },
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.876,
+      "inconclusive_rate": 0.3425,
+      "incorrect_support_rate": 0.6575,
+      "n_scenarios": 60,
+      "rho": 0.5,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.876,
+        "inconclusive_rate_scenario_floor": 0.496,
+        "supported_rate_scenario_floor": 0.504,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.6575,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.015,
+      "zero_event_rate": 0.1535
+    },
+    {
+      "contradicted_rate": 0.0,
+      "coverage_95": 0.836,
+      "inconclusive_rate": 0.6465,
+      "incorrect_support_rate": 0.3535,
+      "n_scenarios": 60,
+      "rho": 0.5,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.8625,
+        "inconclusive_rate_scenario_floor": 0.673,
+        "supported_rate_scenario_floor": 0.327,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.3535,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.03,
+      "zero_event_rate": 0.0265
+    },
+    {
+      "contradicted_rate": 0.003,
+      "coverage_95": 0.8805,
+      "inconclusive_rate": 0.8805,
+      "incorrect_support_rate": 0.1165,
+      "n_scenarios": 60,
+      "rho": 0.5,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.881,
+        "inconclusive_rate_scenario_floor": 0.881,
+        "supported_rate_scenario_floor": 0.116,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.1165,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.05,
+      "zero_event_rate": 0.0005
+    },
+    {
+      "contradicted_rate": 0.0505,
+      "coverage_95": 0.9075,
+      "inconclusive_rate": 0.921,
+      "incorrect_support_rate": 0.0285,
+      "n_scenarios": 60,
+      "rho": 0.5,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.9075,
+        "inconclusive_rate_scenario_floor": 0.9215,
+        "supported_rate_scenario_floor": 0.028,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0285,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.07,
+      "zero_event_rate": 0.0005
+    },
+    {
+      "contradicted_rate": 0.2545,
+      "coverage_95": 0.917,
+      "inconclusive_rate": 0.742,
+      "incorrect_support_rate": 0.0035,
+      "n_scenarios": 60,
+      "rho": 0.5,
+      "scenario_floor_comparison": {
+        "coverage_95_scenario_floor": 0.917,
+        "inconclusive_rate_scenario_floor": 0.742,
+        "supported_rate_scenario_floor": 0.0035,
+        "zero_event_floor_240": 0.015753919941558815,
+        "zero_event_floor_n60": 0.06017185214208986
+      },
+      "supported_rate": 0.0035,
+      "total_genuine_claims": 240,
+      "true_fpr": 0.1,
+      "zero_event_rate": 0.0
+    }
+  ],
+  "interval_convention": {
+    "nonzero_variance": "Two-sided 95% scenario-clustered Student-t CI (df = N - 1)",
+    "zero_event_floor_240": 0.015753919941558815,
+    "zero_event_floor_n60": 0.06017185214208986
+  },
+  "n_replicates": 2000,
+  "rejection_definition": "Trajectory checker returning 'violating' on a genuine (DONE = True) claim; 'inconclusive' tracked separately",
+  "schema": "veap-x2-interval-calibration/1",
+  "subtarget_contradicted_check": {
+    "description": "Sub-target calibration regime exercising contradicted branch",
+    "n_replicates": 2000,
+    "n_scenarios": 60,
+    "outcomes": {
+      "false_rejection": {
+        "contradicted": 0.135,
+        "inconclusive": 0.859,
+        "supported": 0.006
+      },
+      "joint": {
+        "contradicted": 0.6975,
+        "inconclusive": 0.3025,
+        "supported": 0.0
+      },
+      "recall": {
+        "contradicted": 0.647,
+        "inconclusive": 0.353,
+        "supported": 0.0
+      }
+    },
+    "rho_fpr": 0.25,
+    "true_fpr": 0.08,
+    "true_recall_gain": 0.03
+  }
+}

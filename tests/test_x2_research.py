@@ -13,6 +13,13 @@ from x2.detection_attribution import (
     attribute_records,
     run_serialized_fixture_suite,
 )
+from x2.interval_calibration import (
+    DEFAULT_REPORT_PATH as DEFAULT_CALIBRATION_REPORT_PATH,
+    UNEQUAL_CLUSTER_SIZES_60,
+    calibrate_fpr_cell,
+    calibrate_subtarget_regime,
+    scenario_clustered_fpr_ci,
+)
 from x2.leakage_controls import (
     DEFAULT_REPORT_PATH as DEFAULT_LEAKAGE_REPORT_PATH,
     check_endpoint_bytes,
@@ -258,6 +265,39 @@ def test_leakage_controls_byte_entry_points_and_report() -> None:
     assert Path(DEFAULT_LEAKAGE_REPORT_PATH).exists()
     disk_report = json.loads(Path(DEFAULT_LEAKAGE_REPORT_PATH).read_text(encoding="utf-8"))
     assert disk_report == report
+
+
+def test_interval_calibration_coverage_type1_and_floors() -> None:
+    assert len(UNEQUAL_CLUSTER_SIZES_60) == 60
+    assert sum(UNEQUAL_CLUSTER_SIZES_60) == 240
+    assert min(UNEQUAL_CLUSTER_SIZES_60) == 1
+    assert max(UNEQUAL_CLUSTER_SIZES_60) == 7
+
+    # Zero-event Wilson floor comparison: N=60 (~6.02%) vs 240 (~1.58%)
+    _, floor_60 = scenario_clustered_fpr_ci([0.0] * 60, total_rejections=0, zero_event_denominator=60)
+    _, floor_240 = scenario_clustered_fpr_ci([0.0] * 60, total_rejections=0, zero_event_denominator=240)
+    assert floor_60 == pytest.approx(0.06017, abs=1e-4)
+    assert floor_240 == pytest.approx(0.01575, abs=1e-4)
+    assert floor_60 > 0.05 > floor_240
+
+    # Above-ceiling true_fpr=0.100 with rho=0.25 should keep incorrect_support_rate <= 0.05
+    cell = calibrate_fpr_cell(rho=0.25, true_fpr=0.100, n_replicates=400, seed=123)
+    assert cell["coverage_95"] >= 0.85
+    assert cell["incorrect_support_rate"] <= 0.05
+    assert cell["contradicted_rate"] > 0.0
+
+
+def test_interval_calibration_subtarget_exercises_contradicted_and_report() -> None:
+    sub = calibrate_subtarget_regime(n_replicates=400, seed=456)
+    assert sub["outcomes"]["recall"]["contradicted"] > 0.0
+    assert sub["outcomes"]["false_rejection"]["contradicted"] > 0.0
+    assert sub["outcomes"]["joint"]["contradicted"] > 0.0
+
+    assert Path(DEFAULT_CALIBRATION_REPORT_PATH).exists()
+    disk_rep = json.loads(Path(DEFAULT_CALIBRATION_REPORT_PATH).read_text(encoding="utf-8"))
+    assert disk_rep["schema"] == "veap-x2-interval-calibration/1"
+    assert len(disk_rep["fpr_calibration_grid"]) == 15
+    assert disk_rep["subtarget_contradicted_check"]["outcomes"]["joint"]["contradicted"] > 0.0
 
 
 def test_serialized_fixture_suite_and_report() -> None:
