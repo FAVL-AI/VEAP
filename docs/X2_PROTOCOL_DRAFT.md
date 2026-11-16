@@ -87,3 +87,31 @@ Before transitioning from `DRAFT` to `FROZEN` and unsealing the test split, a re
 - [ ] **Test Salt Commitment Verified:** `SHA-256(test_salt)` committed in version control before test split generation; no test scenarios inspected during dev.
 - [ ] **GPU Budget Log Complete:** Total dev GPU-hours logged and verified `<= 12.0` GPU-hours prior to sealed evaluation.
 - [ ] **Inconclusive Reporting Intact:** Attribution output includes separate `trajectory_only_compliant`, `trajectory_only_inconclusive`, `endpoint_only_compliant`, `endpoint_only_inconclusive`, and both denominators.
+
+---
+
+## 6. Fixed-Cluster Monotonicity & Exact-Binomial Reference Feasibility
+
+### 6.1 Fixed-Cluster Monotonicity Check (`x2/feasibility_and_monotonicity.py`)
+
+Holding `N = 60` fixed (`unequal_1_to_7` and `equal_4` clusters) and flipping genuine claims one at a time from `0` to `10` false rejections reveals **non-monotonicity** in all three clustered intervals (`student_t`: 42 anomaly steps, `cluster_score`: 32, `scenario_bootstrap`: 43 across 6 runs):
+- At `0` rejections, the `N = 60` Wilson floor yields `ci_high = 0.0602` (`inconclusive`).
+- Flipping `1` rejection causes `ci_high` to **drop below `0.05`** (e.g., to `0.0071` for `student_t`/`scenario_bootstrap` and `0.0202` for `cluster_score` in `unequal_1_to_7 | distinct_scenarios_largest_first`; `0.0125` / `0.0233` in `equal_4`), flipping the decision from `inconclusive` to `supported` as rejections *increase*.
+
+### 6.2 Exact-Binomial Reference Arm Feasibility (`x2/feasibility_report.json`)
+
+For a reference arm sampling **1 randomly selected genuine claim per independently sampled eligible scenario** (blind to checker verdict) with a two-sided 95% exact Clopper-Pearson interval (`N = 72` is a **mathematical minimum at 0 rejections**, *not* a recommended sample size; all claims remain preserved for paired recall analysis and secondary clustered comparison):
+
+| `N_eligible` | `zero_ub` | `max_k` (`<= 5%`) | `P(clear)` @ `1%` FPR | `P(clear)` @ `2%` FPR | `P(clear)` @ `3%` FPR | Expected `N_total` (`100%` / `90%` / `80%` elig.) |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 60 | 0.05963 | None | 0.0000 | 0.0000 | 0.0000 | 60.0 / 66.7 / 75.0 |
+| 71 | 0.05063 | None | 0.0000 | 0.0000 | 0.0000 | 71.0 / 78.9 / 88.8 |
+| 72 | 0.04994 | 0 | 0.4850 | 0.2335 | 0.1116 | 72.0 / 80.0 / 90.0 |
+| 80 | 0.04506 | 0 | 0.4475 | 0.1986 | 0.0874 | 80.0 / 88.9 / 100.0 |
+| 90 | 0.04016 | 0 | 0.4047 | 0.1623 | 0.0645 | 90.0 / 100.0 / 112.5 |
+| 100 | 0.03622 | 0 | 0.3660 | 0.1326 | 0.0476 | 100.0 / 111.1 / 125.0 |
+| 120 | 0.03027 | 1 | 0.6623 | 0.3054 | 0.1218 | 120.0 / 133.3 / 150.0 |
+| 150 | 0.02429 | 2 | 0.8095 | 0.4209 | 0.1693 | 150.0 / 166.7 / 187.5 |
+| 200 | 0.01828 | 3 | 0.8580 | 0.4315 | 0.1472 | 200.0 / 222.2 / 250.0 |
+| 250 | 0.01465 | 5 | 0.9588 | 0.6160 | 0.2373 | 250.0 / 277.8 / 312.5 |
+| 300 | 0.01222 | 7 | 0.9885 | 0.7454 | 0.3203 | 300.0 / 333.3 / 375.0 |

@@ -13,6 +13,12 @@ from x2.detection_attribution import (
     attribute_records,
     run_serialized_fixture_suite,
 )
+from x2.feasibility_and_monotonicity import (
+    DEFAULT_REPORT_PATH as DEFAULT_FEASIBILITY_REPORT_PATH,
+    clopper_pearson_upper,
+    run_exact_binomial_feasibility,
+    run_monotonicity_check,
+)
 from x2.interval_calibration import (
     CONFIRM_SEED,
     DEFAULT_REPORT_PATH as DEFAULT_CALIBRATION_REPORT_PATH,
@@ -319,6 +325,35 @@ def test_interval_calibration_report_v2_schema_and_worst_case() -> None:
         assert summary["meets_calibration_tolerance"] is False
         assert summary["min_coverage_95"] < 0.92
         assert summary["max_upper_tail_miss"] > 0.05
+
+
+def test_clopper_pearson_and_exact_binomial_feasibility() -> None:
+    assert clopper_pearson_upper(0, 60) > 0.05
+    assert clopper_pearson_upper(0, 71) > 0.05
+    assert clopper_pearson_upper(0, 72) <= 0.05
+    assert clopper_pearson_upper(0, 72) == pytest.approx(1.0 - (0.025 ** (1.0 / 72.0)))
+
+    rows = {r["n_eligible"]: r for r in run_exact_binomial_feasibility()}
+    assert rows[60]["max_k_clearing_5pct"] is None
+    assert rows[71]["max_k_clearing_5pct"] is None
+    assert rows[60]["p_clear_at_1pct"] == 0.0
+    assert rows[72]["max_k_clearing_5pct"] == 0
+    assert rows[72]["p_clear_at_1pct"] == pytest.approx(0.99 ** 72)
+    assert rows[72]["expected_total_scenarios"]["p_elig_80pct"] == pytest.approx(90.0)
+    assert rows[150]["max_k_clearing_5pct"] == 2
+    assert rows[300]["p_clear_at_1pct"] > 0.98
+
+
+def test_monotonicity_check_and_feasibility_report() -> None:
+    mono = run_monotonicity_check(n_boot=200, seed=20261116)
+    assert mono["n_runs"] == 6
+    for m in ("student_t", "cluster_score", "scenario_bootstrap"):
+        assert mono["anomaly_step_counts_by_method"][m] > 0
+
+    assert Path(DEFAULT_FEASIBILITY_REPORT_PATH).exists()
+    disk_rep = json.loads(Path(DEFAULT_FEASIBILITY_REPORT_PATH).read_text(encoding="utf-8"))
+    assert disk_rep["schema"] == "veap-x2-feasibility-and-monotonicity/1"
+    assert len(disk_rep["exact_binomial_feasibility"]) == 11
 
 
 def test_serialized_fixture_suite_and_report() -> None:
