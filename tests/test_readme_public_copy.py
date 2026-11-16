@@ -4,7 +4,7 @@ from pathlib import Path
 from veap.governance.claims import check_public_copy
 
 BASE = Path(__file__).resolve().parents[1]
-FILES = ("README.md", "README_V06.md", "web/index.html", "web/app.js")
+FILES = ("README.md", "README_V06.md", "veap_studio_r03/web/index.html", "veap_studio_r03/web/app.js")
 
 
 def test_old_independent_verification_phrase_absent():
@@ -29,6 +29,6 @@ def test_public_copy_scan_covers_readmes_and_passes():
 
 
 def test_app_js_old_trial_phrase_absent():
-    body = (BASE / "web/app.js").read_text(encoding="utf8")
+    body = (BASE / "veap_studio_r03/web/app.js").read_text(encoding="utf8")
     assert "independently evaluated trial" not in body
     assert "evaluated by a verifier separate from the agent" in body

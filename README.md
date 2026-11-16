@@ -105,7 +105,7 @@ python -m pytest -q
 python -m uvicorn veap.api:app --host 127.0.0.1 --port 8000
 ```
 
-Open **http://127.0.0.1:8000** to launch the **VEAP Agent Observatory**. Select a scenario contract, choose a baseline (`route` or `greedy`), toggle the geometric safety gate, and run the benchmark. Exported evidence JSON bundles are independently verifiable via `python -m veap verify <bundle.json>`.
+Open **http://127.0.0.1:8000** to launch **VEAP Foundry (`VEAP Studio R0.3`)** — Physical AI Replay Operations, World Studio, Data Registry, Policy Lab (Benchmark Observatory &amp; Evidence Ledger), Assurance &amp; Verification (`G0–G3`), and Engine Runtime &amp; Jobs. Exported evidence JSON bundles are independently verifiable via `python -m veap verify <bundle.json>`.
 
 ---
 
@@ -147,7 +147,6 @@ veap_evidence_r1_1/      R1.1–R1.3 three-valued evidence & Ed25519 public-key 
 veap_studio_r03/         VEAP Foundry / Studio R0.3 multi-tenant UI, monitors, and offline demo
 backend/                 Rust standalone verifier & Go orchestrator
 scenarios/               Versioned public train / validation / test task contracts
-web/                     VEAP Agent Observatory (vanilla JS + isometric 3-D projection)
 artifacts/research/      Frozen v0.6 pilot, diagnostic, manifest, 40 kinematic traces & gate report (FAILED 18/20)
 tests/                   Pytest unit, API, claims, studio, and native MuJoCo integration suites
 docs/                    Protocols, threat model, claims policy, release train, and screenshots

@@ -11,7 +11,7 @@ const num=(n,d=2)=>n!==null&&n!==undefined&&n!==''&&Number.isFinite(Number(n))?N
 let toastHandle=null, mediaBlobUrl=null, currentDetailAsset=null;
 function toast(text,bad=false){const t=$('#toast');t.textContent=text;t.style.borderColor=bad?'#ae5c5c':'#668d43';t.classList.add('show');clearTimeout(toastHandle);toastHandle=setTimeout(()=>t.classList.remove('show'),4500)}
 async function api(path,options={}){let headers={'x-veap-token':st.token,...(options.headers||{})};let r=await fetch(path,{...options,headers});if(r.status===401){let value=prompt('Enter local VEAP_STUDIO_TOKEN configured on the server:');if(value){st.token=value;try{sessionStorage.setItem('veap-token',value)}catch{};return api(path,options)}}if(!r.ok){let j=await r.json().catch(()=>({detail:r.statusText}));throw Error(typeof j.detail==='string'?j.detail:'Request failed '+r.status)}return r.json()}
-function openPage(name){st.view=name;$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page'+name[0].toUpperCase()+name.slice(1)));$$('.railbutton[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));let titles={replay:'Replay Operations',world:'World Studio',data:'Evidence Registry',policy:'Policy Lab',assurance:'Assurance',connectors:'Runtime Workbench'};$('#crumbPage').textContent=titles[name]||name;if(name==='world'){renderWorld();requestAnimationFrame(()=>drawScene('#worldCanvas'))}if(name==='data'){renderRegistry();loadInbox()};if(name==='assurance'){populateSelects();renderAssuranceCards();loadContracts()}if(name==='connectors')renderConnectors();if(name==='replay')requestAnimationFrame(renderAll)}
+function openPage(name){st.view=name;$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page'+name[0].toUpperCase()+name.slice(1)));$$('.railbutton[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===name));let titles={replay:'Replay Operations',world:'World Studio',data:'Evidence Registry',policy:'Policy Lab',assurance:'Assurance',connectors:'Runtime Workbench'};$('#crumbPage').textContent=titles[name]||name;if(name==='world'){renderWorld();requestAnimationFrame(()=>drawScene('#worldCanvas'))}if(name==='data'){renderRegistry();loadInbox()};if(name==='policy'){ensureBenchInit();requestAnimationFrame(()=>benchScene&&benchScene.resize())}if(name==='assurance'){populateSelects();renderAssuranceCards();loadContracts()}if(name==='connectors')renderConnectors();if(name==='replay')requestAnimationFrame(renderAll)}
 function setSide(name){$$('[data-side]').forEach(b=>b.classList.toggle('selected',b.dataset.side===name));$$('.side-content').forEach(n=>n.classList.add('hidden'));$('#side'+name[0].toUpperCase()+name.slice(1)).classList.remove('hidden')}
 function badge(a){if(a.origin==='DEMO_SYNTHETIC')return '<span class="badge-lite">SYNTHETIC</span>';if(a.origin==='DERIVED_SYNTHETIC_FAULT')return '<span class="badge-lite">DERIVED</span>';return '<span class="badge-lite">UNATTESTED</span>'}
 function assetLabel(a){return a.name.replace(/\.jsonl$/,'').replace(/\.csv$/,'')}
@@ -228,6 +228,361 @@ $('#copyRecord').onclick=()=>navigator.clipboard.writeText($('#recordPlan').text
 $('#shortcuts').onclick=()=>toast('Shortcuts: Space = play/pause · [ or Ctrl+B = toggle sidebar · / = source search · 1–6 = workspace tabs · Arrow keys = seek');$('#about').onclick=()=>toast('VEAP R0.3: first-party engineering studio. Native jobs only when configured. No live robot control or safety certification.');
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='b'){e.preventDefault();toggleSidebar();return}if(e.target instanceof HTMLInputElement||e.target instanceof HTMLTextAreaElement||e.target instanceof HTMLSelectElement)return;if(e.key==='['){e.preventDefault();toggleSidebar()}if(e.key===' '){e.preventDefault();$('#playBtn').click()}if(e.key==='ArrowRight')seek(st.idx+1);if(e.key==='ArrowLeft')seek(st.idx-1);if(e.key==='/'){e.preventDefault();$('#sideSearch').focus()}if(/^[1-6]$/.test(e.key))openPage(['replay','world','data','policy','assurance','connectors'][Number(e.key)-1]);if(e.key==='Escape'){closeModal();closeAssetDetails()}});window.addEventListener('resize',()=>{renderAll();if(st.view==='world')drawScene('#worldCanvas')});
 }
-async function init(){bind();try{await refreshAssets();renderConnectors();renderWorld();requestAnimationFrame(anim);setInterval(()=>{if(st.view==='connectors')api('/api/jobs').then(j=>renderNativeJobs(j.jobs)).catch(()=>{})},4000)}catch(e){toast(e.message,true);$('#eventList').innerHTML=`<p class="small-note">Unable to load server: ${esc(e.message)}. Start the local API using uvicorn.</p>`}}
+/* Policy Lab: VEAP Benchmark Observatory & Evidence Ledger */
+const bench={scenarios:[],runs:[],selectedScenario:null,selectedRun:null,auth:'',polling:false,initialized:false,tab:'runner'};
+let benchScene=null;
+function benchText(id,val){const el=document.getElementById(id);if(el)el.textContent=String(val)}
+function benchAuthModal(show){const m=$('#benchAuthModal');if(!m)return;m.classList.toggle('hidden',!show);if(show)$('#benchAuthInput')?.focus()}
+async function benchApi(path,options={}){
+  const headers={...(options.headers||{})};
+  if(bench.auth)headers.Authorization='Bearer '+bench.auth;
+  if(options.body&&!headers['Content-Type'])headers['Content-Type']='application/json';
+  const res=await fetch(path,{...options,headers,cache:'no-store'});
+  if(res.status===401){benchAuthModal(true);throw Error('API authentication required')}
+  if(!res.ok){let msg=res.statusText;try{const j=await res.json();msg=typeof j.detail==='string'?j.detail:JSON.stringify(j.detail)}catch{}throw Error(msg||`HTTP ${res.status}`)}
+  return options.blob?res.blob():res.json();
+}
+function openPolicyTab(tab){
+  bench.tab=tab;
+  $$('.policy-tab').forEach(b=>b.classList.toggle('active',b.dataset.policyTab===tab));
+  const map={runner:'policyTabRunner',scenarios:'policyTabScenarios',ledger:'policyTabLedger',research:'policyTabResearch',counterfactual:'policyTabCounterfactual'};
+  Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',k===tab)});
+  if(tab==='runner'&&benchScene)requestAnimationFrame(()=>benchScene.resize());
+}
+function benchCurrentScenario(){return bench.scenarios.find(s=>s.id===bench.selectedScenario)||null}
+function benchScenarioSelect(id){
+  const s=bench.scenarios.find(x=>x.id===id);if(!s)return;
+  bench.selectedScenario=id;
+  const sel=$('#benchScenarioSelect');if(sel)sel.value=id;
+  benchText('benchScenarioLabel',s.title);
+  benchText('benchScenarioDesc',s.description);
+  if(benchScene)benchScene.setScenario(s);
+  if(!bench.selectedRun||bench.selectedRun.scenario_id!==id){
+    if(benchScene)benchScene.setEvents([]);
+    benchSetRunInfo(null);
+    benchText('benchSceneStatus','PREVIEW');
+  }
+}
+function benchRenderScenarios(){
+  const parent=$('#benchScenarioCards');if(!parent)return;
+  parent.replaceChildren();
+  for(const s of bench.scenarios){
+    const card=document.createElement('article');card.className='bench-scenario-card';
+    card.innerHTML=`<div class="bench-scenario-kicker"><span>${esc(s.family.toUpperCase())} / ${esc(s.id)}</span><span>${esc(s.split.toUpperCase())}</span></div><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p><div class="bench-scenario-foot"><span>${s.waypoints.length} GOALS · ${s.obstacles.length} OBSTACLES · ${s.faults.length} FAULTS</span><button class="mini-btn" type="button">OPEN IN LAB →</button></div>`;
+    card.querySelector('button').addEventListener('click',()=>{benchScenarioSelect(s.id);openPolicyTab('runner')});
+    parent.appendChild(card);
+  }
+}
+function benchRenderRuns(){
+  const p=$('#benchRunTable');if(!p)return;
+  p.replaceChildren();
+  benchText('benchRunCount',bench.runs.length+' RUNS');
+  if(!bench.runs.length){const tr=document.createElement('tr');tr.innerHTML='<td colspan="7">No experiments recorded yet.</td>';p.appendChild(tr);return}
+  for(const run of bench.runs){
+    const tr=document.createElement('tr');tr.className='clickable-row';
+    const ver=run.summary?.verified;
+    const status=run.status==='completed'?(ver?'VERIFIED':'NOT VERIFIED'):run.status.toUpperCase();
+    const cls=ver?'green-text':run.status==='completed'?'red-text':'';
+    tr.innerHTML=`<td class="mono"><b>${esc(run.id.slice(0,9))}</b></td><td>${esc(run.scenario_id)}</td><td>${esc(run.policy)}</td><td>${run.shield?'ON':'OFF'}</td><td class="${cls}">${escapeHtmlStatus(status)}</td><td>${run.summary?.safety_violations??'—'}</td><td>${new Date(run.created_at*1000).toLocaleString()}</td>`;
+    tr.addEventListener('click',()=>benchSelectRun(run.id,true));
+    p.appendChild(tr);
+  }
+}
+function escapeHtmlStatus(s){return esc(s)}
+function benchAggregate(){
+  const done=bench.runs.filter(r=>r.status==='completed'&&r.summary);
+  const trials=done.length;
+  const sum=key=>done.reduce((a,r)=>a+(Number(r.summary[key])||0),0);
+  benchText('benchMetricRate',trials?(100*sum('verified')/trials).toFixed(1)+'%':'—');
+  benchText('benchMetricRateNote',`${trials} trial${trials===1?'':'s'} evaluated by a verifier separate from the agent`);
+  benchText('benchMetricViolations',trials?sum('safety_violations'):'—');
+  benchText('benchMetricViolationsNote','Across '+trials+' completed experiments');
+  benchText('benchMetricShields',trials?sum('interventions'):'—');
+  benchText('benchMetricShieldsNote','Geometric motion gate actions');
+  const count=bench.selectedRun?.events?.length;
+  benchText('benchMetricEvents',count?count.toLocaleString():'—');
+  benchText('benchMetricEventsNote','Selected run hash-chain entries');
+  benchRenderResearch();
+}
+function benchRenderResearch(){
+  const done=bench.runs.filter(r=>r.status==='completed'&&r.summary);
+  const groups=[['greedy',false],['greedy',true],['route',false],['route',true]];
+  const p=$('#benchComparisonBars');if(!p)return;
+  p.replaceChildren();
+  if(!done.length){const e=document.createElement('p');e.className='small-note';e.style.padding='0';e.textContent='No experiments yet. Run both policies against the same scenario and seed.';p.appendChild(e);return}
+  for(const [policy,shield] of groups){
+    const list=done.filter(r=>r.policy===policy&&r.shield===shield);
+    if(!list.length)continue;
+    const ratio=list.filter(r=>r.summary.verified).length/list.length;
+    const row=document.createElement('div');row.className='bench-compare-row';
+    row.innerHTML=`<span>${policy==='route'?'Route planning':'Greedy control'} / ${shield?'gate on':'gate off'} <small>(n=${list.length})</small></span><div class="bench-compare-track"><div class="bench-compare-fill"></div></div><b>${Math.round(ratio*100)}%</b>`;
+    row.querySelector('.bench-compare-fill').style.width=`${Math.max(ratio*100,.3)}%`;
+    p.appendChild(row);
+  }
+  const notice=document.createElement('p');notice.className='small-note';notice.style.padding='6px 0 0';
+  notice.textContent='Descriptive local run history only; not a paired, controlled estimate of model performance.';
+  p.appendChild(notice);
+}
+function benchGate(name,label,tone){const node=document.querySelector(`[data-bench-gate="${name}"] b`);if(node){node.textContent=label;node.className=tone||''}}
+function benchSetRunInfo(run){
+  const v=run?.summary;
+  benchGate('chain',v?(v.trace_integrity?'PASS':'FAIL'):'—',v?(v.trace_integrity?'ok':'bad'):'');
+  benchGate('postcondition',v?(v.task_completed?'PASS':'FAIL'):'—',v?(v.task_completed?'ok':'bad'):'');
+  benchGate('safety',v?(v.safety_violations===0?'PASS':'FAIL'):'—',v?(v.safety_violations===0?'ok':'bad'):'');
+  benchGate('attestation',v?(v.attestation_verified===true?'SIGNED':v.attestation_verified===false?'INVALID':'UNSIGNED'):'—',v?(v.attestation_verified===true?'ok':v.attestation_verified===false?'bad':''):'');
+  benchText('benchVerifStatus',v?(v.verified?'VERIFIED':'NOT VERIFIED'):run?.status?.toUpperCase()||'AWAITING EVIDENCE');
+  const vs=$('#benchVerifStatus');if(vs)vs.className='bench-verif-state '+(v?(v.verified?'passed':'failed'):'');
+  const dl=$('#benchDownloadBtn'),ex=$('#benchLedgerExportBtn');
+  if(dl)dl.disabled=!(run?.status==='completed');
+  if(ex)ex.disabled=!(run?.status==='completed');
+  benchText('benchRunProgress',v?Math.round(v.progress*100)+'%':'—');
+  const bar=$('#benchRunProgressBar');if(bar)bar.style.width=v?Math.min(100,Math.max(0,v.progress*100))+'%':'0%';
+  benchText('benchLastClearance',v&&v.min_clearance_m!==null?v.min_clearance_m.toFixed(2)+' m':'—');
+  benchText('benchLastFaults',v?`${v.faults} / ${v.recovered_faults}`:'—');
+  benchText('benchLastDuration',v?v.sim_time_seconds.toFixed(1)+' s':'—');
+  benchText('benchLastEnergy',v?v.energy_proxy.toFixed(2)+' proxy':'—');
+  benchText('benchAnalysisTag',run?run.id.slice(0,8).toUpperCase():'NO RUN');
+}
+function benchEventLabel(e){
+  const p=e.payload||{};
+  if(e.kind==='state')return `Position [${Number(p.x).toFixed(2)}, ${Number(p.y).toFixed(2)}] · stage ${p.stage}`;
+  if(e.kind==='proposal')return `${p.decision||'motion'} · v=(${p.vx}, ${p.vy})`;
+  if(e.kind==='intervention')return p.reason||'Safety gate intervened';
+  if(e.kind==='milestone')return `Verified checkpoint: ${p.label||p.index}`;
+  if(e.kind==='fault')return `${p.kind} · ${p.phase}`;
+  if(e.kind==='terminal')return `Terminal claim: ${p.claimed}`;
+  if(e.kind==='observation')return p.sensor_ok?'Sensor observation accepted':'Sensor observation unavailable';
+  if(e.kind==='abstain')return p.reason||'Correct abstention';
+  return JSON.stringify(p).slice(0,100);
+}
+function benchRenderEvents(events){
+  const p=$('#benchEventsList');if(!p)return;
+  p.replaceChildren();
+  benchText('benchEventCount',`${events.length} EVENTS`);
+  const noteworthy=events.filter(e=>['fault','intervention','milestone','abstain','terminal'].includes(e.kind));
+  const recent=(noteworthy.length?noteworthy:events.filter(e=>e.kind==='proposal')).slice(-9).reverse();
+  if(!recent.length){p.innerHTML='<div class="small-note">No events yet. The trace will appear after you start an experiment.</div>';return}
+  for(const e of recent){
+    const item=document.createElement('div');item.className='bench-event';
+    item.innerHTML=`<span class="bench-event-tick">T+${String(e.tick).padStart(3,'0')}</span><span class="bench-event-tag ${esc(e.kind)}">${esc(e.kind.toUpperCase())}</span><span class="bench-event-content"></span>`;
+    item.querySelector('.bench-event-content').textContent=benchEventLabel(e);
+    item.title=benchEventLabel(e);
+    p.appendChild(item);
+  }
+}
+function benchRenderTrace(run){
+  if(!run){benchText('benchTracePreview','Choose a completed run to inspect event provenance.');return}
+  const events=run.events||[];
+  const overview={id:run.id,scenario:run.scenario_id,policy:run.policy,seed:run.seed,shield:run.shield,status:run.status,verification:run.summary,manifest:run.manifest||null,tail_events:events.slice(-5)};
+  benchText('benchTracePreview',JSON.stringify(overview,null,2));
+}
+async function benchRefresh(){
+  if(bench.polling)return;
+  bench.polling=true;
+  try{
+    bench.runs=await benchApi('/api/runs');
+    benchRenderRuns();
+    const selectedId=bench.selectedRun?.id;
+    if(selectedId){
+      const r=await benchApi('/api/runs/'+selectedId);
+      const wasComplete=bench.selectedRun.status==='completed';
+      const isDifferent=r.events?.length!==bench.selectedRun.events?.length||r.status!==bench.selectedRun.status;
+      bench.selectedRun=r;
+      if(isDifferent){
+        if(benchScene){if(r.status==='completed'&&!wasComplete)benchScene.setEvents([]);benchScene.setEvents(r.events||[],r.status==='completed')}
+        benchSetRunInfo(r);benchRenderEvents(r.events||[]);benchRenderTrace(r);
+        benchText('benchSceneStatus',r.status==='completed'?(r.summary?.verified?'VERIFIED':'REVIEW REQUIRED'):'EXECUTING');
+      }
+    }else if(bench.runs.length){
+      const first=bench.runs[0];
+      if(first.status==='completed')await benchSelectRun(first.id,false);
+    }
+    benchAggregate();
+  }catch(e){if(!String(e.message).includes('authentication'))console.warn(e)}finally{bench.polling=false}
+}
+async function benchSelectRun(id,navigate){
+  try{
+    const r=await benchApi('/api/runs/'+id);
+    bench.selectedRun=r;
+    if(bench.scenarios.find(s=>s.id===r.scenario_id))benchScenarioSelect(r.scenario_id);
+    if(benchScene){benchScene.setEvents([]);benchScene.setEvents(r.events||[],r.status==='completed')}
+    benchSetRunInfo(r);benchRenderEvents(r.events||[]);benchRenderTrace(r);benchAggregate();
+    benchText('benchSceneStatus',r.status==='completed'?(r.summary?.verified?'VERIFIED':'REVIEW REQUIRED'):'EXECUTING');
+    if(navigate)openPolicyTab('runner');
+  }catch(e){toast(e.message,true)}
+}
+async function benchRun(policy=null){
+  const s=benchCurrentScenario();if(!s)return toast('Scenario contracts not loaded',true);
+  const seed=Number($('#benchSeedInput').value);
+  if(!Number.isInteger(seed)||seed<0||seed>4294967295)return toast('Seed must be an integer between 0 and 2^32−1',true);
+  try{
+    const chosenPolicy=policy||$('#benchPolicySelect').value;
+    const req={scenario_id:s.id,policy:chosenPolicy,seed,shield:$('#benchShieldToggle').checked};
+    const accepted=await benchApi('/api/runs',{method:'POST',body:JSON.stringify(req)});
+    bench.selectedRun=null;
+    if(benchScene)benchScene.setEvents([]);
+    benchSetRunInfo(null);
+    benchText('benchSceneStatus','QUEUED');
+    toast(`Trial ${accepted.run_id.slice(0,8)} queued · ${chosenPolicy}`);
+    await benchSelectRun(accepted.run_id,false);
+    openPolicyTab('runner');
+  }catch(e){toast(e.message,true)}
+}
+async function benchCompare(){
+  const s=benchCurrentScenario();if(!s)return toast('Scenario contracts not loaded',true);
+  const seed=Number($('#benchSeedInput').value);
+  if(!Number.isInteger(seed)||seed<0||seed>4294967295)return toast('Invalid seed',true);
+  try{
+    for(const p of ['greedy','route']){
+      await benchApi('/api/runs',{method:'POST',body:JSON.stringify({scenario_id:s.id,policy:p,seed,shield:$('#benchShieldToggle').checked})});
+    }
+    toast('Paired baseline trials queued with identical seed and scenario');
+    setTimeout(benchRefresh,600);
+    openPolicyTab('research');
+  }catch(e){toast(e.message,true)}
+}
+async function benchExportRun(){
+  if(!bench.selectedRun||bench.selectedRun.status!=='completed')return;
+  try{
+    const blob=await benchApi(`/api/runs/${bench.selectedRun.id}/bundle`,{blob:true});
+    const href=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=href;a.download=`veap-evidence-${bench.selectedRun.id.slice(0,8)}.json`;a.click();
+    setTimeout(()=>URL.revokeObjectURL(href),1000);
+    toast('Evidence JSON bundle exported');
+  }catch(e){toast(e.message,true)}
+}
+class BenchWorldRenderer{
+  constructor(canvas){
+    this.canvas=canvas;this.ctx=canvas.getContext('2d');this.yaw=-.57;this.zoom=1;this.frame=0;this.frames=[];this.scenario=null;this.playing=false;this.last=0;this.drag=false;this.mouseX=0;
+    this.resize();window.addEventListener('resize',()=>this.resize());new ResizeObserver(()=>this.resize()).observe(canvas);
+    canvas.addEventListener('pointerdown',e=>{this.drag=true;this.mouseX=e.clientX;canvas.setPointerCapture(e.pointerId)});
+    canvas.addEventListener('pointerup',()=>this.drag=false);canvas.addEventListener('pointercancel',()=>this.drag=false);
+    canvas.addEventListener('pointermove',e=>{if(this.drag){this.yaw+=(e.clientX-this.mouseX)*.008;this.mouseX=e.clientX}});
+    canvas.addEventListener('wheel',e=>{e.preventDefault();this.zoom=Math.max(.57,Math.min(1.8,this.zoom*(e.deltaY>0?.94:1.06)))},{passive:false});
+    requestAnimationFrame(t=>this.loop(t));
+  }
+  resize(){
+    const rect=this.canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;
+    this.w=rect.width;this.h=rect.height;const dpr=Math.min(2,window.devicePixelRatio||1);
+    this.canvas.width=Math.round(this.w*dpr);this.canvas.height=Math.round(this.h*dpr);
+    this.ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  setScenario(s){this.scenario=s;this.frame=0;this.zoom=1;this.yaw=-.57;this.frames=[];this.playing=false;this.updateControls()}
+  setEvents(events,autoplay=false){
+    const prev=this.frames.length;
+    this.frames=events.filter(e=>e.kind==='state').map(e=>({tick:e.tick,x:Number(e.payload.x),y:Number(e.payload.y),vx:Number(e.payload.vx),vy:Number(e.payload.vy),stage:Number(e.payload.stage)}));
+    if(autoplay&&this.frames.length&&prev===0){this.frame=0;this.playing=true}
+    else if(this.frame>=this.frames.length){this.frame=Math.max(0,this.frames.length-1)}
+    this.updateControls();
+  }
+  updateControls(){
+    const max=Math.max(0,this.frames.length-1);
+    const sc=$('#benchScrubber');if(sc){sc.max=max;sc.value=Math.min(max,this.frame)}
+    const dt=this.scenario?.dt||.2,tick=this.frames[this.frame]?.tick||0;
+    benchText('benchPlaybackTime','T+ '+(tick*dt).toFixed(1)+'s');
+    benchText('benchPlaybackTotal',max?(this.frames[max].tick*dt).toFixed(1)+'s':'—');
+    benchText('benchPlayPause',this.playing?'Ⅱ':'▶');
+  }
+  loop(t){
+    if(this.playing&&this.frames.length>1&&t-this.last>74){
+      this.last=t;this.frame++;
+      if(this.frame>=this.frames.length){this.frame=this.frames.length-1;this.playing=false}
+      this.updateControls();
+    }
+    this.render(t);requestAnimationFrame(ts=>this.loop(ts));
+  }
+  point(x,y,h=0){
+    const s=this.scenario;if(!s)return{x:0,y:0,d:0};
+    const cx=s.width/2,cy=s.height/2,dx=x-cx,dy=y-cy,cs=Math.cos(this.yaw),ss=Math.sin(this.yaw);
+    const u=dx*cs-dy*ss,v=dx*ss+dy*cs;
+    const k=Math.min((this.w||700)/(s.width*1.57),(this.h||360)/(s.height*.97))*this.zoom;
+    return{x:this.w/2+u*k,y:this.h*.52+v*k*.58-h*k*.83,d:v,k};
+  }
+  polygon(pts,fill,stroke=null,w=1){const c=this.ctx;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.closePath();if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=w;c.stroke()}}
+  line(pts,col,w=1){if(pts.length<2)return;const c=this.ctx;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.strokeStyle=col;c.lineWidth=w;c.stroke()}
+  rectZone(z){const p=(x,y,h)=>this.point(x,y,h);const q=[[z.x1,z.y1],[z.x2,z.y1],[z.x2,z.y2],[z.x1,z.y2]];this.polygon(q.map(a=>p(...a,0.01)),'#8b43386e','#c97c52',1);this.polygon(q.map(a=>p(...a,.1)),'#b362472a','#e6976080',1)}
+  cylinder(x,y,r,h,main,top){
+    const verts=[],cnt=20;for(let i=0;i<cnt;i++){const a=2*Math.PI*i/cnt;verts.push([x+r*Math.cos(a),y+r*Math.sin(a)])}
+    const base=verts.map(q=>this.point(q[0],q[1],.01)),roof=verts.map(q=>this.point(q[0],q[1],h));
+    for(let i=0;i<cnt;i++){const j=(i+1)%cnt;this.polygon([base[i],base[j],roof[j],roof[i]],i%3===0?main:main+'cc',null)}
+    this.polygon(roof,top,'#7aa89e4d',1);
+  }
+  label(str,x,y,col='#b8d4cc'){const c=this.ctx;c.font='10px ui-sans-serif,system-ui';c.textAlign='center';c.fillStyle=col;c.fillText(str,x,y)}
+  render(t){
+    if(!this.ctx||!this.scenario||!this.w)return;
+    const c=this.ctx,s=this.scenario;c.clearRect(0,0,this.w,this.h);
+    const bg=c.createRadialGradient(this.w*.5,this.h*.45,25,this.w*.5,this.h*.48,this.w*.75);
+    bg.addColorStop(0,'#1b3033');bg.addColorStop(1,'#091317');c.fillStyle=bg;c.fillRect(0,0,this.w,this.h);
+    const p=(x,y,h=0)=>this.point(x,y,h);
+    this.polygon([p(0,0),p(s.width,0),p(s.width,s.height),p(0,s.height)],'#14252a','#49676b',1.3);
+    for(let x=0;x<=s.width+.01;x++)this.line([p(x,0),p(x,s.height)],'#6898941c',.8);
+    for(let y=0;y<=s.height+.01;y++)this.line([p(0,y),p(s.width,y)],'#6898941c',.8);
+    for(const z of s.forbidden_zones)this.rectZone(z);
+    const entries=[];
+    for(const o of s.obstacles)entries.push({depth:p(o.x,o.y).d,render:()=>{this.cylinder(o.x,o.y,o.radius,.71,'#29434d','#3f6470');const a=p(o.x,o.y,1.0);this.label(o.label,a.x,a.y,'#7ea3ad')}});
+    for(let i=0;i<s.waypoints.length;i++){
+      const wp=s.waypoints[i];
+      entries.push({depth:p(wp.x,wp.y).d,render:()=>{
+        const a=p(wp.x,wp.y,.08),top=p(wp.x,wp.y,.8);
+        c.strokeStyle='#a69ff0ab';c.lineWidth=1.5;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(top.x,top.y);c.stroke();
+        const done=(this.frames[this.frame]?.stage||0)>i;
+        c.beginPath();c.ellipse(top.x,top.y,7+Math.sin(t/450+i)*1.4,5,0,0,Math.PI*2);
+        c.fillStyle=done?'#8fd31a':'#b7b1ff';c.fill();c.strokeStyle='#f0edff99';c.stroke();
+        this.label(`${i+1}  ${wp.label}`,top.x,top.y-13,done?'#c5f76e':'#c6c3fd');
+      }});
+    }
+    const trail=this.frames.slice(0,this.frame+1);
+    if(trail.length>1){c.save();c.shadowColor='#55d7b9';c.shadowBlur=10;this.line(trail.map(q=>p(q.x,q.y,.07)),'#55d7b9cc',2.5);c.restore()}
+    const cur=this.frames.length?this.frames[this.frame]:{x:s.start.x,y:s.start.y,vx:0,vy:0};
+    entries.push({depth:p(cur.x,cur.y).d,render:()=>{
+      const a=p(cur.x,cur.y,.08);c.save();c.shadowColor='#8fd31a';c.shadowBlur=22;c.beginPath();c.ellipse(a.x,a.y,13,6,0,0,2*Math.PI);c.fillStyle='#8fd31a66';c.fill();c.restore();
+      this.cylinder(cur.x,cur.y,.22,.38,'#2f8c5a','#b9f378');
+      const top=p(cur.x,cur.y,.44);c.beginPath();c.arc(top.x,top.y,3,0,2*Math.PI);c.fillStyle='#081e0c';c.fill();
+      if(Math.hypot(cur.vx,cur.vy)>.02){const dir=p(cur.x+.55*cur.vx,cur.y+.55*cur.vy,.43);this.line([top,dir],'#e6fff0',2)}
+      this.label('AGENT',top.x,top.y-19,'#c8f782');
+    }});
+    entries.sort((a,b)=>a.depth-b.depth);for(const e of entries)e.render();
+    c.fillStyle='#83a0a8';c.font='10px ui-monospace,monospace';c.textAlign='left';c.fillText(`X ${cur.x.toFixed(2)}  Y ${cur.y.toFixed(2)}   /  ${s.width}×${s.height} m`,14,this.h-44);
+  }
+}
+function bindBench(){
+  const cv=$('#benchWorldCanvas');if(cv&&!benchScene)benchScene=new BenchWorldRenderer(cv);
+  $$('.policy-tab').forEach(b=>b.addEventListener('click',()=>openPolicyTab(b.dataset.policyTab)));
+  $('#benchRunTop')?.addEventListener('click',()=>benchRun());
+  $('#benchRunBtn')?.addEventListener('click',()=>benchRun());
+  $('#benchCompareTop')?.addEventListener('click',benchCompare);
+  $('#benchResearchCompareBtn')?.addEventListener('click',benchCompare);
+  $('#benchScenarioSelect')?.addEventListener('change',e=>benchScenarioSelect(e.target.value));
+  $('#benchDownloadBtn')?.addEventListener('click',benchExportRun);
+  $('#benchLedgerExportBtn')?.addEventListener('click',benchExportRun);
+  $('#benchPlayPause')?.addEventListener('click',()=>{
+    if(!benchScene||!benchScene.frames.length){toast('No trajectory to replay yet');return}
+    if(benchScene.frame===benchScene.frames.length-1)benchScene.frame=0;
+    benchScene.playing=!benchScene.playing;benchScene.updateControls();
+  });
+  $('#benchScrubber')?.addEventListener('input',e=>{if(!benchScene)return;benchScene.frame=Number(e.target.value);benchScene.playing=false;benchScene.updateControls()});
+  $('#benchResetCamera')?.addEventListener('click',()=>{if(!benchScene)return;benchScene.yaw=-.57;benchScene.zoom=1});
+  $('#benchAuthBtn')?.addEventListener('click',()=>benchAuthModal(true));
+  $('#benchAuthClose')?.addEventListener('click',()=>benchAuthModal(false));
+  $('#benchAuthCancel')?.addEventListener('click',()=>benchAuthModal(false));
+  $('#benchAuthSave')?.addEventListener('click',async()=>{bench.auth=$('#benchAuthInput').value.trim();$('#benchAuthInput').value='';benchAuthModal(false);await ensureBenchInit(true)});
+}
+async function ensureBenchInit(force=false){
+  if(bench.initialized&&!force)return;
+  bench.initialized=true;
+  try{
+    bench.scenarios=await benchApi('/api/scenarios');
+    const sel=$('#benchScenarioSelect');
+    if(sel){
+      sel.replaceChildren();
+      for(const s of bench.scenarios){const o=document.createElement('option');o.value=s.id;o.textContent=`${s.title}  [${s.split}]`;sel.appendChild(o)}
+    }
+    benchRenderScenarios();
+    benchScenarioSelect(bench.selectedScenario||'warehouse-transfer');
+    await benchRefresh();
+  }catch(e){bench.initialized=false;if(!String(e.message).includes('authentication'))toast(e.message,true)}
+}
+
+async function init(){bind();bindBench();try{await refreshAssets();renderConnectors();renderWorld();requestAnimationFrame(anim);setInterval(()=>{if(st.view==='connectors')api('/api/jobs').then(j=>renderNativeJobs(j.jobs)).catch(()=>{});if(st.view==='policy')benchRefresh()},1500)}catch(e){toast(e.message,true);$('#eventList').innerHTML=`<p class="small-note">Unable to load server: ${esc(e.message)}. Start the local API using uvicorn.</p>`}}
 window.addEventListener('DOMContentLoaded',init);
 })();

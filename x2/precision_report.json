@@ -1,0 +1,181 @@
+{
+  "config": {
+    "candidate_n": [
+      10,
+      15,
+      20,
+      30,
+      40,
+      60
+    ],
+    "claims_false_per_scenario": 3,
+    "claims_true_per_scenario": 4,
+    "max_false_rejection_rate": 0.05,
+    "min_meaningful_improvement": 0.1,
+    "n_replicates": 2000,
+    "seed": 20261116,
+    "target_joint_power_nominal": 0.8,
+    "target_joint_power_pessimistic": 0.5
+  },
+  "recommended_n": 60,
+  "regimes": {
+    "nominal": {
+      "description": "Development nominal regime: moderate-to-strong recall gain, 1% false-rejection rate",
+      "fpr_true": 0.01,
+      "p_gain": 0.28,
+      "p_loss": 0.03,
+      "scenario_sd_fpr": 0.015,
+      "scenario_sd_recall": 0.08,
+      "true_recall_improvement": 0.25
+    },
+    "pessimistic": {
+      "description": "Development pessimistic regime: modest recall gain, 1.5% false-rejection rate, higher clustering",
+      "fpr_true": 0.015,
+      "p_gain": 0.23,
+      "p_loss": 0.03,
+      "scenario_sd_fpr": 0.025,
+      "scenario_sd_recall": 0.11,
+      "true_recall_improvement": 0.2
+    }
+  },
+  "results": {
+    "nominal": [
+      {
+        "mean_estimated_false_rejection_rate": 0.011874999999999952,
+        "mean_estimated_recall_improvement": 0.2482166666666668,
+        "n_genuine_claims": 40,
+        "n_ref_false_claims": 30,
+        "n_ref_true_claims": 40,
+        "n_scenarios": 10,
+        "p_resolve_false_rejection_ceiling": 0.0,
+        "p_resolve_joint": 0.0,
+        "p_resolve_recall": 0.263
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.012758333333333382,
+        "mean_estimated_recall_improvement": 0.24922222222222368,
+        "n_genuine_claims": 60,
+        "n_ref_false_claims": 45,
+        "n_ref_true_claims": 60,
+        "n_scenarios": 15,
+        "p_resolve_false_rejection_ceiling": 0.0,
+        "p_resolve_joint": 0.0,
+        "p_resolve_recall": 0.43
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.012106249999999808,
+        "mean_estimated_recall_improvement": 0.24976666666666658,
+        "n_genuine_claims": 80,
+        "n_ref_false_claims": 60,
+        "n_ref_true_claims": 80,
+        "n_scenarios": 20,
+        "p_resolve_false_rejection_ceiling": 0.387,
+        "p_resolve_joint": 0.2165,
+        "p_resolve_recall": 0.58
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.012404166666666562,
+        "mean_estimated_recall_improvement": 0.24929444444444482,
+        "n_genuine_claims": 120,
+        "n_ref_false_claims": 90,
+        "n_ref_true_claims": 120,
+        "n_scenarios": 30,
+        "p_resolve_false_rejection_ceiling": 0.563,
+        "p_resolve_joint": 0.425,
+        "p_resolve_recall": 0.7695
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.012334375000000052,
+        "mean_estimated_recall_improvement": 0.25117083333333345,
+        "n_genuine_claims": 160,
+        "n_ref_false_claims": 120,
+        "n_ref_true_claims": 160,
+        "n_scenarios": 40,
+        "p_resolve_false_rejection_ceiling": 0.6835,
+        "p_resolve_joint": 0.612,
+        "p_resolve_recall": 0.902
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.012179166666666442,
+        "mean_estimated_recall_improvement": 0.2516972222222222,
+        "n_genuine_claims": 240,
+        "n_ref_false_claims": 180,
+        "n_ref_true_claims": 240,
+        "n_scenarios": 60,
+        "p_resolve_false_rejection_ceiling": 0.913,
+        "p_resolve_joint": 0.9005,
+        "p_resolve_recall": 0.987
+      }
+    ],
+    "pessimistic": [
+      {
+        "mean_estimated_false_rejection_rate": 0.018887499999999748,
+        "mean_estimated_recall_improvement": 0.20178333333333345,
+        "n_genuine_claims": 40,
+        "n_ref_false_claims": 30,
+        "n_ref_true_claims": 40,
+        "n_scenarios": 10,
+        "p_resolve_false_rejection_ceiling": 0.0,
+        "p_resolve_joint": 0.0,
+        "p_resolve_recall": 0.1245
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.019583333333333265,
+        "mean_estimated_recall_improvement": 0.20413333333333528,
+        "n_genuine_claims": 60,
+        "n_ref_false_claims": 45,
+        "n_ref_true_claims": 60,
+        "n_scenarios": 15,
+        "p_resolve_false_rejection_ceiling": 0.0,
+        "p_resolve_joint": 0.0,
+        "p_resolve_recall": 0.2275
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.019206249999999876,
+        "mean_estimated_recall_improvement": 0.20199166666666601,
+        "n_genuine_claims": 80,
+        "n_ref_false_claims": 60,
+        "n_ref_true_claims": 80,
+        "n_scenarios": 20,
+        "p_resolve_false_rejection_ceiling": 0.2285,
+        "p_resolve_joint": 0.0695,
+        "p_resolve_recall": 0.3085
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.019549999999999658,
+        "mean_estimated_recall_improvement": 0.19977222222222316,
+        "n_genuine_claims": 120,
+        "n_ref_false_claims": 90,
+        "n_ref_true_claims": 120,
+        "n_scenarios": 30,
+        "p_resolve_false_rejection_ceiling": 0.316,
+        "p_resolve_joint": 0.1385,
+        "p_resolve_recall": 0.445
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.018696875,
+        "mean_estimated_recall_improvement": 0.20099999999999982,
+        "n_genuine_claims": 160,
+        "n_ref_false_claims": 120,
+        "n_ref_true_claims": 160,
+        "n_scenarios": 40,
+        "p_resolve_false_rejection_ceiling": 0.428,
+        "p_resolve_joint": 0.2525,
+        "p_resolve_recall": 0.592
+      },
+      {
+        "mean_estimated_false_rejection_rate": 0.019264583333333127,
+        "mean_estimated_recall_improvement": 0.20048611111111136,
+        "n_genuine_claims": 240,
+        "n_ref_false_claims": 180,
+        "n_ref_true_claims": 240,
+        "n_scenarios": 60,
+        "p_resolve_false_rejection_ceiling": 0.6845,
+        "p_resolve_joint": 0.543,
+        "p_resolve_recall": 0.7825
+      }
+    ]
+  },
+  "schema": "veap-x2-precision-analysis/1",
+  "scope": "development-only"
+}

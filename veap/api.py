@@ -1,13 +1,13 @@
 """Local control plane. Network exposure requires external review and stronger IAM."""
 from __future__ import annotations
 import os
+import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Literal
 from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.responses import FileResponse, HTMLResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from .sim import run_episode
 from .spec import list_scenarios, load_scenario
@@ -15,7 +15,11 @@ from .store import Store
 from .verifier import verify_bundle
 
 ROOT = Path(__file__).resolve().parent.parent
-WEB_ROOT = ROOT / "web"
+STUDIO_ROOT = ROOT / "veap_studio_r03"
+STUDIO_WEB_ROOT = STUDIO_ROOT / "web"
+if str(STUDIO_ROOT) not in sys.path:
+    sys.path.insert(0, str(STUDIO_ROOT))
+from veap_studio.api import register_studio_routes
 DATA_ROOT = Path(os.getenv("VEAP_DATA_DIR",str(ROOT / "artifacts")))
 store = Store(DATA_ROOT)
 executor = ThreadPoolExecutor(max_workers=2,thread_name_prefix="veap-benchmark")
@@ -35,7 +39,7 @@ async def security(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "no-referrer"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'"
+    response.headers["Content-Security-Policy"] = "default-src 'self' 'unsafe-inline' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'"
     response.headers["Cache-Control"] = "no-store"
     return response
 
@@ -65,7 +69,7 @@ def execute(run_id: str, req: RunRequest):
 @app.get("/api/health")
 def health():
     return {"status":"ok","version":"0.1.0","mode":"local simulation only",
-            "authentication":bool(os.getenv("VEAP_ADMIN_TOKEN"))}
+            "authentication":bool(os.getenv("VEAP_ADMIN_TOKEN")),"ui":"VEAP_FOUNDRY"}
 
 
 @app.get("/api/scenarios")
@@ -114,7 +118,7 @@ def download_bundle(run_id: str):
 
 @app.get("/")
 def index():
-    return FileResponse(WEB_ROOT / "index.html")
+    return FileResponse(STUDIO_WEB_ROOT / "index.html", media_type="text/html")
 
 
-app.mount("/static",StaticFiles(directory=WEB_ROOT),name="static")
+register_studio_routes(app, mount_root=False)

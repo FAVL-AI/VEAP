@@ -1,0 +1,74 @@
+{
+  "breakdowns": {
+    "fixed_verifier": {},
+    "naive_range": {
+      "inverted_range": 1747,
+      "lower_bound_violated": 9741
+    },
+    "old_verifier_rect": {
+      "lower_bound_violated": 1205
+    }
+  },
+  "circle_cases": 10000,
+  "fixed_error_rate": "0/20,000",
+  "fixed_errors": 0,
+  "naive_error_rate": "11488/20,000",
+  "naive_errors": 11488,
+  "non_overlap_cases": 8512,
+  "old_verifier_rect_error_rate": "1205/20,000",
+  "old_verifier_rect_errors": 1205,
+  "overlap_cases": 11488,
+  "reconciliation_table": {
+    "circle": {
+      "non_overlap": {
+        "cases": 3902,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 0,
+        "old_verifier_rect_errors": 0
+      },
+      "overlap": {
+        "cases": 6098,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 6098,
+        "old_verifier_rect_errors": 0
+      },
+      "total": {
+        "cases": 10000,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 6098,
+        "old_verifier_rect_errors": 0
+      }
+    },
+    "overall": {
+      "cases": 20000,
+      "fixed_verifier_errors": 0,
+      "naive_range_errors": 11488,
+      "non_overlap_cases": 8512,
+      "old_verifier_rect_errors": 1205,
+      "overlap_cases": 11488
+    },
+    "rect": {
+      "non_overlap": {
+        "cases": 4610,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 0,
+        "old_verifier_rect_errors": 0
+      },
+      "overlap": {
+        "cases": 5390,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 5390,
+        "old_verifier_rect_errors": 1205
+      },
+      "total": {
+        "cases": 10000,
+        "fixed_verifier_errors": 0,
+        "naive_range_errors": 5390,
+        "old_verifier_rect_errors": 1205
+      }
+    }
+  },
+  "rect_cases": 10000,
+  "seed": 20261116,
+  "total_cases": 20000
+}

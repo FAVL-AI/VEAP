@@ -11,7 +11,6 @@ def test_api_local_run_and_evidence_bundle(tmp_path,monkeypatch):
     client=TestClient(api.app)
     assert client.get('/api/health').status_code==200
     assert client.get('/').status_code==200
-    assert client.get('/static/app.js').status_code==200
     assert len(client.get('/api/scenarios').json())>=5
     request=client.post('/api/runs',json={'scenario_id':'campus-patrol','policy':'route','shield':True,'seed':7})
     assert request.status_code==202
@@ -37,3 +36,21 @@ def test_api_rejects_bad_input_and_requires_token(tmp_path,monkeypatch):
     assert client.post('/api/runs',headers=headers,json={'scenario_id':'bad-id'}).status_code==404
     assert client.post('/api/runs',headers=headers,json={'scenario_id':'campus-patrol','seed':-1}).status_code==422
     assert client.get('/api/runs/bad-id/bundle',headers=headers).status_code==400
+
+
+def test_api_serves_veap_foundry_ui_and_studio_routes(tmp_path, monkeypatch):
+    monkeypatch.delenv('VEAP_ADMIN_TOKEN', raising=False)
+    monkeypatch.delenv('VEAP_STUDIO_TOKEN', raising=False)
+    monkeypatch.setattr(api, 'store', Store(tmp_path))
+    client = TestClient(api.app)
+
+    root = client.get('/')
+    assert root.status_code == 200
+    assert 'VEAP' in root.text and 'FOUNDRY' in root.text
+    assert client.get('/assets/app.js').status_code == 200
+    assert client.get('/assets/style.css').status_code == 200
+
+    assert client.get('/api/health').json()['ui'] == 'VEAP_FOUNDRY'
+    assert client.get('/api/assets').status_code == 200
+    assert client.get('/api/contracts').status_code == 200
+    assert client.get('/api/integrations').status_code == 200

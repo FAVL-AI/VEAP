@@ -44,13 +44,13 @@ class ReportReq(BaseModel):
     source_id: str
     candidate_id: str | None=None
 
-def create_app(data_root=None, seed_demo=True):
+def register_studio_routes(app: FastAPI, data_root=None, seed_demo=True, mount_root: bool = True):
+    """Mount VEAP Studio R0.3 (VEAP Foundry) UI assets and API endpoints onto an existing FastAPI app."""
     store=Store(data_root or os.environ.get('VEAP_STUDIO_DATA',str(ROOT/'local_data')),seed_demo=seed_demo)
     jobs=Jobs(store)
     registry=Registry(store)
     inbox=Path(os.environ.get('VEAP_INBOX',str(store.root/'inbox'))).resolve()
     inbox.mkdir(parents=True,exist_ok=True)
-    app=FastAPI(title='VEAP Studio R0.3 — sovereign robotics workspace',docs_url='/docs')
     app.state.store=store
     app.state.jobs=jobs
     app.mount('/assets', StaticFiles(directory=WEB), name='assets')
@@ -60,18 +60,11 @@ def create_app(data_root=None, seed_demo=True):
             import hmac
             v=request.headers.get('x-veap-token','')
             if not hmac.compare_digest(v,secret):raise HTTPException(status_code=401,detail='invalid token')
-    @app.middleware('http')
-    async def headers(request:Request,call_next):
-        response=await call_next(request)
-        response.headers['X-Content-Type-Options']='nosniff'
-        response.headers['X-Frame-Options']='DENY'
-        response.headers['Cache-Control']='no-store'
-        response.headers['Content-Security-Policy']="default-src 'self' 'unsafe-inline' data: blob:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'"
-        return response
-    @app.get('/')
-    def index():return FileResponse(WEB/'index.html',media_type='text/html')
-    @app.get('/api/health')
-    def health():return {'status':'LOCAL_RESEARCH_PILOT','schema':'veap.studio.v0.3','source_authenticity':'UNATTESTED','network_boundary':'127.0.0.1 only','ui':'VEAP_NATIVE','external_visualization_dependencies':False,'robot_actuator_authority':False}
+    if mount_root:
+        @app.get('/')
+        def index():return FileResponse(WEB/'index.html',media_type='text/html')
+        @app.get('/api/health')
+        def health():return {'status':'LOCAL_RESEARCH_PILOT','schema':'veap.studio.v0.3','source_authenticity':'UNATTESTED','network_boundary':'127.0.0.1 only','ui':'VEAP_NATIVE','external_visualization_dependencies':False,'robot_actuator_authority':False}
     @app.get('/api/assets',dependencies=[Depends(auth)])
     def assets():return {'assets':store.list_assets()}
     @app.post('/api/assets',dependencies=[Depends(auth)])
@@ -221,6 +214,20 @@ def create_app(data_root=None, seed_demo=True):
         file=jobs.root/job_id/name
         if not file.is_file():raise HTTPException(status_code=404)
         return FileResponse(file,media_type='application/octet-stream',filename=name)
+
+
+def create_app(data_root=None, seed_demo=True):
+    """Create standalone VEAP Studio R0.3 FastAPI application."""
+    app=FastAPI(title='VEAP Studio R0.3 — sovereign robotics workspace',docs_url='/docs')
+    @app.middleware('http')
+    async def headers(request:Request,call_next):
+        response=await call_next(request)
+        response.headers['X-Content-Type-Options']='nosniff'
+        response.headers['X-Frame-Options']='DENY'
+        response.headers['Cache-Control']='no-store'
+        response.headers['Content-Security-Policy']="default-src 'self' 'unsafe-inline' data: blob:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'"
+        return response
+    register_studio_routes(app,data_root=data_root,seed_demo=seed_demo,mount_root=True)
     return app
 
 app=create_app()

@@ -134,9 +134,154 @@
         <div class="cards-3 foot-cards"><div class="feature-card"><h3>MCAP</h3><p>Source bytes are preserved and hashed. Optional ROS 2 decoder extracts odometry and synchronized commands with lineage and timing caveats.</p></div><div class="feature-card"><h3>LeRobotDataset</h3><p>Local conversion runs only with a compatible LeRobot environment and genuine recorded state/action vectors; derived datasets retain source digests.</p></div><div class="feature-card"><h3>Media & logs</h3><p>Images, videos, CSV, JSONL, CAD, point clouds and text logs accepted under bounded local-upload policy.</p></div></div>
       </section>
 
-      <section id="pagePolicy" class="page"><div class="page-header"><span class="eyebrow">POLICY LAB / EVALUATION HARNESS</span><h1>Counterfactual Lab</h1><p>Reproducible analytic perturbations of stored traces. Does not execute physical faults or train VLA policies.</p></div>
-        <div class="page-split wide-left"><div class="panel"><div class="panel-title">Inject an analytic fault</div><div class="form-grid"><label>Input trajectory<select id="faultSource"></select></label><label>Fault family<select id="faultType"><option value="sensor_dropout">Sensor dropout</option><option value="actuator_stall">Actuator stall</option><option value="odometry_drift">Odometry drift</option><option value="command_delay">Command delay</option><option value="perception_noise">Perception noise</option></select></label><label>Severity<input id="faultSeverity" type="range" min="0.1" max="3" step="0.1" value="1"/><span id="faultSeverityValue">1.0</span></label><label>Deterministic seed<input id="faultSeed" type="number" value="17" min="0" max="100000"/></label></div><button class="btn primary" id="createFault">▶ Generate counterfactual</button><div id="faultResult" class="result-box">No perturbation has been generated yet.</div></div>
-        <div class="panel"><div class="panel-title">Training and baseline integration</div><div class="cap-row"><span>LeRobot ACT / Diffusion / SmolVLA</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>Isaac Lab RL / Imitation</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>MuJoCo rollouts</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>Policy vs harness ablations</span><strong class="pending">PLANNED</strong></div><p class="small-note">Future evaluation must freeze task, seed, observations, tool permissions, compute budget, training split and policy weights.</p></div></div>
+      <section id="pagePolicy" class="page">
+        <div class="workspace-top">
+          <div><span class="eyebrow">POLICY LAB / BENCHMARK OBSERVATORY &amp; EVALUATION HARNESS</span><h1>Policy Lab &amp; Benchmark Observatory</h1><p>Reproducible proving ground for agent baselines, geometric safety gates, fault recovery, counterfactual perturbations, and independently verifiable evidence.</p></div>
+          <div class="actions">
+            <button type="button" class="btn subtle" id="benchAuthBtn" title="Set VEAP_ADMIN_TOKEN for benchmark API">⌘ &nbsp; API token</button>
+            <button type="button" class="btn subtle" id="benchCompareTop">⇄ &nbsp; Compare policies</button>
+            <button type="button" class="btn primary" id="benchRunTop">▶ &nbsp; Run experiment</button>
+          </div>
+        </div>
+        <div class="policy-tabs" role="tablist" aria-label="Policy Lab sections">
+          <button type="button" class="policy-tab active" data-policy-tab="runner">Benchmark &amp; World</button>
+          <button type="button" class="policy-tab" data-policy-tab="scenarios">Scenario Library</button>
+          <button type="button" class="policy-tab" data-policy-tab="ledger">Evidence Ledger</button>
+          <button type="button" class="policy-tab" data-policy-tab="research">Harness &amp; Ablations</button>
+          <button type="button" class="policy-tab" data-policy-tab="counterfactual">Counterfactual Lab</button>
+        </div>
+
+        <div id="policyTabRunner" class="policy-subpage active">
+          <div class="stats" aria-label="Observed benchmark metrics">
+            <div class="stat"><div class="label">VERIFIED COMPLETION <span>◈</span></div><strong id="benchMetricRate">—</strong><small id="benchMetricRateNote">No evaluated trials yet</small></div>
+            <div class="stat"><div class="label">UNSAFE EXECUTION EVENTS <span>△</span></div><strong id="benchMetricViolations">—</strong><small id="benchMetricViolationsNote">Computed by a verifier separate from the agent</small></div>
+            <div class="stat"><div class="label">SAFETY INTERVENTIONS <span>✳</span></div><strong id="benchMetricShields">—</strong><small id="benchMetricShieldsNote">Actions modified by safety gate</small></div>
+            <div class="stat"><div class="label">EVIDENCE EVENTS <span>⌁</span></div><strong id="benchMetricEvents">—</strong><small id="benchMetricEventsNote">Hash-linked trajectory records</small></div>
+          </div>
+
+          <div class="bench-grid">
+            <section class="panel">
+              <div class="panel-title"><span class="head-dot green"></span> Mission visualizer <span class="small-sub" id="benchScenarioLabel">Warehouse · multi-stop transfer</span><div class="panel-tools"><span id="benchSceneStatus">PREVIEW</span></div></div>
+              <div class="bench-world-stage">
+                <canvas id="benchWorldCanvas" role="img" aria-label="Interactive isometric simulation of map, hazards, objectives, robot, and verified trajectory"></canvas>
+                <div class="viewport-badge"><span class="head-dot green"></span> WORLD MODEL · 2D DYNAMICS · 3D PROJECTION</div>
+                <div class="viewport-badge right">DRAG TO ORBIT · SCROLL TO ZOOM</div>
+                <div class="bench-world-legend"><span><i class="bench-dot robot"></i> Agent</span><span><i class="bench-dot objective"></i> Objective</span><span><i class="bench-dot hazard"></i> Restricted zone</span><span><i class="bench-dot trail"></i> Trajectory</span></div>
+              </div>
+              <div class="bench-playback">
+                <button id="benchPlayPause" type="button" class="bench-play-btn" aria-label="Play or pause trajectory">▶</button>
+                <div class="bench-time" id="benchPlaybackTime">T+ 00.0s</div>
+                <input id="benchScrubber" type="range" min="0" max="100" value="0" aria-label="Trajectory playback progress" />
+                <div class="bench-time" id="benchPlaybackTotal">—</div>
+                <button id="benchResetCamera" type="button" class="mini-btn" title="Reset camera orbit">⟲</button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-title"><span class="head-dot green"></span> Run control <span class="small-sub">EXPERIMENT HARNESS</span></div>
+              <div class="bench-run-body">
+                <div>
+                  <label class="bench-field-label" for="benchScenarioSelect">SCENARIO CONTRACT</label>
+                  <select id="benchScenarioSelect" class="bench-field"><option>Loading scenarios...</option></select>
+                  <div class="bench-field-hint" id="benchScenarioDesc" style="margin-top:4px">Reproducible benchmark environment</div>
+                </div>
+                <div class="bench-field-two">
+                  <div>
+                    <label class="bench-field-label" for="benchPolicySelect">AGENT BASELINE</label>
+                    <select id="benchPolicySelect" class="bench-field"><option value="route">Route planner</option><option value="greedy">Greedy baseline</option></select>
+                  </div>
+                  <div>
+                    <label class="bench-field-label" for="benchSeedInput">DETERMINISTIC SEED</label>
+                    <input id="benchSeedInput" class="bench-field" type="number" min="0" max="4294967295" value="17" />
+                  </div>
+                </div>
+                <div class="bench-toggle-row">
+                  <div><strong>Geometric safety gate</strong><p>Filter proposed velocities before execution</p></div>
+                  <label class="bench-switch"><input id="benchShieldToggle" type="checkbox" checked /><span class="bench-switch-track"></span></label>
+                </div>
+                <button type="button" class="btn primary" id="benchRunBtn">▶ &nbsp; Execute benchmark run</button>
+                <div class="bench-verif-head"><span>VERIFIER SEPARATE FROM THE AGENT</span><span class="bench-verif-state" id="benchVerifStatus">AWAITING EVIDENCE</span></div>
+                <div class="bench-gate" data-bench-gate="chain"><span>◆</span><span>Event-chain integrity</span><b>—</b></div>
+                <div class="bench-gate" data-bench-gate="postcondition"><span>⊙</span><span>Task postconditions</span><b>—</b></div>
+                <div class="bench-gate" data-bench-gate="safety"><span>⬡</span><span>Constraint satisfaction</span><b>—</b></div>
+                <div class="bench-gate" data-bench-gate="attestation"><span>⌘</span><span>External attestation</span><b>—</b></div>
+                <button type="button" class="btn subtle" id="benchDownloadBtn" disabled>⇩ &nbsp; Export evidence bundle</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="bench-lower-grid">
+            <section class="panel">
+              <div class="panel-title"><span class="head-dot blue"></span> Evidence stream <div class="panel-tools" id="benchEventCount">0 EVENTS</div></div>
+              <div class="bench-events-list" id="benchEventsList"><div class="small-note">Select a scenario and execute a benchmark to generate trace events.</div></div>
+            </section>
+            <section class="panel">
+              <div class="panel-title"><span class="head-dot orange"></span> Assurance metrics <span class="small-sub">LAST RUN</span><div class="panel-tools" id="benchAnalysisTag">NO RUN</div></div>
+              <div class="bench-analysis-body">
+                <div>
+                  <div class="bench-progress-head"><span style="color:#869ba3;font-size:10px;font-weight:700">VERIFIED PROGRESS</span><strong id="benchRunProgress">—</strong></div>
+                  <div class="bench-progress-track"><div id="benchRunProgressBar" class="bench-progress-fill"></div></div>
+                </div>
+                <div class="bench-metric-row"><span>Minimum obstacle clearance</span><b id="benchLastClearance">—</b></div>
+                <div class="bench-metric-row"><span>Faults / recovered</span><b id="benchLastFaults">—</b></div>
+                <div class="bench-metric-row"><span>Simulated episode duration</span><b id="benchLastDuration">—</b></div>
+                <div class="bench-metric-row"><span>Energy proxy <small>(not J)</small></span><b id="benchLastEnergy">—</b></div>
+                <p class="small-note" style="padding:4px 0 0">These measurements come from a planar toy simulator. They do not establish real-world safety or physics validity.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div id="policyTabScenarios" class="policy-subpage">
+          <p class="small-note" style="padding:0 0 12px">Immutable, split-labelled task definitions. Evaluation checks postconditions with a verifier separate from the agent.</p>
+          <div id="benchScenarioCards" class="bench-scenario-cards"></div>
+        </div>
+
+        <div id="policyTabLedger" class="policy-subpage">
+          <section class="panel" style="margin-bottom:12px">
+            <div class="panel-title"><span class="head-dot green"></span> Recorded experiments <div class="panel-tools" id="benchRunCount">0 RUNS</div></div>
+            <div class="table-area">
+              <table class="data-table">
+                <thead><tr><th>RUN ID</th><th>SCENARIO</th><th>POLICY</th><th>SHIELD</th><th>VERIFIED</th><th>VIOLATIONS</th><th>RECORDED</th></tr></thead>
+                <tbody id="benchRunTable"><tr><td colspan="7">No runs recorded.</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-title"><span class="head-dot blue"></span> Selected event trace <div class="panel-tools"><button class="mini-btn" type="button" id="benchLedgerExportBtn" disabled>⇩ Export JSON</button></div></div>
+            <pre class="report-code" id="benchTracePreview">Choose a completed run to inspect event provenance.</pre>
+          </section>
+        </div>
+
+        <div id="policyTabResearch" class="policy-subpage">
+          <div class="bench-pipeline">
+            <div class="bench-node"><div class="bench-node-nr">01 / DECISION ◇</div><h3>Planning agent</h3><p>Greedy and A* reference policies; bounded velocity proposals and inspectable decisions.</p><span>REFERENCE BASELINES · LIVE</span></div>
+            <div class="bench-node"><div class="bench-node-nr">02 / CONTROL ⌁</div><h3>Execution harness</h3><p>Deterministic clock, noisy observations, injected faults, and state transitions.</p><span>TOY SIMULATOR · LIVE</span></div>
+            <div class="bench-node"><div class="bench-node-nr">03 / SAFETY ⬡</div><h3>Safety monitor</h3><p>Separate geometric gate can clamp, redirect, or stop unsafe proposed motions.</p><span>NOT A FORMAL CBF · LIVE</span></div>
+            <div class="bench-node"><div class="bench-node-nr">04 / AUDIT ◈</div><h3>Evidence verifier</h3><p>Separately recomputes hazard contact, milestones, velocity consistency, and integrity.</p><span>READ-ONLY AUDITOR · LIVE</span></div>
+          </div>
+          <section class="panel" style="margin-bottom:12px">
+            <div class="panel-title"><span class="head-dot green"></span> Verified completion by harness configuration <div class="panel-tools"><button class="mini-btn" id="benchResearchCompareBtn" type="button">Run paired comparison</button></div></div>
+            <div id="benchComparisonBars" class="bench-compare-bars"><p class="small-note" style="padding:0">No experiments yet. Run both policies against the same scenario and seed.</p></div>
+          </section>
+          <section class="panel">
+            <div class="panel-title"><span class="head-dot orange"></span> Publication gates — not satisfied by this demo</div>
+            <div class="bench-gates-grid">
+              <div><b>01.</b> Benchmark validity audit</div>
+              <div><b>02.</b> Held-out contamination control</div>
+              <div><b>03.</b> Multi-seed confidence intervals</div>
+              <div><b>04.</b> External physics / hardware tests</div>
+              <div><b>05.</b> Independent safety assurance</div>
+              <div><b>06.</b> Latency, energy, and cost instrumentation</div>
+            </div>
+            <p class="small-note">Run <code>python -m veap suite --seeds 0 1 2</code> to export the demo ablation matrix. Toy-world scores are not SOTA evidence. Physical robot commands are deliberately excluded.</p>
+          </section>
+        </div>
+
+        <div id="policyTabCounterfactual" class="policy-subpage">
+          <div class="page-split wide-left"><div class="panel"><div class="panel-title">Inject an analytic fault</div><div class="form-grid"><label>Input trajectory<select id="faultSource"></select></label><label>Fault family<select id="faultType"><option value="sensor_dropout">Sensor dropout</option><option value="actuator_stall">Actuator stall</option><option value="odometry_drift">Odometry drift</option><option value="command_delay">Command delay</option><option value="perception_noise">Perception noise</option></select></label><label>Severity<input id="faultSeverity" type="range" min="0.1" max="3" step="0.1" value="1"/><span id="faultSeverityValue">1.0</span></label><label>Deterministic seed<input id="faultSeed" type="number" value="17" min="0" max="100000"/></label></div><button class="btn primary" id="createFault">▶ Generate counterfactual</button><div id="faultResult" class="result-box">No perturbation has been generated yet.</div></div>
+          <div class="panel"><div class="panel-title">Training and baseline integration</div><div class="cap-row"><span>LeRobot ACT / Diffusion / SmolVLA</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>Isaac Lab RL / Imitation</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>MuJoCo rollouts</span><strong class="pending">NOT CONNECTED</strong></div><div class="cap-row"><span>Policy vs harness ablations</span><strong class="pending">PLANNED</strong></div><p class="small-note">Future evaluation must freeze task, seed, observations, tool permissions, compute budget, training split and policy weights.</p></div></div>
+        </div>
       </section>
 
       <section id="pageAssurance" class="page"><div class="page-header"><span class="eyebrow">VEAP CONTRACT / MONITOR / REPORT</span><h1>Assurance & Verification</h1><p>Agent-independent replay verdicts, evidence completeness checks and explicit claim boundaries.</p></div>
@@ -174,5 +319,6 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Import evidence</h2><button id="closeModal" class="iconbtn">×</button></div><div class="modal-body"><p>Upload original evidence or engineering assets into this local research workspace. Source authenticity is not established by upload.</p><label class="file-drop" for="fileInput"><span>▤</span><b>Choose a file to import</b><small>MCAP, JSONL, CSV, video, images, CAD, URDF, glTF, PLY and logs</small><input id="fileInput" type="file"/></label><div class="form-grid"><label>Asset classification<select id="fileClass"><option>UNKNOWN</option><option>ROBOT</option><option>SCENE</option><option>TELEMETRY</option><option>SIMULATOR</option></select></label><label>Source custody<input disabled value="UNATTESTED — local pilot"/></label></div><div id="uploadStatus" class="small-note">Maximum file size 128 MiB. Original input is copied into protected local storage.</div></div><div class="modal-actions"><button id="cancelModal" class="btn subtle">Cancel</button><button id="uploadNow" class="btn primary">Import selected file</button></div></div></div>
 <div class="overlay hidden" id="assetOverlay" role="dialog" aria-modal="true" aria-labelledby="assetModalTitle"><div class="modal"><div class="modal-head"><h2 id="assetModalTitle">Asset details</h2><button id="assetClose" class="iconbtn">×</button></div><div class="modal-body"><pre class="report-code" id="assetDetail" style="max-height:220px;margin:0 0 15px">No asset selected.</pre><div class="form-grid"><label>Tags (comma separated)<input id="assetTags" placeholder="M3, inspection, v1"/></label><label>Operator note<input id="assetNote" placeholder="Evidence review note"/></label></div><p class="small-note">Tags and notes are locally editable metadata; the original evidence bytes remain unchanged. This is not an immutable enterprise audit trail.</p></div><div class="modal-actions"><button id="assetCancel" class="btn subtle">Close</button><button id="assetSave" class="btn primary">Save local annotation</button></div></div></div>
+<div class="overlay hidden" id="benchAuthModal" role="dialog" aria-modal="true" aria-labelledby="benchAuthTitle"><div class="modal"><div class="modal-head"><h2 id="benchAuthTitle">Benchmark API access token</h2><button id="benchAuthClose" class="iconbtn" type="button">×</button></div><div class="modal-body"><p>For authenticated deployments, enter the <code>VEAP_ADMIN_TOKEN</code> set on the server. The token stays in this page's memory, not browser storage.</p><input type="password" id="benchAuthInput" class="bench-field" placeholder="Bearer token" autocomplete="off" /></div><div class="modal-actions"><button class="btn subtle" id="benchAuthCancel" type="button">Cancel</button><button class="btn primary" id="benchAuthSave" type="button">Connect</button></div></div></div>
 <script src="/assets/app.js" defer></script>
 </body></html>

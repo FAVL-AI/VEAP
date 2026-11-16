@@ -14,10 +14,75 @@ from .spec import Scenario, digest
 EPS = 0.0008
 
 
+def signed_distance_to_circle(x: float, y: float, cx: float, cy: float, radius: float) -> float:
+    """Signed Euclidean distance from (x, y) to a circle; negative inside."""
+    if radius <= 0:
+        raise ValueError("circle radius must be positive")
+    return math.hypot(x - cx, y - cy) - radius
+
+
+def signed_distance_to_rect(x: float, y: float, r: dict) -> float:
+    """Signed Euclidean distance from (x, y) to an axis-aligned rectangle; negative inside."""
+    dx = max(r["x1"] - x, 0.0, x - r["x2"])
+    dy = max(r["y1"] - y, 0.0, y - r["y2"])
+    if dx > 0.0 or dy > 0.0:
+        return math.hypot(dx, dy)
+    return -min(x - r["x1"], r["x2"] - x, y - r["y1"], r["y2"] - y)
+
+
+def clearance_range_to_circle(
+    x: float,
+    y: float,
+    cx: float,
+    cy: float,
+    obstacle_radius: float,
+    robot_radius: float = 0.0,
+    pos_uncertainty: float = 0.0,
+) -> tuple[float, float]:
+    """Return exact [min_clearance, max_clearance] to a circular obstacle under pose uncertainty.
+
+    Preserves negative clearances for overlapping / interior robot positions and
+    bounds the center-to-center distance below by zero when uncertainty exceeds
+    the nominal center-to-center separation.
+    """
+    if obstacle_radius <= 0:
+        raise ValueError("obstacle_radius must be positive")
+    if robot_radius < 0 or pos_uncertainty < 0:
+        raise ValueError("robot_radius and pos_uncertainty must be non-negative")
+    center_dist = math.hypot(x - cx, y - cy)
+    min_center_dist = max(0.0, center_dist - pos_uncertainty)
+    max_center_dist = center_dist + pos_uncertainty
+    return (
+        min_center_dist - obstacle_radius - robot_radius,
+        max_center_dist - obstacle_radius - robot_radius,
+    )
+
+
+def clearance_range_to_rect(
+    x: float,
+    y: float,
+    r: dict,
+    robot_radius: float = 0.0,
+    pos_uncertainty: float = 0.0,
+) -> tuple[float, float]:
+    """Return sound [min_clearance, max_clearance] to a rectangular obstacle under pose uncertainty.
+
+    Preserves negative signed distances inside the rectangle so overlap and
+    penetration depth remain accurate across the full uncertainty ball.
+    """
+    if not (r["x1"] < r["x2"] and r["y1"] < r["y2"]):
+        raise ValueError("rectangle must have positive area")
+    if robot_radius < 0 or pos_uncertainty < 0:
+        raise ValueError("robot_radius and pos_uncertainty must be non-negative")
+    d = signed_distance_to_rect(x, y, r)
+    inradius = 0.5 * min(r["x2"] - r["x1"], r["y2"] - r["y1"])
+    min_d = max(d - pos_uncertainty, -inradius)
+    max_d = d + pos_uncertainty
+    return min_d - robot_radius, max_d - robot_radius
+
+
 def _distance_to_rect(x: float, y: float, r: dict) -> float:
-    dx = max(r["x1"] - x, 0, x - r["x2"])
-    dy = max(r["y1"] - y, 0, y - r["y2"])
-    return math.hypot(dx,dy)
+    return signed_distance_to_rect(x, y, r)
 
 
 def _clearance(x: float, y: float, s: Scenario) -> tuple[float, list[str]]:

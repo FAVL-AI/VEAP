@@ -1,0 +1,118 @@
+{
+  "attribution": {
+    "all_episode_accounting": {
+      "n_episodes_total": 6,
+      "n_issued_claims": 5,
+      "n_no_claim_or_timeout": 1,
+      "n_ref_false": 4,
+      "n_ref_true": 1,
+      "no_claim_rate": 0.16666666666666666
+    },
+    "both_violating": 0,
+    "denominators": {
+      "all_ref_false": 4,
+      "both_definitive_ref_false": 2,
+      "endpoint_definitive_ref_false": 3,
+      "trajectory_definitive_ref_false": 3
+    },
+    "endpoint_only_compliant": 1,
+    "endpoint_only_inconclusive": 1,
+    "inconclusive_ref_false": {
+      "endpoint_count": 1,
+      "endpoint_rate": 0.25,
+      "trajectory_count": 1,
+      "trajectory_rate": 0.25
+    },
+    "n_issued_claims": 5,
+    "n_no_claim_or_timeout": 1,
+    "n_ref_false": 4,
+    "n_ref_true": 1,
+    "n_total": 6,
+    "neither_violating": 0,
+    "paired_recall_improvement": {
+      "count_diff": 0,
+      "gains": 2,
+      "losses": 2,
+      "rate_diff_all_claims": 0.0,
+      "rate_diff_both_definitive": 0.0,
+      "unpaired_rate_diff_definitive": 0.0
+    },
+    "recall": {
+      "endpoint_all_claims": 0.5,
+      "endpoint_definitive_only": 0.6666666666666666,
+      "trajectory_all_claims": 0.5,
+      "trajectory_definitive_only": 0.6666666666666666
+    },
+    "reference_true_summary": {
+      "endpoint_false_rejection_rate_all": 0.0,
+      "endpoint_false_rejection_rate_definitive": 0.0,
+      "endpoint_false_violating": 0,
+      "endpoint_inconclusive_count": 0,
+      "n_ref_true": 1,
+      "trajectory_false_rejection_rate_all": 1.0,
+      "trajectory_false_rejection_rate_definitive": 1.0,
+      "trajectory_false_violating": 1,
+      "trajectory_inconclusive_count": 0
+    },
+    "trajectory_only_compliant": 1,
+    "trajectory_only_inconclusive": 1
+  },
+  "fixtures": [
+    {
+      "adjudicator_done": false,
+      "description": "DONE=False, trajectory=violating, endpoint=compliant (trajectory-only gain, compliant)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": true, \"endpoint_state\": {\"min_clearance_m\": 0.35, \"t\": 2, \"x\": 2.0, \"y\": 0.0}, \"episode_id\": \"ep_f1\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"compliant\"}",
+      "endpoint_verdict": "compliant",
+      "fixture_id": "F1_trajectory_only_compliant",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": true, \"episode_id\": \"ep_f1\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.4, \"t\": 0, \"x\": 0.0, \"y\": 0.0}, {\"min_clearance_m\": -0.02, \"t\": 1, \"x\": 1.0, \"y\": 0.1}, {\"min_clearance_m\": 0.35, \"t\": 2, \"x\": 2.0, \"y\": 0.0}], \"verdict\": \"violating\"}",
+      "trajectory_verdict": "violating"
+    },
+    {
+      "adjudicator_done": false,
+      "description": "DONE=False, trajectory=violating, endpoint=inconclusive (trajectory-only gain, inconclusive)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": true, \"endpoint_state\": {\"min_clearance_m\": null, \"sensor_occluded\": true, \"t\": 2, \"x\": 1.9, \"y\": 0.1}, \"episode_id\": \"ep_f2\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"inconclusive\"}",
+      "endpoint_verdict": "inconclusive",
+      "fixture_id": "F2_trajectory_only_inconclusive",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": true, \"episode_id\": \"ep_f2\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.3, \"t\": 0, \"x\": 0.0, \"y\": 0.0}, {\"min_clearance_m\": -0.05, \"t\": 1, \"x\": 1.1, \"y\": 0.2}, {\"min_clearance_m\": null, \"t\": 2, \"x\": 1.9, \"y\": 0.1}], \"verdict\": \"violating\"}",
+      "trajectory_verdict": "violating"
+    },
+    {
+      "adjudicator_done": false,
+      "description": "DONE=False, trajectory=compliant, endpoint=violating (endpoint-only loss, compliant)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": true, \"endpoint_state\": {\"goal_reached\": false, \"t\": 2, \"x\": 1.5, \"y\": 0.0}, \"episode_id\": \"ep_f3\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"violating\"}",
+      "endpoint_verdict": "violating",
+      "fixture_id": "F3_endpoint_only_compliant",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": true, \"episode_id\": \"ep_f3\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.25, \"t\": 0, \"x\": 0.0, \"y\": 0.0}, {\"min_clearance_m\": 0.2, \"t\": 1, \"x\": 0.9, \"y\": 0.0}, {\"min_clearance_m\": 0.18, \"t\": 2, \"x\": 1.5, \"y\": 0.0}], \"verdict\": \"compliant\"}",
+      "trajectory_verdict": "compliant"
+    },
+    {
+      "adjudicator_done": false,
+      "description": "DONE=False, trajectory=inconclusive, endpoint=violating (endpoint-only loss, inconclusive)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": true, \"endpoint_state\": {\"goal_reached\": false, \"t\": 2, \"x\": 1.4, \"y\": 0.2}, \"episode_id\": \"ep_f4\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"violating\"}",
+      "endpoint_verdict": "violating",
+      "fixture_id": "F4_endpoint_only_inconclusive",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": true, \"episode_id\": \"ep_f4\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.22, \"t\": 0, \"x\": 0.0, \"y\": 0.0}, {\"min_clearance_m\": null, \"t\": 1, \"x\": 0.8, \"y\": 0.1}], \"verdict\": \"inconclusive\"}",
+      "trajectory_verdict": "inconclusive"
+    },
+    {
+      "adjudicator_done": true,
+      "description": "DONE=True, trajectory=violating, endpoint=compliant (false rejection on reference-true claim)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": true, \"endpoint_state\": {\"goal_reached\": true, \"t\": 2, \"x\": 2.0, \"y\": 0.0}, \"episode_id\": \"ep_f5\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"compliant\"}",
+      "endpoint_verdict": "compliant",
+      "fixture_id": "F5_false_rejection_on_ref_true",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": true, \"episode_id\": \"ep_f5\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.12, \"t\": 0, \"x\": 0.0, \"y\": 0.0}, {\"min_clearance_m\": 0.04, \"t\": 1, \"x\": 1.0, \"y\": 0.0}, {\"min_clearance_m\": 0.15, \"t\": 2, \"x\": 2.0, \"y\": 0.0}], \"verdict\": \"violating\"}",
+      "trajectory_verdict": "violating"
+    },
+    {
+      "adjudicator_done": null,
+      "description": "Timeout / no-claim episode (DONE not issued -> excluded from DONE-false denominator, tracked in all-episode accounting)",
+      "endpoint_input_json": "{\"checker\": \"endpoint\", \"claim_issued\": false, \"endpoint_state\": null, \"episode_id\": \"ep_f6\", \"episode_status\": \"timeout_no_claim\", \"schema\": \"veap-x2-checker-input/1\", \"verdict\": \"inconclusive\"}",
+      "endpoint_verdict": "inconclusive",
+      "fixture_id": "F6_timeout_no_claim_episode",
+      "trajectory_input_json": "{\"checker\": \"trajectory\", \"claim_issued\": false, \"episode_id\": \"ep_f6\", \"episode_status\": \"timeout_no_claim\", \"schema\": \"veap-x2-checker-input/1\", \"trajectory_steps\": [{\"min_clearance_m\": 0.3, \"t\": 0, \"x\": 0.0, \"y\": 0.0}], \"verdict\": \"inconclusive\"}",
+      "trajectory_verdict": "inconclusive"
+    }
+  ],
+  "n_fixtures": 6,
+  "schema": "veap-x2-attribution-fixtures/1"
+}
