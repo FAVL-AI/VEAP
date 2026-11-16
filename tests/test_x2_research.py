@@ -442,3 +442,17 @@ def test_cohort_manifest_and_canonical_claim_ordering():
     assert select_blind_genuine_claim(claims_a, "s1", "salt-x") == select_blind_genuine_claim(
         claims_b, "s1", "salt-x"
     )
+
+
+def test_confirmatory_manifest_407_unique_geometries_and_rrt_ppo():
+    from x2.cohort_manifest import build_confirmatory_manifest
+
+    c1 = build_confirmatory_manifest("dev-preview-salt")
+    c2 = build_confirmatory_manifest("dev-preview-salt")
+    assert c1["manifest_sha256"] == c2["manifest_sha256"]
+    manifest = c1["manifest"]
+    assert manifest["cohort_role"] == "confirmatory"
+    assert manifest["total_scenario_cap"] == 407
+    assert manifest["unique_geometry_count"] == 407
+    assert set(manifest["policy_counts"].keys()) == {"rrt_replan", "ppo"}
+    assert sum(manifest["policy_counts"].values()) == 407
