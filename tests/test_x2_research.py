@@ -14,10 +14,14 @@ from x2.detection_attribution import (
     run_serialized_fixture_suite,
 )
 from x2.interval_calibration import (
+    CONFIRM_SEED,
     DEFAULT_REPORT_PATH as DEFAULT_CALIBRATION_REPORT_PATH,
+    DEV_SEED,
     UNEQUAL_CLUSTER_SIZES_60,
-    calibrate_fpr_cell,
-    calibrate_subtarget_regime,
+    _draw_scenario_fpr_counts,
+    cluster_score_fpr_ci,
+    evaluate_methods_for_cell,
+    scenario_bootstrap_fpr_ci,
     scenario_clustered_fpr_ci,
 )
 from x2.leakage_controls import (
@@ -267,37 +271,54 @@ def test_leakage_controls_byte_entry_points_and_report() -> None:
     assert disk_report == report
 
 
-def test_interval_calibration_coverage_type1_and_floors() -> None:
+def test_interval_calibration_three_methods_and_zero_claim_exclusion() -> None:
+    import random
+
+    assert DEV_SEED != CONFIRM_SEED
     assert len(UNEQUAL_CLUSTER_SIZES_60) == 60
     assert sum(UNEQUAL_CLUSTER_SIZES_60) == 240
     assert min(UNEQUAL_CLUSTER_SIZES_60) == 1
     assert max(UNEQUAL_CLUSTER_SIZES_60) == 7
 
-    # Zero-event Wilson floor comparison: N=60 (~6.02%) vs 240 (~1.58%)
+    # Scenarios with 0 genuine claims are excluded from the equal-weighted mean
+    fprs, total_rej, total_claims = _draw_scenario_fpr_counts(
+        random.Random(1), (0, 4, 4, 0), true_fpr=0.0, rho=0.0
+    )
+    assert len(fprs) == 2
+    assert total_rej == 0
+    assert total_claims == 8
+
+    # Zero-event fallback for all 3 methods uses N-scenario Wilson floor (~6.02% at N=60)
     _, floor_60 = scenario_clustered_fpr_ci([0.0] * 60, total_rejections=0, zero_event_denominator=60)
-    _, floor_240 = scenario_clustered_fpr_ci([0.0] * 60, total_rejections=0, zero_event_denominator=240)
+    _, floor_cs = cluster_score_fpr_ci([0.0] * 60, total_rejections=0, total_claims=240)
+    _, floor_sb = scenario_bootstrap_fpr_ci([0.0] * 60, total_rejections=0, boot_rng=random.Random(2), n_boot=50)
     assert floor_60 == pytest.approx(0.06017, abs=1e-4)
-    assert floor_240 == pytest.approx(0.01575, abs=1e-4)
-    assert floor_60 > 0.05 > floor_240
+    assert floor_cs == pytest.approx(0.06017, abs=1e-4)
+    assert floor_sb == pytest.approx(0.06017, abs=1e-4)
 
-    # Above-ceiling true_fpr=0.100 with rho=0.25 should keep incorrect_support_rate <= 0.05
-    cell = calibrate_fpr_cell(rho=0.25, true_fpr=0.100, n_replicates=400, seed=123)
-    assert cell["coverage_95"] >= 0.85
-    assert cell["incorrect_support_rate"] <= 0.05
-    assert cell["contradicted_rate"] > 0.0
+    # Evaluate all 3 methods on a single confirmation cell
+    cell = evaluate_methods_for_cell(rho=0.25, true_fpr=0.050, n_replicates=100, n_boot=50, seed=CONFIRM_SEED)
+    assert set(cell.keys()) == {"student_t", "cluster_score", "scenario_bootstrap"}
+    for m, row in cell.items():
+        assert row["regime_tag"] == "boundary"
+        assert 0.0 <= row["coverage_95"] <= 1.0
+        assert 0.0 <= row["upper_tail_miss"] <= 1.0
+        assert row["coverage_95_mcse"] >= 0.0
+        assert row["mean_width"] > 0.0
 
 
-def test_interval_calibration_subtarget_exercises_contradicted_and_report() -> None:
-    sub = calibrate_subtarget_regime(n_replicates=400, seed=456)
-    assert sub["outcomes"]["recall"]["contradicted"] > 0.0
-    assert sub["outcomes"]["false_rejection"]["contradicted"] > 0.0
-    assert sub["outcomes"]["joint"]["contradicted"] > 0.0
-
+def test_interval_calibration_report_v2_schema_and_worst_case() -> None:
     assert Path(DEFAULT_CALIBRATION_REPORT_PATH).exists()
     disk_rep = json.loads(Path(DEFAULT_CALIBRATION_REPORT_PATH).read_text(encoding="utf-8"))
-    assert disk_rep["schema"] == "veap-x2-interval-calibration/1"
-    assert len(disk_rep["fpr_calibration_grid"]) == 15
-    assert disk_rep["subtarget_contradicted_check"]["outcomes"]["joint"]["contradicted"] > 0.0
+    assert disk_rep["schema"] == "veap-x2-interval-calibration/2"
+    assert disk_rep["seeds"]["dev_seed"] != disk_rep["seeds"]["confirm_seed"]
+    assert disk_rep["calibrated_candidates"] == []
+    for m in ("student_t", "cluster_score", "scenario_bootstrap"):
+        assert len(disk_rep["results_by_method"][m]) == 18  # 3 rhos x 6 true_fprs
+        summary = disk_rep["worst_case_summary"][m]
+        assert summary["meets_calibration_tolerance"] is False
+        assert summary["min_coverage_95"] < 0.92
+        assert summary["max_upper_tail_miss"] > 0.05
 
 
 def test_serialized_fixture_suite_and_report() -> None:
