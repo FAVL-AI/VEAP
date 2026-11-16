@@ -230,14 +230,77 @@ def run_exact_binomial_feasibility(
     return rows
 
 
+def find_first_n_eligible(
+    true_fpr: float,
+    target_power: float,
+    *,
+    ceiling: float = 0.05,
+    alpha: float = 0.05,
+    max_n: int = 1000,
+) -> dict[str, Any]:
+    """Find the exact first ``N_eligible`` reaching ``target_power`` under 95% Clopper-Pearson."""
+    for n_elig in range(1, max_n + 1):
+        max_k: int | None = None
+        for k in range(n_elig + 1):
+            if clopper_pearson_upper(k, n_elig, alpha=alpha) <= ceiling:
+                max_k = k
+            else:
+                break
+        if max_k is None:
+            continue
+        p_clear = _binom_cdf(max_k, n_elig, true_fpr)
+        if p_clear >= target_power:
+            return {
+                "true_fpr": true_fpr,
+                "target_power": target_power,
+                "n_eligible": n_elig,
+                "max_k_clearing_5pct": max_k,
+                "p_clear": p_clear,
+            }
+    raise RuntimeError(f"No N_eligible <= {max_n} reached target_power={target_power}")
+
+
+def compute_planning_milestones() -> list[dict[str, Any]]:
+    """Verify the four exact integer sample-size milestones."""
+    specs = (
+        (0.01, 0.80),
+        (0.01, 0.90),
+        (0.02, 0.80),
+        (0.02, 0.90),
+    )
+    return [find_first_n_eligible(fpr, target) for fpr, target in specs]
+
+
+def eligibility_cap_probability(
+    cap: int = 407,
+    target_eligible: int = 312,
+    p_eligible: float = 0.80,
+) -> float:
+    """Compute ``P(Binomial(cap, p_eligible) >= target_eligible)``."""
+    if target_eligible <= 0:
+        return 1.0
+    if target_eligible > cap:
+        return 0.0
+    return 1.0 - _binom_cdf(target_eligible - 1, cap, p_eligible)
+
+
 def main(output_path: Path = DEFAULT_REPORT_PATH) -> dict[str, Any]:
     monotonicity = run_monotonicity_check()
     feasibility = run_exact_binomial_feasibility()
+    milestones = compute_planning_milestones()
+    cap_prob = eligibility_cap_probability(cap=407, target_eligible=312, p_eligible=0.80)
     report = {
         "schema": "veap-x2-feasibility-and-monotonicity/1",
         "scope": "development-only",
         "monotonicity_check": monotonicity,
         "exact_binomial_feasibility": feasibility,
+        "planning_milestones": milestones,
+        "eligibility_cap_check": {
+            "cap": 407,
+            "target_eligible": 312,
+            "p_eligible": 0.80,
+            "p_reach_target": cap_prob,
+        },
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -249,5 +312,6 @@ if __name__ == "__main__":
     print(
         f"Wrote {DEFAULT_REPORT_PATH} "
         f"(anomalies={rep['monotonicity_check']['anomaly_step_counts_by_method']}, "
-        f"n_grid={len(rep['exact_binomial_feasibility'])})"
+        f"n_grid={len(rep['exact_binomial_feasibility'])}, "
+        f"cap_prob={rep['eligibility_cap_check']['p_reach_target']:.4f})"
     )

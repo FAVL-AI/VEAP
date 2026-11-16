@@ -16,6 +16,8 @@ from x2.detection_attribution import (
 from x2.feasibility_and_monotonicity import (
     DEFAULT_REPORT_PATH as DEFAULT_FEASIBILITY_REPORT_PATH,
     clopper_pearson_upper,
+    compute_planning_milestones,
+    eligibility_cap_probability,
     run_exact_binomial_feasibility,
     run_monotonicity_check,
 )
@@ -354,6 +356,30 @@ def test_monotonicity_check_and_feasibility_report() -> None:
     disk_rep = json.loads(Path(DEFAULT_FEASIBILITY_REPORT_PATH).read_text(encoding="utf-8"))
     assert disk_rep["schema"] == "veap-x2-feasibility-and-monotonicity/1"
     assert len(disk_rep["exact_binomial_feasibility"]) == 11
+
+
+def test_planning_milestones_and_eligibility_cap_probability() -> None:
+    milestones = compute_planning_milestones()
+    expected = [
+        (0.01, 0.80, 142, 2, 0.8294),
+        (0.01, 0.90, 173, 3, 0.9033),
+        (0.02, 0.80, 312, 8, 0.8235),
+        (0.02, 0.90, 390, 11, 0.9041),
+    ]
+    assert len(milestones) == 4
+    for row, (fpr, target, n_elig, max_k, p_clear) in zip(milestones, expected):
+        assert row["true_fpr"] == fpr
+        assert row["target_power"] == target
+        assert row["n_eligible"] == n_elig
+        assert row["max_k_clearing_5pct"] == max_k
+        assert row["p_clear"] == pytest.approx(p_clear, abs=1e-4)
+
+    cap_prob = eligibility_cap_probability(cap=407, target_eligible=312, p_eligible=0.80)
+    assert cap_prob == pytest.approx(0.9577, abs=1e-4)
+
+    disk_rep = json.loads(Path(DEFAULT_FEASIBILITY_REPORT_PATH).read_text(encoding="utf-8"))
+    assert disk_rep["planning_milestones"] == milestones
+    assert disk_rep["eligibility_cap_check"]["p_reach_target"] == pytest.approx(0.9577, abs=1e-4)
 
 
 def test_serialized_fixture_suite_and_report() -> None:

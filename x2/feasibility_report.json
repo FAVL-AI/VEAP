@@ -1,4 +1,10 @@
 {
+  "eligibility_cap_check": {
+    "cap": 407,
+    "p_eligible": 0.8,
+    "p_reach_target": 0.9576587085773365,
+    "target_eligible": 312
+  },
   "exact_binomial_feasibility": [
     {
       "expected_total_scenarios": {
@@ -3004,6 +3010,36 @@
       }
     ]
   },
+  "planning_milestones": [
+    {
+      "max_k_clearing_5pct": 2,
+      "n_eligible": 142,
+      "p_clear": 0.8293587678313377,
+      "target_power": 0.8,
+      "true_fpr": 0.01
+    },
+    {
+      "max_k_clearing_5pct": 3,
+      "n_eligible": 173,
+      "p_clear": 0.9032511349267189,
+      "target_power": 0.9,
+      "true_fpr": 0.01
+    },
+    {
+      "max_k_clearing_5pct": 8,
+      "n_eligible": 312,
+      "p_clear": 0.8234794115315234,
+      "target_power": 0.8,
+      "true_fpr": 0.02
+    },
+    {
+      "max_k_clearing_5pct": 11,
+      "n_eligible": 390,
+      "p_clear": 0.9041285691819875,
+      "target_power": 0.9,
+      "true_fpr": 0.02
+    }
+  ],
   "schema": "veap-x2-feasibility-and-monotonicity/1",
   "scope": "development-only"
 }
