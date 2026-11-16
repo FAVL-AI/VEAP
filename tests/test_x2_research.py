@@ -407,8 +407,20 @@ def test_cohort_composition_check_and_report() -> None:
     disk = json.loads(Path(DEFAULT_COHORT_COMPOSITION_REPORT_PATH).read_text(encoding="utf-8"))
     assert disk["n_replicates"] == 2000
     assert disk["n_cap"] == 407
-    assert len(disk["regimes"]["homogeneous"]["composition"]) == 10
-    assert disk["regimes"]["homogeneous"]["p_reach_312"] == pytest.approx(0.9515, abs=1e-4)
+    for reg_name in ("homogeneous", "heterogeneous_moderate", "heterogeneous_severe"):
+        reg = disk["regimes"][reg_name]
+        assert reg["n_replicates"] == 2000
+        assert (
+            reg["n_reached_312_and_cleared_5pct"] + reg["n_shortfall_but_cleared_5pct_numerically"]
+            == reg["n_cleared_numeric_all"]
+        )
+        assert reg["p_reach_and_clear"] <= reg["p_reach_312"]
+        assert len(reg["composition"]) == 10
+        for cell in reg["composition"]:
+            assert "assigned_count" in cell
+            assert "mean_eligible_count" in cell
+            assert "mean_selected_count" in cell
+            assert 0.0 <= cell["mean_selected_count"] <= cell["mean_eligible_count"] <= cell["assigned_count"]
 
 
 def test_serialized_fixture_suite_and_report() -> None:

@@ -118,10 +118,14 @@ def simulate_cohort_composition(
         ) / sum(elig_weights)
 
         reach_312_count = 0
+        reached_and_cleared_count = 0
+        shortfall_cleared_count = 0
         selected_n_sum = 0
-        cov_selected_true = 0
-        cov_equal_cohort = 0
-        clear_5pct_count = 0
+        cov_selected_true_all = 0
+        cov_selected_true_reached = 0
+        cov_equal_cohort_all = 0
+        cov_equal_cohort_reached = 0
+        cell_eligible_sums = {cell: 0 for cell in all_cells}
         cell_selected_sums = {cell: 0 for cell in all_cells}
 
         for _ in range(n_replicates):
@@ -129,31 +133,43 @@ def simulate_cohort_composition(
             k_rej = 0
             for cell in row_keys:
                 p_elig, p_fpr = cell_params[cell]
-                if rng.random() < p_elig:
-                    n_sel += 1
-                    cell_selected_sums[cell] += 1
-                    if rng.random() < p_fpr:
-                        k_rej += 1
-                    if n_sel == TARGET_ELIGIBLE:
-                        break
+                is_elig = rng.random() < p_elig
+                if is_elig:
+                    cell_eligible_sums[cell] += 1
+                    if n_sel < TARGET_ELIGIBLE:
+                        n_sel += 1
+                        cell_selected_sums[cell] += 1
+                        if rng.random() < p_fpr:
+                            k_rej += 1
 
-            if n_sel >= TARGET_ELIGIBLE:
+            reached = n_sel >= TARGET_ELIGIBLE
+            if reached:
                 reach_312_count += 1
             selected_n_sum += n_sel
 
             lo, hi = _get_cp(k_rej, n_sel)
-            if lo <= selected_true_fpr <= hi:
-                cov_selected_true += 1
-            if lo <= equal_cohort_fpr <= hi:
-                cov_equal_cohort += 1
-            if hi <= CEILING:
-                clear_5pct_count += 1
+            cleared = hi <= CEILING
+            if reached and cleared:
+                reached_and_cleared_count += 1
+            elif (not reached) and cleared:
+                shortfall_cleared_count += 1
 
+            if lo <= selected_true_fpr <= hi:
+                cov_selected_true_all += 1
+                if reached:
+                    cov_selected_true_reached += 1
+            if lo <= equal_cohort_fpr <= hi:
+                cov_equal_cohort_all += 1
+                if reached:
+                    cov_equal_cohort_reached += 1
+
+        n_cleared_numeric_all = reached_and_cleared_count + shortfall_cleared_count
         mean_selected_n = selected_n_sum / n_replicates
         composition: list[dict[str, Any]] = []
         for fam, pol in all_cells:
             m_cnt = manifest_counts[(fam, pol)]
             m_share = m_cnt / n_cap
+            mean_elig_cnt = cell_eligible_sums[(fam, pol)] / n_replicates
             mean_sel_cnt = cell_selected_sums[(fam, pol)] / n_replicates
             mean_sel_share = mean_sel_cnt / mean_selected_n if mean_selected_n > 0 else 0.0
             p_elig, p_fpr = cell_params[(fam, pol)]
@@ -163,8 +179,10 @@ def simulate_cohort_composition(
                     "policy": pol,
                     "p_elig": p_elig,
                     "p_fpr": p_fpr,
+                    "assigned_count": m_cnt,
                     "manifest_count": m_cnt,
                     "manifest_share": m_share,
+                    "mean_eligible_count": mean_elig_cnt,
                     "mean_selected_count": mean_sel_cnt,
                     "mean_selected_share": mean_sel_share,
                     "share_shift": mean_sel_share - m_share,
@@ -172,13 +190,31 @@ def simulate_cohort_composition(
             )
 
         regime_results[regime_name] = {
+            "n_replicates": n_replicates,
+            "n_reached_312": reach_312_count,
+            "n_reached_312_and_cleared_5pct": reached_and_cleared_count,
+            "n_shortfall_but_cleared_5pct_numerically": shortfall_cleared_count,
+            "n_cleared_numeric_all": n_cleared_numeric_all,
             "p_reach_312": reach_312_count / n_replicates,
+            "p_reach_and_clear": reached_and_cleared_count / n_replicates,
+            "p_clear_given_reached_312": (
+                reached_and_cleared_count / reach_312_count if reach_312_count > 0 else None
+            ),
+            "p_clear_numeric_all": n_cleared_numeric_all / n_replicates,
+            "p_clear_5pct": n_cleared_numeric_all / n_replicates,
             "mean_selected_n": mean_selected_n,
             "selected_true_fpr": selected_true_fpr,
             "equal_cohort_fpr": equal_cohort_fpr,
-            "coverage_95_vs_selected_true": cov_selected_true / n_replicates,
-            "coverage_95_vs_equal_cohort": cov_equal_cohort / n_replicates,
-            "p_clear_5pct": clear_5pct_count / n_replicates,
+            "cov95_vs_selected_true_all": cov_selected_true_all / n_replicates,
+            "cov95_vs_selected_true_given_reached_312": (
+                cov_selected_true_reached / reach_312_count if reach_312_count > 0 else None
+            ),
+            "cov95_vs_equal_cohort_all": cov_equal_cohort_all / n_replicates,
+            "cov95_vs_equal_cohort_given_reached_312": (
+                cov_equal_cohort_reached / reach_312_count if reach_312_count > 0 else None
+            ),
+            "coverage_95_vs_selected_true": cov_selected_true_all / n_replicates,
+            "coverage_95_vs_equal_cohort": cov_equal_cohort_all / n_replicates,
             "composition": composition,
         }
 

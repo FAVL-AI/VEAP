@@ -16,10 +16,11 @@
 - **Development Preview vs Sealed Confirmatory Manifest:**
   - **Development Preview Digest (`dev-preview-only-not-sealed`):** `8e1aed5ce11903fbc0f3ca5fbd371554e337bb57484fa050294278e79969ce6a` (non-sealed dev preview only; distinct from the sealed confirmatory manifest).
   - **Sealed Confirmatory Manifest Digest:** `[PENDING CUSTODIAN test_salt]` (to be generated privately on Frank's device and recorded here only upon freeze sign-off).
+- **Primary Endpoint & Mandatory Secondary Breakdown:** X2's **primary false-rejection endpoint** is the **pooled, eligibility-weighted false-rejection rate** across the selected eligible-scenario cohort (95% exact Clopper-Pearson `<= 0.05`). The **10 `(task_family, policy)` cells** (reporting **assigned**, **eligible**, and **selected** counts alongside per-cell rejection and inconclusive rates) are a **mandatory secondary breakdown** so any differential eligibility composition shift is visible.
 - **Development Cohort-Composition Check (`x2/cohort_composition_report.json`):** `2,000` replicates on the `407`-row dev-preview order under the exact first-`312` rule and 95% exact Clopper-Pearson (`<= 0.05`):
-  - `homogeneous`: `p_reach_312 = 0.9515`, `mean_n = 311.81`, `selected_true_fpr = 0.0200`, `cov_sel = 0.9605`, `p_clear = 0.8045`.
-  - `heterogeneous_moderate`: `p_reach_312 = 0.9095`, `mean_n = 311.66`, `selected_true_fpr = 0.0180` vs `equal_cohort_fpr = 0.0192`, `cov_sel = 0.9655`, `cov_eq = 0.9665`, `p_clear = 0.8790`.
-  - `heterogeneous_severe`: `p_reach_312 = 0.0425`, `mean_n = 298.20` (shortfall), `selected_true_fpr = 0.0183` vs `equal_cohort_fpr = 0.0229`, `cov_sel = 0.9750`, `cov_eq = 0.9625`, `p_clear = 0.8090` (`absence-rejection / ppo` share shifts `-0.0615`).
+  - `homogeneous`: `p_reach_312 = 0.9550` (`1910/2000`), `p_reach_and_clear = 0.7780` (`1556/2000`), `p_clear_given_reached_312 = 0.8147`, `p_clear_numeric_all = 0.8105` (`65` shortfall-cleared), `cov95_vs_selected_true_all = 0.9615`.
+  - `heterogeneous_moderate`: `p_reach_312 = 0.9125` (`1825/2000`), `p_reach_and_clear = 0.8110` (`1622/2000`), `p_clear_given_reached_312 = 0.8888`, `p_clear_numeric_all = 0.8810` (`140` shortfall-cleared), `cov95_vs_selected_true_all = 0.9620`.
+  - `heterogeneous_severe`: `p_reach_312 = 0.0415` (`83/2000`), `p_reach_and_clear = 0.0350` (`70/2000`), `p_clear_given_reached_312 = 0.8434`, `p_clear_numeric_all = 0.8220` (`1574` shortfall-cleared), `cov95_vs_selected_true_all = 0.9715`, `cov95_vs_equal_cohort_all = 0.9675`.
 - **Held:** `git push`, `12 GPU-hours` development training, and sealed test evaluation remain held until the named adjudication acceptances, Frank's salt commitments, and Reviewer freeze-commit sign-off in Section 3 are recorded.
 
 ---
