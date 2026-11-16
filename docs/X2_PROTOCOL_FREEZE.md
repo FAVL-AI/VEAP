@@ -12,7 +12,15 @@
 - **Reviewer Disposition:**
   - **Signed Off:** Statistical design for X2's primary false-rejection endpoint (`1-claim-per-eligible-scenario` exact-binomial estimand; `N_eligible = 312`; two-sided 95% Clopper–Pearson `max_k = 8`; `407`-scenario cap; shortfall rule; `82.35%` clearing probability under the `2%` planning assumption, applying solely to the false-rejection endpoint).
   - **Development Cohort Note (`61cf2ee`):** `build_cohort_manifest()` (`194 route` / `213 greedy`, `sha256 = 4b932608f4d91e496a30d186317e88761d04282ec25dcb2d1de697f41c8c5acc`) is explicitly retained as a **development/baseline-only** cohort and is **not** the confirmatory cohort.
-  - **Held:** `git push`, `12 GPU-hours` development training, and sealed test evaluation remain held until the named adjudication acceptances and Frank's salt commitments in Section 3 are recorded.
+  - **Research Scope (`L3` Five-Family Domain):** X2 evaluates **`L3` perturbations of the five named VEAP task families** (`warehouse-transfer`, `hospital-inspection`, `campus-patrol`, `distribution-shift`, `absence-rejection`). The development preview (`dev-preview-only-not-sealed`) and cohort-composition simulation provide **no evidence about unseen task families** or perturbation levels outside `L3`.
+- **Development Preview vs Sealed Confirmatory Manifest:**
+  - **Development Preview Digest (`dev-preview-only-not-sealed`):** `8e1aed5ce11903fbc0f3ca5fbd371554e337bb57484fa050294278e79969ce6a` (non-sealed dev preview only; distinct from the sealed confirmatory manifest).
+  - **Sealed Confirmatory Manifest Digest:** `[PENDING CUSTODIAN test_salt]` (to be generated privately on Frank's device and recorded here only upon freeze sign-off).
+- **Development Cohort-Composition Check (`x2/cohort_composition_report.json`):** `2,000` replicates on the `407`-row dev-preview order under the exact first-`312` rule and 95% exact Clopper-Pearson (`<= 0.05`):
+  - `homogeneous`: `p_reach_312 = 0.9515`, `mean_n = 311.81`, `selected_true_fpr = 0.0200`, `cov_sel = 0.9605`, `p_clear = 0.8045`.
+  - `heterogeneous_moderate`: `p_reach_312 = 0.9095`, `mean_n = 311.66`, `selected_true_fpr = 0.0180` vs `equal_cohort_fpr = 0.0192`, `cov_sel = 0.9655`, `cov_eq = 0.9665`, `p_clear = 0.8790`.
+  - `heterogeneous_severe`: `p_reach_312 = 0.0425`, `mean_n = 298.20` (shortfall), `selected_true_fpr = 0.0183` vs `equal_cohort_fpr = 0.0229`, `cov_sel = 0.9750`, `cov_eq = 0.9625`, `p_clear = 0.8090` (`absence-rejection / ppo` share shifts `-0.0615`).
+- **Held:** `git push`, `12 GPU-hours` development training, and sealed test evaluation remain held until the named adjudication acceptances, Frank's salt commitments, and Reviewer freeze-commit sign-off in Section 3 are recorded.
 
 ---
 

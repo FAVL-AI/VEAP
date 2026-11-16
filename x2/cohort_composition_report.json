@@ -1,0 +1,374 @@
+{
+  "dev_preview_manifest_sha256": "8e1aed5ce11903fbc0f3ca5fbd371554e337bb57484fa050294278e79969ce6a",
+  "n_cap": 407,
+  "n_replicates": 2000,
+  "regimes": {
+    "heterogeneous_moderate": {
+      "composition": [
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 16.7445,
+          "mean_selected_share": 0.05372759344853532,
+          "p_elig": 0.45,
+          "p_fpr": 0.035,
+          "policy": "ppo",
+          "share_shift": -0.039638499917558044,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 28.9215,
+          "mean_selected_share": 0.09279958158928689,
+          "p_elig": 0.7,
+          "p_fpr": 0.025,
+          "policy": "rrt_replan",
+          "share_shift": -0.012851524061818762,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 32.6755,
+          "mean_selected_share": 0.10484493294679541,
+          "p_elig": 0.88,
+          "p_fpr": 0.012,
+          "policy": "ppo",
+          "share_shift": 0.011478839580702047,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 37.444,
+          "mean_selected_share": 0.12014548114825505,
+          "p_elig": 0.9,
+          "p_fpr": 0.01,
+          "policy": "rrt_replan",
+          "share_shift": 0.014494375497149395,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 31.675,
+          "mean_selected_share": 0.10163465749842374,
+          "p_elig": 0.75,
+          "p_fpr": 0.03,
+          "policy": "ppo",
+          "share_shift": -0.004016448152681915,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 29.699,
+          "mean_selected_share": 0.09529432337950076,
+          "p_elig": 0.82,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": 0.0019282300134074032,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 44,
+          "manifest_share": 0.10810810810810811,
+          "mean_selected_count": 34.8165,
+          "mean_selected_share": 0.11171469779933291,
+          "p_elig": 0.82,
+          "p_fpr": 0.018,
+          "policy": "ppo",
+          "share_shift": 0.003606589691224793,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 31.424,
+          "mean_selected_share": 0.1008292810491071,
+          "p_elig": 0.86,
+          "p_fpr": 0.014,
+          "policy": "rrt_replan",
+          "share_shift": 0.007463187683013739,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 50,
+          "manifest_share": 0.12285012285012285,
+          "mean_selected_count": 41.256,
+          "mean_selected_share": 0.13237693543030685,
+          "p_elig": 0.85,
+          "p_fpr": 0.015,
+          "policy": "ppo",
+          "share_shift": 0.009526812580183994,
+          "task_family": "warehouse-transfer"
+        },
+        {
+          "manifest_count": 32,
+          "manifest_share": 0.07862407862407862,
+          "mean_selected_count": 26.9995,
+          "mean_selected_share": 0.08663251571045594,
+          "p_elig": 0.88,
+          "p_fpr": 0.012,
+          "policy": "rrt_replan",
+          "share_shift": 0.008008437086377315,
+          "task_family": "warehouse-transfer"
+        }
+      ],
+      "coverage_95_vs_equal_cohort": 0.9665,
+      "coverage_95_vs_selected_true": 0.9655,
+      "equal_cohort_fpr": 0.019162162162162103,
+      "mean_selected_n": 311.6555,
+      "p_clear_5pct": 0.879,
+      "p_reach_312": 0.9095,
+      "selected_true_fpr": 0.018041282552689577
+    },
+    "heterogeneous_severe": {
+      "composition": [
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 9.4995,
+          "mean_selected_share": 0.03185565610176909,
+          "p_elig": 0.25,
+          "p_fpr": 0.055,
+          "policy": "ppo",
+          "share_shift": -0.06151043726432427,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 23.6695,
+          "mean_selected_share": 0.0793733830307725,
+          "p_elig": 0.55,
+          "p_fpr": 0.04,
+          "policy": "rrt_replan",
+          "share_shift": -0.02627772262033315,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 33.3255,
+          "mean_selected_share": 0.11175384677293601,
+          "p_elig": 0.88,
+          "p_fpr": 0.008,
+          "policy": "ppo",
+          "share_shift": 0.01838775340684265,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 39.5485,
+          "mean_selected_share": 0.13262207646095212,
+          "p_elig": 0.92,
+          "p_fpr": 0.005,
+          "policy": "rrt_replan",
+          "share_shift": 0.026970970809846465,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 23.7645,
+          "mean_selected_share": 0.07969195635880746,
+          "p_elig": 0.55,
+          "p_fpr": 0.045,
+          "policy": "ppo",
+          "share_shift": -0.025959149292298186,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 28.388,
+          "mean_selected_share": 0.09519641722375083,
+          "p_elig": 0.75,
+          "p_fpr": 0.03,
+          "policy": "rrt_replan",
+          "share_shift": 0.0018303238576574676,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 44,
+          "manifest_share": 0.10810810810810811,
+          "mean_selected_count": 35.2045,
+          "mean_selected_share": 0.11805489186112215,
+          "p_elig": 0.8,
+          "p_fpr": 0.015,
+          "policy": "ppo",
+          "share_shift": 0.00994678375301404,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 33.4575,
+          "mean_selected_share": 0.11219649602873197,
+          "p_elig": 0.88,
+          "p_fpr": 0.01,
+          "policy": "rrt_replan",
+          "share_shift": 0.018830402662638607,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 50,
+          "manifest_share": 0.12285012285012285,
+          "mean_selected_count": 42.5565,
+          "mean_selected_share": 0.14270911404757475,
+          "p_elig": 0.85,
+          "p_fpr": 0.012,
+          "policy": "ppo",
+          "share_shift": 0.019858991197451895,
+          "task_family": "warehouse-transfer"
+        },
+        {
+          "manifest_count": 32,
+          "manifest_share": 0.07862407862407862,
+          "mean_selected_count": 28.7905,
+          "mean_selected_share": 0.09654616211358313,
+          "p_elig": 0.9,
+          "p_fpr": 0.008,
+          "policy": "rrt_replan",
+          "share_shift": 0.01792208348950451,
+          "task_family": "warehouse-transfer"
+        }
+      ],
+      "coverage_95_vs_equal_cohort": 0.9625,
+      "coverage_95_vs_selected_true": 0.975,
+      "equal_cohort_fpr": 0.022850122850122757,
+      "mean_selected_n": 298.2045,
+      "p_clear_5pct": 0.809,
+      "p_reach_312": 0.0425,
+      "selected_true_fpr": 0.018293555525751043
+    },
+    "homogeneous": {
+      "composition": [
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 29.337,
+          "mean_selected_share": 0.09408674568965518,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "ppo",
+          "share_shift": 0.0007206523235618184,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 32.6705,
+          "mean_selected_share": 0.10477761956075533,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": -0.0008734860903503172,
+          "task_family": "absence-rejection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 29.429,
+          "mean_selected_share": 0.09438179905582923,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "ppo",
+          "share_shift": 0.0010157056897358713,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 32.928,
+          "mean_selected_share": 0.10560344827586206,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": -4.76573752435927e-05,
+          "task_family": "campus-patrol"
+        },
+        {
+          "manifest_count": 43,
+          "manifest_share": 0.10565110565110565,
+          "mean_selected_count": 33.5725,
+          "mean_selected_share": 0.10767042538998357,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "ppo",
+          "share_shift": 0.0020193197388779227,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 28.6525,
+          "mean_selected_share": 0.09189148450328408,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": -0.0014746088628092846,
+          "task_family": "distribution-shift"
+        },
+        {
+          "manifest_count": 44,
+          "manifest_share": 0.10810810810810811,
+          "mean_selected_count": 33.6495,
+          "mean_selected_share": 0.10791737222906406,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "ppo",
+          "share_shift": -0.0001907358790440572,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 38,
+          "manifest_share": 0.09336609336609336,
+          "mean_selected_count": 28.8815,
+          "mean_selected_share": 0.09262591081691297,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": -0.0007401825491803876,
+          "task_family": "hospital-inspection"
+        },
+        {
+          "manifest_count": 50,
+          "manifest_share": 0.12285012285012285,
+          "mean_selected_count": 38.45,
+          "mean_selected_share": 0.12331306444991791,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "ppo",
+          "share_shift": 0.00046294159979505534,
+          "task_family": "warehouse-transfer"
+        },
+        {
+          "manifest_count": 32,
+          "manifest_share": 0.07862407862407862,
+          "mean_selected_count": 24.2375,
+          "mean_selected_share": 0.07773213002873564,
+          "p_elig": 0.8,
+          "p_fpr": 0.02,
+          "policy": "rrt_replan",
+          "share_shift": -0.0008919485953429868,
+          "task_family": "warehouse-transfer"
+        }
+      ],
+      "coverage_95_vs_equal_cohort": 0.9605,
+      "coverage_95_vs_selected_true": 0.9605,
+      "equal_cohort_fpr": 0.019999999999999792,
+      "mean_selected_n": 311.808,
+      "p_clear_5pct": 0.8045,
+      "p_reach_312": 0.9515,
+      "selected_true_fpr": 0.019999999999999865
+    }
+  },
+  "schema": "veap-x2-cohort-composition-check/1",
+  "scope": "development-only",
+  "seed": 20261116,
+  "target_eligible": 312
+}

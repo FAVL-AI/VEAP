@@ -7,6 +7,11 @@ from pathlib import Path
 
 import pytest
 
+from x2.cohort_composition_check import (
+    DEFAULT_REPORT_PATH as DEFAULT_COHORT_COMPOSITION_REPORT_PATH,
+    clopper_pearson_lower,
+    simulate_cohort_composition,
+)
 from x2.detection_attribution import (
     DEFAULT_FIXTURES_REPORT_PATH,
     attribute_detection,
@@ -380,6 +385,30 @@ def test_planning_milestones_and_eligibility_cap_probability() -> None:
     disk_rep = json.loads(Path(DEFAULT_FEASIBILITY_REPORT_PATH).read_text(encoding="utf-8"))
     assert disk_rep["planning_milestones"] == milestones
     assert disk_rep["eligibility_cap_check"]["p_reach_target"] == pytest.approx(0.9577, abs=1e-4)
+
+
+def test_cohort_composition_check_and_report() -> None:
+    assert clopper_pearson_lower(0, 312) == 0.0
+    assert clopper_pearson_lower(8, 312) > 0.01
+
+    sim = simulate_cohort_composition(n_replicates=200, seed=20261116)
+    assert sim["schema"] == "veap-x2-cohort-composition-check/1"
+    assert sim["n_cap"] == 407
+    assert sim["target_eligible"] == 312
+    assert set(sim["regimes"].keys()) == {
+        "homogeneous",
+        "heterogeneous_moderate",
+        "heterogeneous_severe",
+    }
+    assert sim["regimes"]["homogeneous"]["p_reach_312"] > 0.90
+    assert sim["regimes"]["heterogeneous_severe"]["p_reach_312"] < 0.20
+
+    assert Path(DEFAULT_COHORT_COMPOSITION_REPORT_PATH).exists()
+    disk = json.loads(Path(DEFAULT_COHORT_COMPOSITION_REPORT_PATH).read_text(encoding="utf-8"))
+    assert disk["n_replicates"] == 2000
+    assert disk["n_cap"] == 407
+    assert len(disk["regimes"]["homogeneous"]["composition"]) == 10
+    assert disk["regimes"]["homogeneous"]["p_reach_312"] == pytest.approx(0.9515, abs=1e-4)
 
 
 def test_serialized_fixture_suite_and_report() -> None:
