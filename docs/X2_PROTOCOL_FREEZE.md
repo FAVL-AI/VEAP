@@ -1,6 +1,6 @@
 # X2 Protocol-Freeze Record
 
-> **Freeze Record Status:** **STATISTICAL DESIGN SIGNED OFF (PARTIAL FREEZE)** — Operational manifests & custody assignments listed in Section 3 remain **OPEN** prior to unsealing.  
+> **Freeze Record Status:** **STATISTICAL DESIGN SIGNED OFF; COHORT MANIFEST CLOSED — PENDING HUMAN ASSIGNMENTS & SALT COMMITMENTS**  
 > **Sign-Off Baseline Commit:** `c01a0d209425046ac81e96ede201effca5630a49` (`c01a0d2`)  
 > **Execution & Release Hold:** Push to `origin`, `12 GPU-hours` training, and sealed test evaluation **REMAIN HELD**.
 
@@ -10,33 +10,27 @@
 
 - **Baseline Commit:** `c01a0d209425046ac81e96ede201effca5630a49` (`c01a0d2`)
 - **Reviewer Disposition:**
-  - **Signed Off:** Statistical design for X2's primary false-rejection endpoint:
-    - **Estimand:** Probability that VEAP's trajectory checker returns `"violating"` on one genuine (`DONE == True`) completion claim selected uniformly (blind to both checker verdicts) from an independently sampled eligible scenario (`>= 1` genuine `DONE == True` claim), with `"inconclusive"` and `"compliant"` fractions reported separately.
-    - **Sample-Size & Decision Rule:** `N_eligible = 312` eligible scenarios under a two-sided 95% exact Clopper–Pearson interval against the `<= 0.05` ceiling (`max_k = 8` rejections allowed; `82.35%` clearing probability under the `2%` planning assumption, applying solely to the false-rejection endpoint).
-    - **Cohort Cap & Shortfall Rule:** Total cap of `407` scenarios in prespecified order (`95.77%` probability of obtaining `>= 312` eligible scenarios at `80%` independent eligibility), using the first `312` eligible scenarios in order and reporting any shortfall transparently if `< 312`.
-    - **Preserved Analyses:** All issued claims preserved for paired recall analysis; all no-claim/timeout episodes preserved in all-episode accounting; clustered FPR intervals retained as secondary diagnostics only.
-  - **Scope Note:** Sign-off covers the **statistical design** only (based on local test/claims reports for `c01a0d2`).
-  - **Held:** `git push`, `12 GPU-hours` development training, and sealed test evaluation remain held until the open full-freeze items in Section 3 are completed.
+  - **Signed Off:** Statistical design for X2's primary false-rejection endpoint (`1-claim-per-eligible-scenario` exact-binomial estimand; `N_eligible = 312`; two-sided 95% Clopper–Pearson `max_k = 8`; `407`-scenario cap; shortfall rule; `82.35%` clearing probability under the `2%` planning assumption, applying solely to the false-rejection endpoint).
+  - **Held:** `git push`, `12 GPU-hours` development training, and sealed test evaluation remain held until the named adjudication acceptance and salt commitments in Section 3 are filled in and signed off against the resulting freeze commit.
 
 ---
 
 ## 2. Verification of Required Full-Freeze Elements
 
-Direct cross-reference against [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md):
+Direct cross-reference against [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) and [x2/cohort_manifest.py](../x2/cohort_manifest.py):
 
-| Required Element | Freeze Status | Reference / Current State |
+| Required Element | Freeze Status | Specification / Recorded Values |
 | --- | --- | --- |
-| **Paired-recall decision rule** | **DEFINED** | [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §3.1, §3.2, §4 (`gains - losses` over all `DONE == False` claims; `>= 0.10` minimum meaningful improvement via 95% scenario-clustered Student-$t$ CI; `supported` iff `CI_low >= 0.10`, `contradicted` iff `CI_high < 0.10`, `inconclusive` otherwise; all-claims primary denominator, `compliant` vs `inconclusive` reported separately). |
-| **Verdict-blind claim-selection procedure** | **DEFINED** | [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §4 (`sha256(selection_salt \| scenario_id)` uniform selection among `DONE == True` claims in each eligible scenario, blind to `trajectory_verdict` and `endpoint_verdict`). |
-| **Scenario order and policy mix** | **OPEN (Manifest Pending)** | Procedure defined in [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §4, **but the concrete ordered 407-scenario manifest and explicit policy-mix proportions/weights are not yet frozen**. |
-| **Adjudicator** | **OPEN (Assignment Pending)** | Double-blinded adjudication schema defined in [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §4 (stripping checker identity, verdicts, and `diagnostic_flag`), **but the named adjudicator (and ambiguous-label tie-breaker) is not yet assigned**. |
-| **Salt custodian** | **OPEN (Custodian & Commitment Pending)** | `SHA-256(S)` commitment and deterministic split procedure defined in [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §4, **but the named salt custodian and published `SHA-256(test_salt)` / `SHA-256(selection_salt)` commitment digests are not yet recorded**. |
+| **Paired-recall decision rule** | **CLOSED** | [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §3.1, §3.2, §4 (`gains - losses` over all `DONE == False` claims; `>= 0.10` minimum meaningful improvement via 95% scenario-clustered Student-$t$ CI; `supported` iff `CI_low >= 0.10`, `contradicted` iff `CI_high < 0.10`, `inconclusive` otherwise; all-claims primary denominator, `compliant` vs `inconclusive` reported separately). |
+| **Verdict-blind claim-selection procedure** | **CLOSED** | [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §4 & [x2/cohort_manifest.py](../x2/cohort_manifest.py) (`select_blind_genuine_claim` via `sha256(selection_salt \| scenario_id)` on canonically ordered genuine claims, blind to `trajectory_verdict` and `endpoint_verdict`). |
+| **Scenario order, policy mix & canonical claim ordering** | **CLOSED** | Implemented in [x2/cohort_manifest.py](../x2/cohort_manifest.py). **Total cap:** `407` scenarios (`1..407`, round-robin across `warehouse-transfer`, `hospital-inspection`, `campus-patrol`, `distribution-shift`, `absence-rejection`). **Policy weights:** `{"route": 0.50, "greedy": 0.50}`, assigned deterministically via `sha256("x2-policy-v1|{index}|{scenario_id}")` (`route = 194`, `greedy = 213`). **Private manifest retained locally** (`x2/.private_cohort_manifest.json`, gitignored) with **SHA-256:** `4b932608f4d91e496a30d186317e88761d04282ec25dcb2d1de697f41c8c5acc`. **Canonical genuine-claim ordering before salted selection:** lexicographical sort by `(scenario_id, episode_id, claim_id, claim_seq)` so replay selects the identical claim regardless of file or database iteration order. |
+| **Adjudication** | **PROCEDURE CLOSED / NAMES PENDING ACCEPTANCE** | **Inspection scope:** Adjudicator and tie-breaker inspect only the task contract, reference-state specification, and raw trajectory/environment observations (checker implementations, checker identity, checker verdicts, and `diagnostic_flag` are stripped). **Finality rule:** Reference labels (`DONE == True/False` or no-claim/timeout) and the eligible genuine-claim list become final and immutable **before** either checker's verdict is revealed. **Assignments:** Adjudicator: `[PENDING ACCEPTANCE]`; Ambiguous-label tie-breaker: `[PENDING ACCEPTANCE]`. |
+| **Salt custody** | **PROCEDURE CLOSED / CUSTODIAN & COMMITMENTS PENDING** | **Recommended custodian:** **Frank** `[PENDING USER CONFIRMATION]`. Separate `test_salt` and `selection_salt` are generated on the custodian's device and retained privately. **Commitments:** `sha256(test_salt): [PENDING CUSTODIAN COMMITMENT]`; `sha256(selection_salt): [PENDING CUSTODIAN COMMITMENT]`. |
 
 ---
 
-## 3. Open Items Required Before Full X2 Freeze & Unsealing
+## 3. Remaining Entries to Finalize Full X2 Freeze
 
-1. **Concrete Scenario Order & Policy Mix Manifest:** Commit the exact prespecified 407-scenario ordered list, eligibility rule implementation reference, and fixed policy-mix weights.
-2. **Named Adjudicator:** Record the named author/adjudicator (working from task contracts and reference-state specs without reading VEAP's verifier implementation or outputs) and ambiguous-label resolution owner.
-3. **Named Salt Custodian & Published Commitments:** Record the named custodian holding `test_salt` and `selection_salt` on-device, and publish `SHA-256(test_salt)` and `SHA-256(selection_salt)` in this freeze record before test unsealing.
-4. **Hardening & SHA-256 Code Manifest:** Record `SHA-256` digests of the frozen checker entry points (`x2/leakage_controls.py`), attribution/scoring scripts (`x2/detection_attribution.py`), and verifier (`veap/verifier.py`) per [docs/X2_PROTOCOL_DRAFT.md](X2_PROTOCOL_DRAFT.md) §5.
+1. **Adjudicator Acceptance:** Record the accepting **Adjudicator** and **Ambiguous-label tie-breaker** names above.
+2. **Salt Custodian Confirmation & Commitments:** Confirm **Frank** as salt custodian and record the two on-device generated `SHA-256` commitments (`sha256(test_salt)` and `sha256(selection_salt)`).
+3. **Final Freeze Tag / SHA:** Once those entries are populated, commit, tag the exact commit SHA, and obtain reviewer sign-off against that SHA before unsealing or running GPU jobs.

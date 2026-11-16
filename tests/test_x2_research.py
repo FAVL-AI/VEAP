@@ -417,3 +417,28 @@ def test_serialized_fixture_suite_and_report() -> None:
         endp_payload = json.loads(fx["endpoint_input_json"])
         assert traj_payload["checker"] == "trajectory"
         assert endp_payload["checker"] == "endpoint"
+
+
+def test_cohort_manifest_and_canonical_claim_ordering():
+    from x2.cohort_manifest import (
+        build_cohort_manifest,
+        order_genuine_claims_canonically,
+        select_blind_genuine_claim,
+    )
+
+    m1 = build_cohort_manifest()
+    m2 = build_cohort_manifest()
+    assert m1["manifest_sha256"] == m2["manifest_sha256"]
+    assert m1["manifest"]["total_scenario_cap"] == 407
+    assert sum(m1["manifest"]["policy_counts"].values()) == 407
+
+    claims_a = [
+        {"scenario_id": "s1", "episode_id": "ep2", "claim_id": "c1", "claim_seq": 2},
+        {"scenario_id": "s1", "episode_id": "ep1", "claim_id": "c2", "claim_seq": 1},
+        {"scenario_id": "s1", "episode_id": "ep1", "claim_id": "c1", "claim_seq": 1},
+    ]
+    claims_b = list(reversed(claims_a))
+    assert order_genuine_claims_canonically(claims_a) == order_genuine_claims_canonically(claims_b)
+    assert select_blind_genuine_claim(claims_a, "s1", "salt-x") == select_blind_genuine_claim(
+        claims_b, "s1", "salt-x"
+    )

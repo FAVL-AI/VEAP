@@ -21,3 +21,4 @@ backend/rust_verifier/target/
 /frontend/node_modules/
 /frontend/.next/
 /backend/rl/build/
+x2/.private_cohort_manifest.json
